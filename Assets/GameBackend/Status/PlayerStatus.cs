@@ -8,23 +8,23 @@ namespace GameBackend.Status
     {
         public enum Tags
         {
-            normalAttack=0,
-            normalSkill=1,
-            specialSkill=2,
-            physicalAttack=3,
-            fireAttack=4,
-            waterAttack=5,
-            windAttack=6,
-            earthAttack=7,
-            lightningAttack=8,
-            shadowAttack=9
+            normalAttack = 0,
+            normalSkill = 1,
+            specialSkill = 2,
+            physicalAttack = 3,
+            fireAttack = 4,
+            waterAttack = 5,
+            windAttack = 6,
+            earthAttack = 7,
+            lightningAttack = 8,
+            shadowAttack = 9
         }
 
         public static IEnumerable<Tags> iter = Enum.GetValues(typeof(Tags)).Cast<Tags>();
 
         public static int tagCount = Enum.GetValues(typeof(Tags)).Length;
     }
-    
+
     public class PlayerStatus
     {
         private int maxHp { get; }
@@ -43,6 +43,7 @@ namespace GameBackend.Status
             this.def = def;
             this.crit = crit;
             this.critDmg = critDmg;
-            this.dmgUp=new float[Tag.tagCount];
+            this.dmgUp = new float[Tag.tagCount];
         }
+    }
 }
