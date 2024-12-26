@@ -6,7 +6,6 @@ namespace GameBackend
 {
     public class Entity : MonoBehaviour
     {
-    
+        
     }
-
 }
