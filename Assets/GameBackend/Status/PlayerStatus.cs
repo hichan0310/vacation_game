@@ -1,4 +1,6 @@
-﻿namespace GameBackend
+﻿using UnityEngine;
+
+namespace GameBackend.Status
 {
     public class PlayerStatus
     {
@@ -42,8 +44,6 @@
             this.crit = 5; this.critDmg = 50;
             this.dmgUp = new float[Tag.atkTagCount];
         }
-        
-        
     }
 
     public interface IBuffStatus
