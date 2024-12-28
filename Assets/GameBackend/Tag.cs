@@ -15,7 +15,8 @@ namespace GameBackend
         windAttack = 6,
         earthAttack = 7,
         lightningAttack = 8,
-        shadowAttack = 9
+        shadowAttack = 9,
+        criticalHit = 10,
     }
 
     public static class Tag
