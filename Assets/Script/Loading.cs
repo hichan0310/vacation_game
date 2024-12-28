@@ -8,21 +8,25 @@ public class Loading : MonoBehaviour
 
     public CanvasGroup Fade_img;
     public GameObject loading;
-    float fadeDuration = 1.5f; 
+    float fadeDuration = 1.0f; 
     public static string nextScene;
 
     public Image progressBar;
+
+    void Awake()
+    {
+        progressBar.fillAmount = 0.0f;
+    }
 
     private void Start()
     {
         Fade_img.DOFade(0, fadeDuration)
         .OnStart(()=>{
-
+            Fade_img.blocksRaycasts = false;
         })
         .OnComplete(()=>{
-            Fade_img.blocksRaycasts = false;
+            StartCoroutine(LoadScene());
         });
-        StartCoroutine(LoadScene());
     }
 
     public static void loadScene(string sceneName)
@@ -51,7 +55,7 @@ public class Loading : MonoBehaviour
                 progressBar.fillAmount=Mathf.Lerp(progressBar.fillAmount,1f,timer);
                 if(progressBar.fillAmount == 1.0f)
                 {
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(1.5f);
                     Fade_img.DOFade(1, fadeDuration)
                     .OnStart(()=>{
                         Fade_img.blocksRaycasts = true;
@@ -59,7 +63,7 @@ public class Loading : MonoBehaviour
                     .OnComplete(()=>{
 
                      });
-                    yield return new WaitForSeconds(1.5f);
+                    yield return new WaitForSeconds(1.0f);
                     op.allowSceneActivation = true;
                     yield break;
                 }
