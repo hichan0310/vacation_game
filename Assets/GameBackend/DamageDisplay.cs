@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using GameBackend;
 using GameBackend.Events;
@@ -23,8 +24,12 @@ public class DamageDisplay : MonoBehaviour
             if (value.atkTags.Contains(AtkTags.criticalHit)) text.fontSize = 20; 
             else text.fontSize = 10;
             text.color=Color.black;
-            Invoke("destroy", destroyTime);
         }
+    }
+
+    private void Awake()
+    {
+        Invoke("destroy", destroyTime);
     }
 
     void Update()
