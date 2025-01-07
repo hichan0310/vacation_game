@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
+using UnityEditor;
 public class StartsceneUItext : MonoBehaviour
 {   
     public GameObject UItext;
@@ -10,15 +11,112 @@ public class StartsceneUItext : MonoBehaviour
     public GameObject keysetbg;
     public GameObject fullbg;
     public GameObject windowbg;
+    public GameObject windowed;
+    public GameObject setresolution;
+    public Image arrow1;
+    public Image arrow2;
     public Slider mastersound;
     public Slider musicsound;
     public Slider effectsound;
     public TMP_Text mastersoundtext;
     public TMP_Text musicsoundtext;
     public TMP_Text effectsoundtext;
+    public TMP_Text resolutiontext;
+    int screenmode;
+    int HW;
+    int height;
+    int width;
+    int fullheight;
+    int fullwidth;
+    int[] heightarray = {360, 540, 576, 720, 768, 900, 1080, 1152, 1440, 1620};
+    int[] widtharray = {640, 960, 1024, 1280, 1366, 1600, 1920, 2048, 2560, 2880};
     bool key = false; // DoTween 최적화를 위한 실행확인 트리거거
-    bool screenmode = true;
-    bool isSetting = false; // 세팅창을 켜두었는가가
+    bool isSetting = false; // 세팅창을 켜두었는가
+
+    public enum ScreenMode
+    {
+        FullScreenWindow,
+        Window
+    }
+    void Awake()
+    {
+        if (PlayerPrefs.HasKey("HW"))
+        {
+            HW = PlayerPrefs.GetInt("HW"); 
+            height = heightarray[PlayerPrefs.GetInt("HW")]; 
+            width = widtharray[PlayerPrefs.GetInt("HW")]; 
+        }
+        else
+        {
+            PlayerPrefs.SetInt("HW", 6);
+            PlayerPrefs.Save();
+            HW = 6;
+            height = heightarray[6]; 
+            width = widtharray[6]; 
+        }
+
+
+        if (PlayerPrefs.HasKey("ScreenMode"))
+        {
+            if (PlayerPrefs.GetInt("ScreenMode") == 0)
+                Screen.SetResolution(Screen.width, Screen.height, FullScreenMode.FullScreenWindow);
+            else
+                Screen.SetResolution(width, height, FullScreenMode.Windowed);
+            screenmode = PlayerPrefs.GetInt("ScreenMode");
+        }
+        else
+        {
+            Screen.SetResolution(Screen.width, Screen.height, FullScreenMode.FullScreenWindow);
+            PlayerPrefs.SetInt("ScreenMode", 0);
+            PlayerPrefs.Save();
+            screenmode = 0;
+        }
+
+        if (PlayerPrefs.HasKey("Height") && PlayerPrefs.HasKey("Width"))
+        {
+            fullheight = PlayerPrefs.GetInt("Height"); 
+            fullwidth = PlayerPrefs.GetInt("Width"); 
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Height", Screen.height);
+            PlayerPrefs.SetInt("Width", Screen.width);
+            PlayerPrefs.Save();
+            fullheight = PlayerPrefs.GetInt("Height"); 
+            fullwidth = PlayerPrefs.GetInt("Width");  
+        }
+
+        if (PlayerPrefs.HasKey("Sound1"))
+        {
+            mastersound.value = PlayerPrefs.GetFloat("Sound1");
+        }
+        else
+        {
+            PlayerPrefs.SetFloat("Sound1", 1);
+            PlayerPrefs.Save();
+            mastersound.value = 1; 
+        }
+        if (PlayerPrefs.HasKey("Sound2"))
+        {
+            musicsound.value = PlayerPrefs.GetFloat("Sound2");
+        }
+        else
+        {
+            PlayerPrefs.SetFloat("Sound2", 1);
+            PlayerPrefs.Save();
+            musicsound.value = 1; 
+        }
+        if (PlayerPrefs.HasKey("Sound3"))
+        {
+            effectsound.value = PlayerPrefs.GetFloat("Sound3");
+        }
+        else
+        {
+            PlayerPrefs.SetFloat("Sound3", 1);
+            PlayerPrefs.Save();
+            effectsound.value = 1; 
+        }
+    }
     
     void Start()
     {
@@ -74,6 +172,60 @@ public class StartsceneUItext : MonoBehaviour
             mastersoundtext.text = (mastersound.value * 10).ToString("F0");
             musicsoundtext.text = (musicsound.value * 10).ToString("F0");
             effectsoundtext.text = (effectsound.value * 10).ToString("F0");
+            if(screenmode == 0)
+            {
+                windowed.SetActive(false);
+            }
+            else
+            {
+                windowed.SetActive(true);
+                resolutiontext.text = $"{widtharray[HW]} * {heightarray[HW]}";
+                if(MouseOnUI.isMouseOver && MouseOnUI.gameObj.name == "arrow1") 
+                { 
+                    arrow1.color = new Color(1f, 1f, 1f);
+                    if(Input.GetMouseButtonDown(0)) 
+                    {
+                        if(HW > 0)
+                        {
+                            HW -= 1;
+                        }
+                    }
+                }
+                else
+                    arrow1.color = new Color(0.5f, 0.5f, 0.5f); 
+                if(MouseOnUI.isMouseOver && MouseOnUI.gameObj.name == "arrow2") 
+                { 
+                    arrow2.color = new Color(1f, 1f, 1f);
+                    if(Input.GetMouseButtonDown(0)) 
+                    {
+                        if(HW < 9)
+                        {
+                            HW += 1;
+                        }
+                    }
+                }
+                else
+                    arrow2.color = new Color(0.5f, 0.5f, 0.5f); 
+                if(MouseOnUI.isMouseOver && MouseOnUI.gameObj.name == "applyresolution") 
+                { 
+                    Color color = setresolution.GetComponent<Image>().color;
+                    color.a = 0.8f;
+                    setresolution.GetComponent<Image>().color = color;
+                    if(Input.GetMouseButtonDown(0)) 
+                    {
+                        PlayerPrefs.SetInt("HW", HW);
+                        width = widtharray[HW];
+                        height = heightarray[HW];
+                        Screen.SetResolution(width, height, FullScreenMode.Windowed);
+                    }
+                }
+                else
+                {
+                    Color color = setresolution.GetComponent<Image>().color;
+                    color.a = 0.4f;
+                    setresolution.GetComponent<Image>().color = color;
+                }
+            }
             if(MouseOnUI.isMouseOver && MouseOnUI.gameObj.name == "back") 
             { 
                 Color color = backbg.GetComponent<Image>().color;
@@ -81,9 +233,13 @@ public class StartsceneUItext : MonoBehaviour
                 backbg.GetComponent<Image>().color = color;
                 if(Input.GetMouseButtonDown(0)) 
                 {
+                    PlayerPrefs.SetFloat("Sound1", mastersound.value);
+                    PlayerPrefs.SetFloat("Sound2", musicsound.value);
+                    PlayerPrefs.SetFloat("Sound3", effectsound.value);
                     isSetting = false;
                     UItext.SetActive(true);
                     SettingUI.SetActive(false);
+                    PlayerPrefs.Save();
                 }
             }
             else if(MouseOnUI.isMouseOver && MouseOnUI.gameObj.name == "keysetting") 
@@ -103,7 +259,9 @@ public class StartsceneUItext : MonoBehaviour
                 fullbg.GetComponent<Image>().color = color;
                 if(Input.GetMouseButtonDown(0)) 
                 {
-                    screenmode = true;
+                    Screen.SetResolution(fullwidth, fullheight, FullScreenMode.FullScreenWindow);
+                    PlayerPrefs.SetInt("ScreenMode", 0);
+                    screenmode = 0;
                     Color color2 = windowbg.GetComponent<Image>().color;
                     color2.a = 0.47f;
                     windowbg.GetComponent<Image>().color = color2;
@@ -116,7 +274,9 @@ public class StartsceneUItext : MonoBehaviour
                 windowbg.GetComponent<Image>().color = color;
                 if(Input.GetMouseButtonDown(0)) 
                 {
-                    screenmode = false;
+                    Screen.SetResolution(width, height, FullScreenMode.Windowed);
+                    PlayerPrefs.SetInt("ScreenMode", 1);
+                    screenmode = 1;
                     Color color2 = fullbg.GetComponent<Image>().color;
                     color2.a = 0.47f;
                     fullbg.GetComponent<Image>().color = color2;
@@ -130,7 +290,7 @@ public class StartsceneUItext : MonoBehaviour
                 Color color2 = keysetbg.GetComponent<Image>().color;
                 color2.a = 0.47f;
                 keysetbg.GetComponent<Image>().color = color2;
-                if(screenmode == true)
+                if(screenmode == 0)
                 {
                     Color color3 = fullbg.GetComponent<Image>().color;
                     color3.a = 0.823f;
