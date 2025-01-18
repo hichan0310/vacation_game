@@ -5,6 +5,7 @@ using TMPro;
 using System.Collections.Generic;
 public class StartsceneUItext : MonoBehaviour
 {   
+    public CanvasGroup Fade_img;
     public GameObject UItext;
     public GameObject SettingUI;
     public GameObject backbg;
@@ -34,6 +35,7 @@ public class StartsceneUItext : MonoBehaviour
     string iswaitkeyset = "";
     string keytemp = "";
     KeyCode valuetemp;
+    float fadeDuration = 2.0f; 
     int screenmode;
     int HW;
     int height;
@@ -149,6 +151,11 @@ public class StartsceneUItext : MonoBehaviour
             foreach (string key in keylist)
                 PlayerPrefs.SetString(key, $"{keysetting[key]}");       
         }
+
+        Fade_img.DOFade(0, fadeDuration)
+        .OnComplete(()=>{
+            Fade_img.blocksRaycasts = false;
+        });
     }
     
     void Start()
@@ -469,7 +476,5 @@ public class StartsceneUItext : MonoBehaviour
                 }
             }
         }
-
     }
-
 }
