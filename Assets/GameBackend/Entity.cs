@@ -10,15 +10,15 @@ namespace GameBackend
 {
     public abstract class Entity : MonoBehaviour
     {
-        public float speed { get; set; }
-        public PlayerStatus status { get; set; }
-        public List<IEntityEventListener> eventListener { get; set; }
+        public float speed { get; set; } = 1;
+        public PlayerStatus status { get; set; } = new(1, 0, 0);
+        public List<IEntityEventListener> eventListener { get; set; } = new();
 
-        public Entity()
+        protected Animator animator;
+
+        private void Awake()
         {
-            speed = 1;
-            status = new PlayerStatus(1, 0, 0);
-            eventListener = new List<IEntityEventListener>();
+            animator = GetComponent<Animator>();
         }
 
         public void addListener(IEntityEventListener listener)
@@ -41,9 +41,9 @@ namespace GameBackend
 
         protected abstract void update(float deltaTime);
 
-        public void Update()
+        public virtual void Update()
         {
-            update(Time.deltaTime);
+            update(TimeManager.deltaTime);
         }
 
         public void dmgtake(DmgGiveEvent dmg)
@@ -54,6 +54,11 @@ namespace GameBackend
             
             eventActive(new DmgTakeEvent(realDmg, dmg.attacker, dmg.target, dmg.atkTags));
             status.nowHp -= realDmg;
+        }
+
+        public void knuckBack(float force)
+        {
+            // todo
         }
     }
 }

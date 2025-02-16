@@ -23,4 +23,15 @@
             return new PlayerStatus(10000, 1000, 1000);
         }
     }
+
+    public class TestPlayerInfo: IPlayerInfo
+    {
+        public PlayerStatus getPlayerStatus()
+        {
+            return new PlayerStatus(10000, 1000, 1000);
+        }
+
+        public string name { get; }
+        public string explaination { get; }
+    }
 }
