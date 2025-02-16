@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace GameBackend.Objects
 {
-    public class PlayerObject:Player<TestPlayerInfo>
+    public class PlayerObject:Player<TestPlayerInfo1>
     {
         private static readonly int Atk = Animator.StringToHash("atk");
         
