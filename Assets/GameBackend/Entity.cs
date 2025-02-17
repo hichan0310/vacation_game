@@ -31,7 +31,7 @@ namespace GameBackend
             this.eventListener.Remove(listener);
         }
 
-        protected virtual void eventActive(EventArgs e)
+        public virtual void eventActive(EventArgs e)
         {
             foreach (var listener in eventListener)
             {
@@ -59,6 +59,28 @@ namespace GameBackend
         public void knuckBack(float force)
         {
             // todo
+        }
+    }
+
+    public class EmptyEntity:Entity
+    {
+        public static EmptyEntity Instance { get; private set; }
+
+        protected override void update(float deltaTime)
+        {
+            
+        }
+        
+        public void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this; // Singleton 초기화
+            }
+            else
+            {
+                Destroy(gameObject); // 중복된 매니저 제거
+            }
         }
     }
 }

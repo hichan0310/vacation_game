@@ -14,6 +14,7 @@ namespace GameBackend
         public void eventActive<T>(T eventArgs) where T : EventArgs;
         public void registrarTarget(Entity target);
         public void removeSelf();
+        public void update(float deltaTime);
     }
 
     

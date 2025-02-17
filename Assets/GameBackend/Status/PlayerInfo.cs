@@ -5,12 +5,18 @@
         public PlayerStatus getPlayerStatus();
         public string name { get; }
         public string explaination { get; }
+        public ISkill normalSkill { get; }
+        public ISkill specialSkill { get; }
     }
 
     public class CommonPlayerInfo : IPlayerInfo
     {
         public string name { get; }
         public string explaination { get; }
+
+        public ISkill normalSkill => new TestSkill();
+
+        public ISkill specialSkill => new TestSpecialSkill();
 
         public CommonPlayerInfo()
         {
@@ -33,6 +39,8 @@
 
         public string name { get; }
         public string explaination { get; }
+        public ISkill normalSkill => new TestSkill();
+        public ISkill specialSkill => new TestSpecialSkill();
         
         /*
          * e로 근처 적에게 피해를 주고 넉백

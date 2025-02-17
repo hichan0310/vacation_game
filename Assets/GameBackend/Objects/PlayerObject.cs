@@ -14,6 +14,11 @@ namespace GameBackend.Objects
         private bool direction = true;
         protected override void update(float deltaTime)
         {
+            foreach (var listener in this.eventListener)
+            {
+                listener.update(deltaTime);
+            }
+            
             cooltime_gumgi += deltaTime;
             animator.SetBool(Atk, false);
             if (cooltime_gumgi >= 2)

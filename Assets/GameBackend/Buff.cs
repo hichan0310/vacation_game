@@ -7,10 +7,11 @@ namespace GameBackend
 {
     public class Buff : IBuffStatus, IEntityEventListener
     {
-        private List<Entity> targets = new List<Entity>();
+        protected List<Entity> targets = new List<Entity>();
         
         public virtual void buffStatus(PlayerStatus status) {}
         public virtual void eventActive<T>(T eventArgs) where T : EventArgs {}
+        public virtual void update(float deltaTime) {}
 
         public virtual void registrarTarget(Entity target)
         {
