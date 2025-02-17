@@ -43,7 +43,7 @@ namespace GameBackend
 
         public virtual void Update()
         {
-            update(TimeManager.deltaTime);
+            update(TimeManager.deltaTime*speed);
         }
 
         public void dmgtake(DmgGiveEvent dmg)
