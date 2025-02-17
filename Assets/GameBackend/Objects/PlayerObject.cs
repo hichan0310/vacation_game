@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using GameBackend.Events;
 using GameBackend.Status;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace GameBackend.Objects

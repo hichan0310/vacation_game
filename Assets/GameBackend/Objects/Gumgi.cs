@@ -8,7 +8,7 @@ namespace GameBackend.Objects
         public bool direction { get; set; } // true==right
         public Vector3 position { get; set; }
         public float time { get; set; }
-        public float speed { get; set; }
+        public static float gumgiSpeed { get; set; }
         public DmgInfo dmgInfo { get; set; }
 
         public void apply()
@@ -20,13 +20,17 @@ namespace GameBackend.Objects
             {
                 scale.x *= -1;
                 transform.localScale = scale;
-                speed *= -1;
+                Gumgi.gumgiSpeed = -1;
+            }
+            else
+            {
+                Gumgi.gumgiSpeed = 1;
             }
         }
 
         protected override void update(float deltaTime)
         {
-            transform.position += new Vector3(speed * deltaTime, 0, 0);
+            transform.position += new Vector3(gumgiSpeed * deltaTime, 0, 0);
         }
         
         void destroy()
