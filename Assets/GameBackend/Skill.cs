@@ -1,21 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using GameBackend.Buffs;
 using GameBackend.Events;
 using GameBackend.Objects;
 using GameBackend.Status;
+using UnityEngine;
 
 namespace GameBackend
 {
-    public interface ISkill
+    public interface ISkill : IEntityEventListener
     {
         public string name { get; }
         public string description { get; }
         public bool active { get; }
         public float timeleft { get; }
-        public void execute(PlayerObject player);
+        public void execute();
+        public void requireObjects(List<GameObject> objects);
     }
 
-    public class TestSkill : ISkill, IEntityEventListener
+    public class TestSkill : ISkill
     {
         public string name => "TestSkill";
 
@@ -24,6 +27,12 @@ namespace GameBackend
         private const float cooltime = 5;
         private Entity player;
         private int supportAttack = 0;
+        
+        
+        public GameObject motionHelper1{get;private set;}
+        public GameObject motionHelper2{get;private set;}
+        public GameObject chamgyuck1{get;private set;}
+        public GameObject chamgyuck2{get;private set;}
 
         public float timeleft
         {
@@ -38,13 +47,24 @@ namespace GameBackend
             timeleft = cooltime;
         }
 
+        public void requireObjects(List<GameObject> objects)
+        {
+            this.motionHelper1=objects[0];
+            this.motionHelper2=objects[1];
+            this.chamgyuck1=objects[2];
+            this.chamgyuck2=objects[3];
+        }
+
         public void update(float deltaTime)
         {
             timeleft-=deltaTime;
             if (timeleft < 0) timeleft = 0;
+            
+            
+            //todo
         }
 
-        public void execute(PlayerObject player)
+        public void execute()
         {
             timeleft = cooltime;
             supportAttack = 3;
@@ -57,10 +77,12 @@ namespace GameBackend
                 if (supportAttack > 0)
                 {
                     supportAttack -= 1;
-                    //추가 공격 날리기
+                    activateAttack();
                 }
             }
         }
+
+        
 
         public void registrarTarget(Entity target)
         {
@@ -138,11 +160,16 @@ namespace GameBackend
             }
         }
 
-        public void execute(PlayerObject player)
+        public void execute()
         {
             timeleft = cooltime;
             TimeManager.timeRate *= 0.1f;
             this.slowtime = 7;
+        }
+
+        public void requireObjects(List<GameObject> objects)
+        {
+            // 오브젝트 추가해서 여기에서 스킬 이펙트 구현
         }
 
         public void eventActive<T>(T eventArgs) where T : EventArgs

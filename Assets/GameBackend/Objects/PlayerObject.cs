@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GameBackend.Events;
 using GameBackend.Status;
 using Unity.VisualScripting;
@@ -12,6 +13,27 @@ namespace GameBackend.Objects
         
         private float cooltime_gumgi = 0.5f;
         private bool direction = true;
+
+        public GameObject motionHelper1;
+        public GameObject motionHelper2;
+        public GameObject chamgyuck1;
+        public GameObject chamgyuck2;
+        
+        public ISkill normalSkill{get;private set;}
+
+        public void Start()
+        {
+            normalSkill = new TestSkill();
+            List<GameObject> objs = new List<GameObject>();
+            objs.Add(motionHelper1);
+            objs.Add(motionHelper2);
+            objs.Add(chamgyuck1);
+            objs.Add(chamgyuck2);
+            normalSkill.requireObjects(objs);
+            normalSkill.registrarTarget(this);
+            normalSkill.execute();
+        }
+
         protected override void update(float deltaTime)
         {
             foreach (var listener in this.eventListener)
@@ -23,6 +45,8 @@ namespace GameBackend.Objects
             animator.SetBool(Atk, false);
             if (cooltime_gumgi >= 2)
             {
+                NormalAttackExecuteEvent evnt = new NormalAttackExecuteEvent(this, new List<AtkTags>());
+                this.eventActive(evnt);
                 Vector3 scale = transform.localScale;
                 scale.x *= -1;
                 transform.localScale = scale;
