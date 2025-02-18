@@ -65,7 +65,7 @@ namespace GameBackend
         public void execute()
         {
             timeleft = cooltime;
-            supportAttack = 3;
+            supportAttack = 300;
         }
         
         public void eventActive<T>(T eventArgs) where T : EventArgs

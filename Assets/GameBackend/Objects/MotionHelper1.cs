@@ -8,21 +8,25 @@ namespace GameBackend.Objects
         private static readonly int Atk = Animator.StringToHash("atk");
         private bool actived;
         
+        
         public void Start()
         {
-            animator = GetComponent<Animator>();
-            Invoke("destroy", 1f);
+            setAlpha(0);
+            Invoke("destroy", 0.7f);
         }
 
         protected override void update(float deltaTime)
         {
             this.timer += deltaTime;
+            checkAlpha(0, 0.2f, 0, 1);
+            checkAlpha(0.5f, 0.7f, 1, 0);
+            checkMove(0, 0.3f, new Vector3(-0.54f, 1.56f, 0f), new Vector3(0.34f, 0.76f, 0f));
+            
             if (!actived && timer >= 0.2)
             {
-                Debug.Log("triggered");
                 actived = true;
                 animator.SetTrigger(Atk);
-            } 
+            }
         }
 
         public void setInfo(Entity player)
