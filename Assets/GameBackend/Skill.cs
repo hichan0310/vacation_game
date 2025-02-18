@@ -20,6 +20,7 @@ namespace GameBackend
 
     public class TestSkill : ISkill
     {
+        private static readonly int Atk = Animator.StringToHash("atk");
         public string name => "TestSkill";
 
         public string description => "TestSkillDescription";
@@ -34,11 +35,7 @@ namespace GameBackend
         public GameObject chamgyuck1{get;private set;}
         public GameObject chamgyuck2{get;private set;}
 
-        public float timeleft
-        {
-            get => timeleft;
-            private set => timeleft = value;
-        }
+        public float timeleft { get; private set; }
 
         public bool active => timeleft == 0;
 
@@ -82,7 +79,35 @@ namespace GameBackend
             }
         }
 
-        
+        private void activateAttack()
+        {
+            GameObject instance1 = Object.Instantiate(motionHelper1, player.transform.position, Quaternion.identity);
+            GameObject instance2 = Object.Instantiate(motionHelper2, player.transform.position, Quaternion.identity);
+            // GameObject chamgyuckInstance1 = Object.Instantiate(chamgyuck1, player.transform.position, Quaternion.identity);
+            // GameObject chamgyuckInstance2 = Object.Instantiate(chamgyuck2, player.transform.position, Quaternion.identity);
+            
+            
+            float tmp = 1;
+            if (player.transform.localScale.x<0) tmp = -1;
+
+            MotionHelper1 helper1 = instance1.GetComponent<MotionHelper1>();
+            helper1.setInfo(player);
+            MotionHelper2 helper2 = instance2.GetComponent<MotionHelper2>();
+            helper2.setInfo(player);
+            
+            // chamgyuckInstance1.transform.localPosition = player.transform.localPosition;
+            // chamgyuckInstance1.transform.localPosition += new Vector3(1.09f*tmp, 0.36f, 0f);
+            // Vector3 scale3 = instance1.transform.localScale;
+            // scale3.x *= tmp;
+            // instance1.transform.localScale = scale3;
+            //
+            // chamgyuckInstance2.transform.localPosition = player.transform.localPosition;
+            // chamgyuckInstance2.transform.localPosition += new Vector3(0.36f*tmp, -0.36f, 0f);
+            // Vector3 scale4 = instance1.transform.localScale;
+            // scale4.x *= tmp;
+            // instance1.transform.localScale = scale4;
+
+        }
 
         public void registrarTarget(Entity target)
         {

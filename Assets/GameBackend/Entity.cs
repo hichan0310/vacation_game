@@ -11,6 +11,7 @@ namespace GameBackend
     public abstract class Entity : MonoBehaviour
     {
         public float speed { get; set; } = 1;
+
         public PlayerStatus status { get; set; } = new(1, 0, 0);
         public List<IEntityEventListener> eventListener { get; set; } = new();
 
@@ -18,6 +19,7 @@ namespace GameBackend
 
         private void Awake()
         {
+            speed = 1;
             animator = GetComponent<Animator>();
         }
 

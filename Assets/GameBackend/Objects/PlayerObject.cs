@@ -45,8 +45,6 @@ namespace GameBackend.Objects
             animator.SetBool(Atk, false);
             if (cooltime_gumgi >= 2)
             {
-                NormalAttackExecuteEvent evnt = new NormalAttackExecuteEvent(this, new List<AtkTags>());
-                this.eventActive(evnt);
                 Vector3 scale = transform.localScale;
                 scale.x *= -1;
                 transform.localScale = scale;
@@ -54,6 +52,9 @@ namespace GameBackend.Objects
                 cooltime_gumgi = 0;
                 direction = !direction;
                 Invoke("balsa", 0.4f);
+                
+                NormalAttackExecuteEvent evnt = new NormalAttackExecuteEvent(this, new List<AtkTags>());
+                this.eventActive(evnt);
             }
         }
         
