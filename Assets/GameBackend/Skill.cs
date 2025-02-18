@@ -4,6 +4,7 @@ using GameBackend.Buffs;
 using GameBackend.Events;
 using GameBackend.Objects;
 using GameBackend.Status;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace GameBackend
@@ -73,40 +74,27 @@ namespace GameBackend
             {
                 if (supportAttack > 0)
                 {
-                    supportAttack -= 1;
                     activateAttack();
+                    supportAttack -= 1;
                 }
             }
         }
 
         private void activateAttack()
         {
-            GameObject instance1 = Object.Instantiate(motionHelper1, player.transform.position, Quaternion.identity);
-            GameObject instance2 = Object.Instantiate(motionHelper2, player.transform.position, Quaternion.identity);
-            // GameObject chamgyuckInstance1 = Object.Instantiate(chamgyuck1, player.transform.position, Quaternion.identity);
-            // GameObject chamgyuckInstance2 = Object.Instantiate(chamgyuck2, player.transform.position, Quaternion.identity);
-            
-            
-            float tmp = 1;
-            if (player.transform.localScale.x<0) tmp = -1;
+            GameObject instance1 = Object.Instantiate(motionHelper1, player.transform);
+            GameObject instance2 = Object.Instantiate(motionHelper2, player.transform);
+            GameObject chamgyuckInstance1 = Object.Instantiate(chamgyuck1, player.transform);
+            GameObject chamgyuckInstance2 = Object.Instantiate(chamgyuck2, player.transform);
 
             MotionHelper1 helper1 = instance1.GetComponent<MotionHelper1>();
             helper1.setInfo(player);
+            Chamgyuck1 cham1 = chamgyuckInstance1.GetComponent<Chamgyuck1>();
+            cham1.setInfo(player);
             MotionHelper2 helper2 = instance2.GetComponent<MotionHelper2>();
             helper2.setInfo(player);
-            
-            // chamgyuckInstance1.transform.localPosition = player.transform.localPosition;
-            // chamgyuckInstance1.transform.localPosition += new Vector3(1.09f*tmp, 0.36f, 0f);
-            // Vector3 scale3 = instance1.transform.localScale;
-            // scale3.x *= tmp;
-            // instance1.transform.localScale = scale3;
-            //
-            // chamgyuckInstance2.transform.localPosition = player.transform.localPosition;
-            // chamgyuckInstance2.transform.localPosition += new Vector3(0.36f*tmp, -0.36f, 0f);
-            // Vector3 scale4 = instance1.transform.localScale;
-            // scale4.x *= tmp;
-            // instance1.transform.localScale = scale4;
-
+            Chamgyuck2 cham2 = chamgyuckInstance2.GetComponent<Chamgyuck2>();
+            cham2.setInfo(player);
         }
 
         public void registrarTarget(Entity target)

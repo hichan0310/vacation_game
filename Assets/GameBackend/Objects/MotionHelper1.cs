@@ -27,16 +27,9 @@ namespace GameBackend.Objects
 
         public void setInfo(Entity player)
         {
-            float tmp = 1;
-            if (player.transform.localScale.x < 0)
-            {
-                Debug.Log("-");
-                tmp = -1;
-            }
-            //this.transform.SetParent(player.transform);
             this.transform.position = player.transform.position;
-            this.transform.localScale = new Vector3(tmp, 1, 1);
-            this.transform.localPosition = new Vector3(0.34f*tmp, 0.76f, 0f);
+            this.transform.localScale = new Vector3(1, 1, 1);
+            this.transform.localPosition = new Vector3(0.34f, 0.76f, 0f);
         }
     }
 }
