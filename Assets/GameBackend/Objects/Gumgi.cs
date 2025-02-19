@@ -8,18 +8,15 @@ namespace GameBackend.Objects
         public bool direction { get; set; } // true==right
         public Vector3 position { get; set; }
         public float time { get; set; }
-        public float gumgiSpeed { get; set; } = 2;
+        public float gumgiSpeed { get; set; } = 1.5f;
         public DmgInfo dmgInfo { get; set; }
 
         public void apply()
         {
             Invoke("destroy", time);
-            Vector3 scale = transform.localScale;
             transform.position = position;
             if (!direction)
             {
-                scale.x *= -1;
-                transform.localScale = scale;
                 gumgiSpeed *= -1;
             }
         }
