@@ -9,6 +9,8 @@ public class InputHandler : MonoBehaviour
     public bool MoveLeft { get; private set; }
     public bool MoveRight { get; private set; }
     public bool Jump { get; private set; }
+    public bool Skill { get; private set; }
+    public bool Ultimate { get; private set; }
     public bool Attack { get; private set; }
     
     public void Awake()
@@ -31,6 +33,8 @@ public class InputHandler : MonoBehaviour
         MoveLeft = Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("MoveLeft")));
         MoveRight = Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("MoveRight")));
         Jump = Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Jump")));
+        Skill = Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Skill")));
+        Ultimate = Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Ultimate")));
         Attack = Input.GetMouseButtonDown(0);
     }
 }
