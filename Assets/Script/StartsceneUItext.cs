@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
 using System.Collections.Generic;
+using System;
 public class StartsceneUItext : MonoBehaviour
 {   
     public CanvasGroup Fade_img;
@@ -30,8 +31,11 @@ public class StartsceneUItext : MonoBehaviour
     public TMP_Text movelefttext;
     public TMP_Text moverighttext;
     public TMP_Text jumptext;
+    public TMP_Text skilltext;
+    public TMP_Text ultimatetext;
     private Dictionary<string, KeyCode> keysetting = new Dictionary<string, KeyCode>();
-    string[] keylist = {"MoveUp", "MoveDown", "MoveLeft", "MoveRight", "Jump"};
+    string[] keylist = {"MoveUp", "MoveDown", "MoveLeft", "MoveRight", "Jump", "Skill", "Ultimate"};
+    KeyCode[] defaultlist = {KeyCode.W, KeyCode.S, KeyCode.A, KeyCode.D, KeyCode.Space, KeyCode.E, KeyCode.Q};
     string iswaitkeyset = "";
     string keytemp = "";
     KeyCode valuetemp;
@@ -134,24 +138,19 @@ public class StartsceneUItext : MonoBehaviour
             effectsound.value = 1; 
         }
 
-        if (PlayerPrefs.HasKey("MoveUp"))
+        foreach (string key in keylist)
         {
-            foreach (string key in keylist)
+            if (PlayerPrefs.HasKey(key))
             {
                 keysetting[key] = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString(key));
             } 
-        }
-        else
-        {
-            keysetting["MoveUp"] = KeyCode.W;
-            keysetting["MoveDown"] = KeyCode.S;
-            keysetting["MoveLeft"] = KeyCode.A;
-            keysetting["MoveRight"] = KeyCode.D;
-            keysetting["Jump"] = KeyCode.Space;
-            foreach (string key in keylist)
+            else
+            {
+                keysetting[key] = defaultlist[Array.IndexOf(keylist, key)];
                 PlayerPrefs.SetString(key, $"{keysetting[key]}");       
+            }
         }
-
+        
         Fade_img.DOFade(0, fadeDuration)
         .OnComplete(()=>{
             Fade_img.blocksRaycasts = false;
@@ -189,6 +188,8 @@ public class StartsceneUItext : MonoBehaviour
                 movelefttext.text = $"{keysetting["MoveLeft"]}";
                 moverighttext.text = $"{keysetting["MoveRight"]}";
                 jumptext.text = $"{keysetting["Jump"]}";
+                skilltext.text = $"{keysetting["Skill"]}";
+                ultimatetext.text = $"{keysetting["Ultimate"]}";
             }
         }
     }
@@ -305,6 +306,24 @@ public class StartsceneUItext : MonoBehaviour
                         iswaitkeyset = "Jump";
                     }
                 }
+                else if(MouseOnUI.isMouseOver && MouseOnUI.gameObj.name == "skilltmp" && iswaitkeyset == "") 
+                { 
+                    if(Input.GetMouseButtonDown(0)) 
+                    {
+                        valuetemp = keysetting["Skill"];
+                        skilltext.text = "";
+                        iswaitkeyset = "Skill";
+                    }
+                }
+                else if(MouseOnUI.isMouseOver && MouseOnUI.gameObj.name == "ultimatetmp" && iswaitkeyset == "") 
+                { 
+                    if(Input.GetMouseButtonDown(0)) 
+                    {
+                        valuetemp = keysetting["Ultimate"];
+                        ultimatetext.text = "";
+                        iswaitkeyset = "Ultimate";
+                    }
+                }
                 if(MouseOnUI.isMouseOver && MouseOnUI.gameObj.name == "savetext" && iswaitkeyset == "")
                 {
                     Color color = textset.GetComponent<Image>().color;
@@ -316,6 +335,24 @@ public class StartsceneUItext : MonoBehaviour
                         keysetbg.SetActive(true);
                         keysetUI.SetActive(false);
                         PlayerPrefs.Save();
+                    }
+                }
+                if(MouseOnUI.isMouseOver && MouseOnUI.gameObj.name == "resettext" && iswaitkeyset == "")
+                {
+                    if(Input.GetMouseButtonDown(0)) 
+                    {
+                        foreach (string key in keylist)
+                        {
+                            keysetting[key] = defaultlist[Array.IndexOf(keylist, key)];
+                            PlayerPrefs.SetString(key, $"{keysetting[key]}");       
+                        }
+                        moveuptext.text = $"{keysetting["MoveUp"]}";
+                        movedowntext.text = $"{keysetting["MoveDown"]}";
+                        movelefttext.text = $"{keysetting["MoveLeft"]}";
+                        moverighttext.text = $"{keysetting["MoveRight"]}";
+                        jumptext.text = $"{keysetting["Jump"]}";
+                        skilltext.text = $"{keysetting["Skill"]}";
+                        ultimatetext.text = $"{keysetting["Ultimate"]}";
                     }
                 }
                 else
@@ -414,6 +451,8 @@ public class StartsceneUItext : MonoBehaviour
                         movelefttext.text = $"{keysetting["MoveLeft"]}";
                         moverighttext.text = $"{keysetting["MoveRight"]}";
                         jumptext.text = $"{keysetting["Jump"]}";
+                        skilltext.text = $"{keysetting["Skill"]}";
+                        ultimatetext.text = $"{keysetting["Ultimate"]}";
                         isKeysetting = true;
                     }
                 }

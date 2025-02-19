@@ -60,7 +60,7 @@ namespace GameBackend.Objects
         
         public void balsa()
         {
-            GameObject obj = Instantiate(gumgi); 
+            GameObject obj = Instantiate(gumgi, this.transform); 
             Gumgi gumgiCompo=obj.GetComponent<Gumgi>();
             gumgiCompo.direction = direction;
             gumgiCompo.position=transform.position;
