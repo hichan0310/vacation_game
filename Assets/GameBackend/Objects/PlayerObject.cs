@@ -49,7 +49,6 @@ namespace GameBackend.Objects
                 cooltime_gumgi = 0;
                 direction = !direction;
                 Invoke("balsa", 0.4f);
-                
                 NormalAttackExecuteEvent evnt = new NormalAttackExecuteEvent(this, new List<AtkTags>());
                 this.eventActive(evnt);
             }
@@ -58,7 +57,7 @@ namespace GameBackend.Objects
         public void balsa()
         {
             GameObject obj = Instantiate(gumgi, this.transform); 
-            Gumgi gumgiCompo=obj.GetComponent<Gumgi>();
+            Gumgi gumgiCompo = obj.GetComponent<Gumgi>();
             gumgiCompo.direction = direction;
             gumgiCompo.position=transform.position;
             gumgiCompo.time = 0.4f;

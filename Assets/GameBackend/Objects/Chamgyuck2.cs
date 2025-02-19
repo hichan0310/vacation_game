@@ -20,6 +20,12 @@ namespace GameBackend.Objects
             checkMove(0.2f, 0.3f, new Vector3(0.34f, -0.76f, 0f), new Vector3(1.09f, -0.36f, 0));
         }
 
+        protected override void OnTriggerEnter2D(Collider2D other)
+        {
+            base.OnTriggerEnter2D(other); 
+            Debug.Log($"{gameObject.tag}와 충돌");
+        }
+
         public void setInfo(Entity player)
         {
             this.transform.position = player.transform.position;

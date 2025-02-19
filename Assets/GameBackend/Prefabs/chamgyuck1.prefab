@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 118624423311965603}
   - component: {fileID: 7909223856243267402}
   - component: {fileID: 7665628214490299445}
+  - component: {fileID: 6757471694260720764}
+  - component: {fileID: 4215326220715721791}
   m_Layer: 0
   m_Name: chamgyuck1
-  m_TagString: Untagged
+  m_TagString: Chamgyuck
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5156613517413916078}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.09, y: 0.36, z: 0}
+  m_LocalPosition: {x: 1.059, y: 0.334, z: 0}
   m_LocalScale: {x: -0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -97,3 +99,83 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4cb248e249e72348b487268d81c7ee4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!50 &6757471694260720764
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5156613517413916078}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.5
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 6200000, guid: 76fb57a0369ef414bb45be14d0e95c80, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
+--- !u!68 &4215326220715721791
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5156613517413916078}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 76fb57a0369ef414bb45be14d0e95c80, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0.3
+  m_Points:
+  - {x: 1.690753, y: -0.7124274}
+  - {x: 1.6934177, y: -1.1817592}
+  - {x: 1.4831935, y: -1.6806545}
+  - {x: 1.0483543, y: -1.9175742}
+  - {x: 0.47073257, y: -1.9701312}
+  - {x: -0.0020866394, y: -1.8408926}
+  - {x: -0.60698175, y: -1.4702003}
+  - {x: -0.91773725, y: -0.95014346}
+  - {x: -1.2040968, y: -0.27577296}
+  - {x: -1.2280931, y: 0.42128587}
+  - {x: -1.042387, y: 1.3560754}
+  - {x: -0.50078344, y: 1.817168}
+  - {x: 0.14201951, y: 1.8874822}
+  - {x: 0.5512999, y: 1.6553476}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0

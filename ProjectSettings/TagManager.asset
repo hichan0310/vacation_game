@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Enemy
+  - Gumgi
+  - Chamgyuck
+  - Undefined
   layers:
   - Default
   - TransparentFX
