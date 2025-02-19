@@ -41,14 +41,17 @@ namespace GameBackend
             }
         }
 
-        protected abstract void update(float deltaTime);
+        protected virtual void update(float deltaTime)
+        {
+            this.eventListener.ForEach(listener => listener.update(deltaTime));
+        }
 
         public virtual void Update()
         {
             update(TimeManager.deltaTime*speed);
         }
 
-        public void dmgtake(DmgGiveEvent dmg)
+        public virtual void dmgtake(DmgGiveEvent dmg)
         {
             int def = status.def;
             int C = 200;
@@ -58,10 +61,8 @@ namespace GameBackend
             status.nowHp -= realDmg;
         }
 
-        public void knuckBack(float force)
-        {
-            // todo
-        }
+        public virtual bool stagger(float deltaTime) { return true; }
+        public virtual bool knockback(float deltaTime) { return true; }
     }
 
     public class EmptyEntity:Entity
@@ -70,7 +71,7 @@ namespace GameBackend
 
         protected override void update(float deltaTime)
         {
-            
+            base.update(deltaTime);
         }
         
         public void Awake()

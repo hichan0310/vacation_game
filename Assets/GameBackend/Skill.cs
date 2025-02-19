@@ -162,6 +162,7 @@ namespace GameBackend
                 atkTags.Add(AtkTags.specialSkill);
                 DmgGiveEvent dmgGiveEvent = new DmgGiveEvent(
                     (int)(0.4*status.atk*target.Value),
+                    1, 
                     player, 
                     target.Key, 
                     atkTags);

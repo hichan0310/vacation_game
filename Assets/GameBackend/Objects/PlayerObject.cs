@@ -36,10 +36,7 @@ namespace GameBackend.Objects
 
         protected override void update(float deltaTime)
         {
-            foreach (var listener in this.eventListener)
-            {
-                listener.update(deltaTime);
-            }
+            base.update(deltaTime);
             
             cooltime_gumgi += deltaTime;
             animator.SetBool(Atk, false);

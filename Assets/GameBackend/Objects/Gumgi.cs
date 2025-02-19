@@ -23,6 +23,7 @@ namespace GameBackend.Objects
 
         protected override void update(float deltaTime)
         {
+            base.update(deltaTime);
             transform.position += new Vector3(gumgiSpeed * deltaTime, 0, 0);
         }
         

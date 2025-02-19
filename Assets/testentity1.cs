@@ -13,13 +13,14 @@ public class testentity1 : Entity
     // ReSharper disable Unity.PerformanceAnalysis
     protected override void update(float deltaTime)
     {
+        base.update(deltaTime);
         t-=deltaTime;
         if (t < 0)
         {
             t = 1;
             var tags = new List<AtkTags>();
             tags.Add(AtkTags.normalAttack);
-            target.dmgtake(new DmgGiveEvent(100, this, target, tags));
+            target.dmgtake(new DmgGiveEvent(100, 0, this, target, tags));
         }
     }
 }

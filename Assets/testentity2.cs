@@ -12,6 +12,6 @@ public class testentity2 : Entity
     }
     protected override void update(float deltaTime)
     {
-        
+        base.update(deltaTime);
     }
 }

@@ -14,7 +14,10 @@ namespace GameBackend
             status = info.getPlayerStatus();
         }
 
-        protected override void update(float deltaTime) {}
+        protected override void update(float deltaTime)
+        {
+            base.update(deltaTime);
+        }
 
         public override void Update()
         {

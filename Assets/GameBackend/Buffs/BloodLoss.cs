@@ -26,7 +26,7 @@ namespace GameBackend.Buffs
                 {
                     List<AtkTags> atkTags = new List<AtkTags>();
                     atkTags.Add(AtkTags.StatusEffect);
-                    DmgGiveEvent dmgTakeEvent=new DmgGiveEvent(damage, EmptyEntity.Instance, target, atkTags);
+                    DmgGiveEvent dmgTakeEvent=new DmgGiveEvent(damage, 0, EmptyEntity.Instance, target, atkTags);
                     target.dmgtake(dmgTakeEvent);
                 }
 
