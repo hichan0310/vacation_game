@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Enemy
+  - Gumgi
+  - Chamgyuck
+  - Plate
   layers:
   - Default
   - TransparentFX

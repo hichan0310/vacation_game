@@ -23,6 +23,11 @@ namespace GameBackend
             update(Time.deltaTime);
         }
 
+        protected virtual void OnTriggerEnter2D(Collider2D other)
+        {
+            
+        }
+
         protected void destroy()
         {
             Destroy(gameObject);

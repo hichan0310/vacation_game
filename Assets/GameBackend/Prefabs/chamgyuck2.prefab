@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 314595126009321513}
   - component: {fileID: 4665559390546516799}
   - component: {fileID: 99973940763670097}
+  - component: {fileID: 4151108873052051393}
+  - component: {fileID: 152547309491074488}
   m_Layer: 0
   m_Name: chamgyuck2
-  m_TagString: Untagged
+  m_TagString: Chamgyuck
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,3 +99,82 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f48a454e6a6a54946a88fbeafa4f1bcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!50 &4151108873052051393
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454134281367992849}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.5
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 6200000, guid: 76fb57a0369ef414bb45be14d0e95c80, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
+--- !u!68 &152547309491074488
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454134281367992849}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 76fb57a0369ef414bb45be14d0e95c80, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0.3
+  m_Points:
+  - {x: 1.7189121, y: -0.7125027}
+  - {x: 1.6440772, y: -1.368402}
+  - {x: 1.3362275, y: -1.7985632}
+  - {x: 0.35048053, y: -1.9360406}
+  - {x: -0.5498574, y: -1.5075175}
+  - {x: -0.9319349, y: -0.99029344}
+  - {x: -1.2927027, y: -0.40320474}
+  - {x: -1.2196358, y: 0.250382}
+  - {x: -1.1868954, y: 0.9055157}
+  - {x: -0.8782087, y: 1.4239504}
+  - {x: -0.49880025, y: 1.9083974}
+  - {x: 0.037900437, y: 1.9547322}
+  - {x: 0.54922676, y: 1.6421039}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0

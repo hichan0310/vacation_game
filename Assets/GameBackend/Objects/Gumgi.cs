@@ -27,6 +27,12 @@ namespace GameBackend.Objects
             transform.position += new Vector3(gumgiSpeed * deltaTime, 0, 0);
         }
         
+        protected override void OnTriggerEnter2D(Collider2D other)
+        {
+            base.OnTriggerEnter2D(other); 
+            Debug.Log($"{gameObject.tag}와 {other.tag} 충돌");
+        }
+        
         void destroy()
         {
             Destroy(gameObject);

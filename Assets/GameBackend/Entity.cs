@@ -33,6 +33,11 @@ namespace GameBackend
             this.eventListener.Remove(listener);
         }
 
+        protected virtual void OnTriggerEnter2D(Collider2D other)
+        {
+            
+        }
+
         public virtual void eventActive(EventArgs e)
         {
             foreach (var listener in eventListener)
