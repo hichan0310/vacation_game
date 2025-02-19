@@ -23,7 +23,7 @@ namespace GameBackend.Objects
         protected override void OnTriggerEnter2D(Collider2D other)
         {
             base.OnTriggerEnter2D(other); 
-            Debug.Log($"{gameObject.tag}와 충돌");
+            Debug.Log($"{gameObject.tag}와 {other.tag} 충돌");
         }
 
         public void setInfo(Entity player)

@@ -8,7 +8,7 @@ TagManager:
   - Enemy
   - Gumgi
   - Chamgyuck
-  - Undefined
+  - Plate
   layers:
   - Default
   - TransparentFX
