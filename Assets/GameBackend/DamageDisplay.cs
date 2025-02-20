@@ -19,8 +19,8 @@ public class DamageDisplay : MonoBehaviour
     {
         set
         {
-            float x = Random.Range(-1f, 1f); // X 좌표: -1 ~ 1
-            float y = Random.Range(-1f, 1f); // Y 좌표: -1 ~ 1
+            float x = Random.Range(-0.3f, 0.3f); // X 좌표: -1 ~ 1
+            float y = Random.Range(-0.3f, 0.3f); // Y 좌표: -1 ~ 1
             text=GetComponent<TextMeshPro>();
             transform.position=value.target.transform.position+new Vector3(x, y, 0f);
             text.text = value.realDmg.ToString();
