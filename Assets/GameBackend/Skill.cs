@@ -35,10 +35,11 @@ namespace GameBackend
         public GameObject motionHelper2{get;private set;}
         public GameObject chamgyuck1{get;private set;}
         public GameObject chamgyuck2{get;private set;}
+        public GameObject effect{get;private set;}
 
         public float timeleft { get; private set; }
 
-        public bool active => timeleft == 0;
+        public bool active => timeleft <= 0;
 
         public TestSkill()
         {
@@ -51,6 +52,7 @@ namespace GameBackend
             this.motionHelper2=objects[1];
             this.chamgyuck1=objects[2];
             this.chamgyuck2=objects[3];
+            this.effect=objects[4];
         }
 
         public void update(float deltaTime)
@@ -65,7 +67,9 @@ namespace GameBackend
         public void execute()
         {
             timeleft = cooltime;
-            supportAttack = 300;
+            supportAttack = 3;
+            GameObject obj=Object.Instantiate(effect, this.player.transform);
+            obj.transform.localPosition = new Vector3(0, 0.2f, 0);
         }
         
         public void eventActive<T>(T eventArgs) where T : EventArgs

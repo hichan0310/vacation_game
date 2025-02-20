@@ -25,6 +25,7 @@ namespace GameBackend.Objects
         public GameObject motionHelper2;
         public GameObject chamgyuck1;
         public GameObject chamgyuck2;
+        public GameObject normalSkillEffect;
         
         public ISkill normalSkill{get;private set;}
 
@@ -38,9 +39,10 @@ namespace GameBackend.Objects
             objs.Add(motionHelper2);
             objs.Add(chamgyuck1);
             objs.Add(chamgyuck2);
+            objs.Add(normalSkillEffect);
             normalSkill.requireObjects(objs);
             normalSkill.registrarTarget(this);
-            // normalSkill.execute();
+            //normalSkill.execute();
         }
 
         protected override void update(float deltaTime)
@@ -50,6 +52,7 @@ namespace GameBackend.Objects
             animator.SetInteger("atknum", atknum);
             Move(deltaTime);
             Jump(deltaTime);
+            NormalSkill(deltaTime);
             // cooltime_gumgi += deltaTime;
             // animator.SetTrigger(Atk);
             // if (cooltime_gumgi >= 2)
@@ -90,7 +93,7 @@ namespace GameBackend.Objects
                     isJumpatk = true;
                 }
             }
-
+            
         }
 
         protected override void OnCollisionEnter2D(Collision2D collision)
@@ -117,6 +120,13 @@ namespace GameBackend.Objects
             gumgiCompo.apply();
         }
 
+        void NormalSkill(float deltaTime)
+        {
+            if (this.normalSkill.active && Input.GetKey(InputHandler.Skill))
+            {
+                this.normalSkill.execute();
+            }
+        }
         
         void Move(float deltaTime)
         {

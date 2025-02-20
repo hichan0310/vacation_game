@@ -340,6 +340,7 @@ MonoBehaviour:
   motionHelper2: {fileID: 5919447203258398930, guid: bb241672ef7b320428c1fa3af46aa0c6, type: 3}
   chamgyuck1: {fileID: 5156613517413916078, guid: 1c53c3ffdd496b34cb932a139f2224a9, type: 3}
   chamgyuck2: {fileID: 454134281367992849, guid: 70abeb9855a16cf4a85fc00ae2052682, type: 3}
+  normalSkillEffect: {fileID: 7574279432512491051, guid: 9a47f91b364eb2f428f55c11062557ba, type: 3}
 --- !u!60 &1061263773
 PolygonCollider2D:
   m_ObjectHideFlags: 0
