@@ -10,7 +10,8 @@ namespace GameBackend.Objects
     public class PlayerObject:Player<TestPlayerInfo1>
     {
         private static readonly int Atk = Animator.StringToHash("atk");
-        
+        private static readonly int Moving = Animator.StringToHash("moving");
+
         private float cooltime_gumgi = 0.5f;
         private bool direction = true;
         private float movePower = 1f;
@@ -42,23 +43,25 @@ namespace GameBackend.Objects
 
         protected override void update(float deltaTime)
         {
-            base.update(deltaTime);
-            Move();
-            Jump();
-            cooltime_gumgi += deltaTime;
-            animator.SetBool(Atk, false);
-            if (cooltime_gumgi >= 2)
-            {
-                Vector3 scale = transform.localScale;
-                scale.x *= -1;
-                transform.localScale = scale;
-                animator.SetBool(Atk, true);
-                cooltime_gumgi = 0;
-                direction = !direction;
-                Invoke("balsa", 0.4f);
-                NormalAttackExecuteEvent evnt = new NormalAttackExecuteEvent(this, new List<AtkTags>());
-                this.eventActive(evnt);
-            }
+            // base.update(deltaTime);
+            // Move(deltaTime);
+            // Jump(deltaTime);
+            // cooltime_gumgi += deltaTime;
+            // animator.SetTrigger(Atk);
+            // if (cooltime_gumgi >= 2)
+            // {
+            //     Vector3 scale = transform.localScale;
+            //     scale.x *= -1;
+            //     transform.localScale = scale;
+            //     animator.SetTrigger(Atk);
+            //     cooltime_gumgi = 0;
+            //     direction = !direction;
+            //     Invoke("balsa", 0.4f);
+            //     NormalAttackExecuteEvent evnt = new NormalAttackExecuteEvent(this, new List<AtkTags>());
+            //     this.eventActive(evnt);
+            // }
+            animator.SetBool("jumping", true);
+            animator.SetTrigger(Atk);
         }
 
         protected override void OnCollisionEnter2D(Collision2D collision)
@@ -85,20 +88,23 @@ namespace GameBackend.Objects
         }
 
         
-        void Move()
+        void Move(float deltaTime)
         {
             Vector3 moveVelocity= Vector3.zero;
             if(Input.GetKey(InputHandler.MoveLeft))
             {
+                animator.SetBool(Moving, true);
                 moveVelocity = Vector3.left;
             }
             else if(Input.GetKey(InputHandler.MoveRight))
             {
+                animator.SetBool(Moving, true);
                 moveVelocity = Vector3.right;
             }
-            this.transform.position += moveVelocity * movePower * Time.deltaTime;
+            animator.SetBool(Moving, false);
+            this.transform.position += moveVelocity * (movePower * deltaTime);
         }
-        void Jump()
+        void Jump(float deltaTime)
         {
             if(Input.GetKey(InputHandler.Jump))
             {
