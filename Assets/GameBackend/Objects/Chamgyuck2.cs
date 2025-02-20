@@ -9,12 +9,14 @@ namespace GameBackend.Objects
         private Entity player;
         private int dmg;
         private List<AtkTags> atkTags = new() { AtkTags.normalSkill ,AtkTags.physicalAttack };
+        private HashSet<GameObject> atkObjects = new();
 
         public void Start()
         {
             timer = -0.2f;
             setAlpha(0);
             Invoke("destroy", 1f);
+            this.transform.localScale = new Vector3(0, 0, 0);
         }
 
         protected override void update(float deltaTime)
@@ -28,7 +30,9 @@ namespace GameBackend.Objects
 
         protected override void OnTriggerEnter2D(Collider2D other)
         {
+            if (atkObjects.Contains(other.gameObject)) return;
             base.OnTriggerEnter2D(other); 
+            this.atkObjects.Add(other.gameObject);
             Enemy enemy = other.GetComponent<Enemy>();
             if (enemy is null) return;
             DmgGiveEvent dmgGiveEvent=new DmgGiveEvent(this.dmg, 0.4f, player, enemy, atkTags);

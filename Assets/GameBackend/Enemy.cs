@@ -92,7 +92,7 @@ namespace GameBackend
             }
 
             Vector3 pos = this.transform.position;
-            pos.x += (direction?-1:1)*(Mathf.Max(1-staggerTimer, 0))*deltaTime;
+            pos.x += (direction?-1:1)*(Mathf.Max(1-staggerTimer, 0))*deltaTime*0.7f;
             this.transform.position = pos;
             if (staggerTimer >= 1.5)
             {
@@ -114,7 +114,7 @@ namespace GameBackend
             }
 
             Vector3 pos = this.transform.position;
-            pos.x += (direction?-1:1)*(Mathf.Max(3-knockbackTimer, 0))*deltaTime;
+            pos.x += (direction?-1:1)*(Mathf.Max(3-knockbackTimer, 0))*deltaTime*0.7f;
             this.transform.position = pos;
             if (knockbackTimer >= 4)
             {

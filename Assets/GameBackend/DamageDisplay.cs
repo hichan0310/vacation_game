@@ -6,6 +6,7 @@ using GameBackend.Events;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class DamageDisplay : MonoBehaviour
 {
@@ -18,11 +19,13 @@ public class DamageDisplay : MonoBehaviour
     {
         set
         {
+            float x = Random.Range(-1f, 1f); // X 좌표: -1 ~ 1
+            float y = Random.Range(-1f, 1f); // Y 좌표: -1 ~ 1
             text=GetComponent<TextMeshPro>();
-            transform.position=value.target.transform.position;
+            transform.position=value.target.transform.position+new Vector3(x, y, 0f);
             text.text = value.realDmg.ToString();
-            if (value.atkTags.Contains(AtkTags.criticalHit)) text.fontSize = 20; 
-            else text.fontSize = 10;
+            if (value.atkTags.Contains(AtkTags.criticalHit)) text.fontSize = 10; 
+            else text.fontSize = 6;
             text.color=Color.black;
         }
     }
