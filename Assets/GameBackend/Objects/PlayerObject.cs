@@ -13,6 +13,10 @@ namespace GameBackend.Objects
         
         private float cooltime_gumgi = 0.5f;
         private bool direction = true;
+        private float movePower = 1f;
+        private float jumpPower = 2.5f;
+        private bool isJumping = false;
+        private Rigidbody2D rigid;
 
         public GameObject motionHelper1;
         public GameObject motionHelper2;
@@ -23,6 +27,7 @@ namespace GameBackend.Objects
 
         public void Start()
         {
+            rigid = this.gameObject.GetComponent<Rigidbody2D>();
             this.status = new PlayerStatus(10000, 1000, 100);
             normalSkill = new TestSkill();
             List<GameObject> objs = new List<GameObject>();
@@ -38,7 +43,8 @@ namespace GameBackend.Objects
         protected override void update(float deltaTime)
         {
             base.update(deltaTime);
-            
+            Move();
+            Jump();
             cooltime_gumgi += deltaTime;
             animator.SetBool(Atk, false);
             if (cooltime_gumgi >= 2)
@@ -52,6 +58,14 @@ namespace GameBackend.Objects
                 Invoke("balsa", 0.4f);
                 NormalAttackExecuteEvent evnt = new NormalAttackExecuteEvent(this, new List<AtkTags>());
                 this.eventActive(evnt);
+            }
+        }
+
+        protected override void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.tag == "Plate")
+            {
+                isJumping = false;
             }
         }
         
@@ -68,6 +82,35 @@ namespace GameBackend.Objects
             atkTag.Add(AtkTags.normalAttack);
             gumgiCompo.dmgInfo = new DmgInfo(100, 10, this, atkTag);
             gumgiCompo.apply();
+        }
+
+        
+        void Move()
+        {
+            Vector3 moveVelocity= Vector3.zero;
+            if(Input.GetKey(InputHandler.MoveLeft))
+            {
+                moveVelocity = Vector3.left;
+            }
+            else if(Input.GetKey(InputHandler.MoveRight))
+            {
+                moveVelocity = Vector3.right;
+            }
+            this.transform.position += moveVelocity * movePower * Time.deltaTime;
+        }
+        void Jump()
+        {
+            if(Input.GetKey(InputHandler.Jump))
+            {
+                if (!isJumping)
+                {
+                    isJumping = true;
+                    rigid.velocity = Vector2.zero;
+
+                    Vector2 jumpVelocity = new Vector2 (0, jumpPower);
+                    rigid.AddForce (jumpVelocity, ForceMode2D.Impulse);
+                }
+	        }
         }
     }
 }
