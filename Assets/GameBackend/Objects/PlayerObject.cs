@@ -54,9 +54,7 @@ namespace GameBackend.Objects
             // animator.SetTrigger(Atk);
             // if (cooltime_gumgi >= 2)
             // {
-            //     Vector3 scale = transform.localScale;
-            //     scale.x *= -1;
-            //     transform.localScale = scale;
+            //     
             //     animator.SetTrigger(Atk);
             //     cooltime_gumgi = 0;
             //     direction = !direction;
@@ -68,7 +66,7 @@ namespace GameBackend.Objects
             if(cooltime_click > 1f)
             {
                 atknum = 0;
-                cooltime_click = 0.0f;
+                cooltime_click = 0.25f;
             }
             else if(Input.GetMouseButtonDown(0))
             {
@@ -78,7 +76,6 @@ namespace GameBackend.Objects
                     if (cooltime_click >= 0.25f)
                     {
                     animator.SetTrigger("atk");
-                    Debug.Log(atknum);
                     atknum = (atknum < 3) ? atknum + 1 : 0;
                     cooltime_click = 0;
                     }
@@ -124,11 +121,25 @@ namespace GameBackend.Objects
             Vector3 moveVelocity= Vector3.zero;
             if(Input.GetKey(InputHandler.MoveLeft))
             {
+                if (direction == true)
+                {
+                    direction = false;
+                    Vector3 scale = transform.localScale;
+                    scale.x *= -1;
+                    transform.localScale = scale;
+                }
                 animator.SetBool(Moving, true);
                 moveVelocity = Vector3.left;
             }
             else if(Input.GetKey(InputHandler.MoveRight))
             {
+                if (direction == false)
+                {
+                    direction = true;
+                    Vector3 scale = transform.localScale;
+                    scale.x *= -1;
+                    transform.localScale = scale;
+                }
                 animator.SetBool(Moving, true);
                 moveVelocity = Vector3.right;
             }
