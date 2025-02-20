@@ -47,6 +47,7 @@ namespace GameBackend.Objects
         {
             this.player = player;
             this.direction = (int)player.transform.localScale.x;
+            if (direction == -1) this.gameObject.transform.rotation = Quaternion.Euler(new Vector3 (0, 0, -35));
             this.playerPosition = player.transform.position;
             this.transform.localScale = new Vector3(-0.5f * direction, 0.5f, 0.5f);
             this.transform.localPosition = this.playerPosition + new Vector3(1.09f, -0.36f, 0f);
