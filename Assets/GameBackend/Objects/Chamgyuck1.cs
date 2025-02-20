@@ -4,13 +4,15 @@ using UnityEngine;
 
 namespace GameBackend.Objects
 {
-    public class Chamgyuck1 :SkillEffect
+    public class Chamgyuck1 : SkillEffect
     {
         private Entity player;
         private int dmg;
-        private List<AtkTags> atkTags = new() { AtkTags.normalSkill ,AtkTags.physicalAttack };
+        private List<AtkTags> atkTags = new() { AtkTags.normalSkill, AtkTags.physicalAttack };
         private HashSet<GameObject> atkObjects = new();
-        
+        private int direction;
+        private Vector3 playerPosition;
+
         public void Start()
         {
             timer = -0.15f;
@@ -21,11 +23,13 @@ namespace GameBackend.Objects
 
         protected override void update(float deltaTime)
         {
-            timer+=deltaTime;
+            timer += deltaTime;
             checkAlpha(0.2f, 0.3f, 0, 1);
             checkAlpha(0.5f, 0.6f, 1, 0);
-            checkScale(0.2f, 0.3f, Vector3.zero, new Vector3(-0.5f, 0.5f, 0.5f));
-            checkMove(0.2f, 0.3f, new Vector3(0.34f, 0.76f, 0f), new Vector3(1.09f, 0.36f, 0));
+            checkScale(0.2f, 0.3f, Vector3.zero, new Vector3(-0.5f * direction, 0.5f, 0.5f));
+            checkMove(0.2f, 0.3f,
+                this.playerPosition + new Vector3(0.34f * direction, 0.76f, 0f),
+                this.playerPosition + new Vector3(1.09f * direction, 0.36f, 0));
         }
 
         protected override void OnTriggerEnter2D(Collider2D other)
@@ -35,17 +39,18 @@ namespace GameBackend.Objects
             this.atkObjects.Add(other.gameObject);
             Enemy enemy = other.GetComponent<Enemy>();
             if (enemy is null) return;
-            DmgGiveEvent dmgGiveEvent=new DmgGiveEvent(this.dmg, 0.4f, player, enemy, atkTags);
+            DmgGiveEvent dmgGiveEvent = new DmgGiveEvent(this.dmg, 0.4f, player, enemy, atkTags);
             enemy.dmgtake(dmgGiveEvent);
         }
 
         public void setInfo(Entity player)
         {
             this.player = player;
-            this.transform.position = player.transform.position;
-            this.transform.localScale = new Vector3(-0.5f, 0.5f, 0.5f);
-            this.transform.localPosition = new Vector3(1.09f, 0.36f, 0);
-            this.dmg=player.status.calculateTrueDamage(atkTags, atkCoef:100);
+            this.direction = (int)player.transform.localScale.x;
+            this.playerPosition = player.transform.position;
+            this.transform.localScale = new Vector3(-0.5f * direction, 0.5f, 0.5f);
+            this.transform.localPosition = this.playerPosition + new Vector3(1.09f, 0.36f, 0);
+            this.dmg = player.status.calculateTrueDamage(atkTags, atkCoef: 100);
         }
     }
 }

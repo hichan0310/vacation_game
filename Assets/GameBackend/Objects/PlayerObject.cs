@@ -40,7 +40,7 @@ namespace GameBackend.Objects
             objs.Add(chamgyuck2);
             normalSkill.requireObjects(objs);
             normalSkill.registrarTarget(this);
-            normalSkill.execute();
+            // normalSkill.execute();
         }
 
         protected override void update(float deltaTime)
@@ -76,6 +76,8 @@ namespace GameBackend.Objects
                     if (cooltime_click >= 0.25f)
                     {
                     animator.SetTrigger("atk");
+                    NormalAttackExecuteEvent evnt = new NormalAttackExecuteEvent(this, new List<AtkTags>());
+                    this.eventActive(evnt);
                     atknum = (atknum < 3) ? atknum + 1 : 0;
                     cooltime_click = 0;
                     }

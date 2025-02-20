@@ -82,10 +82,10 @@ namespace GameBackend
 
         private void activateAttack()
         {
-            GameObject instance1 = Object.Instantiate(motionHelper1, player.transform);
-            GameObject instance2 = Object.Instantiate(motionHelper2, player.transform);
-            GameObject chamgyuckInstance1 = Object.Instantiate(chamgyuck1, player.transform);
-            GameObject chamgyuckInstance2 = Object.Instantiate(chamgyuck2, player.transform);
+            GameObject instance1 = Object.Instantiate(motionHelper1);
+            GameObject instance2 = Object.Instantiate(motionHelper2);
+            GameObject chamgyuckInstance1 = Object.Instantiate(chamgyuck1);
+            GameObject chamgyuckInstance2 = Object.Instantiate(chamgyuck2);
 
             MotionHelper1 helper1 = instance1.GetComponent<MotionHelper1>();
             helper1.setInfo(player);
