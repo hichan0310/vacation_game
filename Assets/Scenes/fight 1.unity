@@ -350,7 +350,7 @@ PolygonCollider2D:
   m_GameObject: {fileID: 1061263768}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 070a973e14fd68a4e95dd6308a5b3a83, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -373,7 +373,7 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.17, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.37, y: 0.5}
@@ -386,10 +386,10 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: -0.1320351, y: 0.38079917}
-      - {x: -0.32275018, y: 0.23616956}
-      - {x: -0.3257656, y: -0.30999932}
-      - {x: -0.013655305, y: -0.31159836}
-      - {x: -0.014167726, y: 0.2407229}
+      - {x: -0.363942, y: 0.23616956}
+      - {x: -0.34407306, y: -0.3237299}
+      - {x: 0.009229183, y: -0.34363633}
+      - {x: 0.031600893, y: 0.23614602}
   m_UseDelaunayMesh: 0
 --- !u!50 &1061263774
 Rigidbody2D:
