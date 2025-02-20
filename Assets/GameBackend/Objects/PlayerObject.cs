@@ -15,7 +15,7 @@ namespace GameBackend.Objects
         private float cooltime_gumgi = 0.5f;
         private bool direction = true;
         private float movePower = 1f;
-        private float jumpPower = 2.5f;
+        private float jumpPower = 2f;
         private bool isJumping = false;
         private Rigidbody2D rigid;
 
@@ -43,9 +43,9 @@ namespace GameBackend.Objects
 
         protected override void update(float deltaTime)
         {
-            // base.update(deltaTime);
-            // Move(deltaTime);
-            // Jump(deltaTime);
+            base.update(deltaTime);
+            Move(deltaTime);
+            Jump(deltaTime);
             // cooltime_gumgi += deltaTime;
             // animator.SetTrigger(Atk);
             // if (cooltime_gumgi >= 2)
@@ -60,8 +60,8 @@ namespace GameBackend.Objects
             //     NormalAttackExecuteEvent evnt = new NormalAttackExecuteEvent(this, new List<AtkTags>());
             //     this.eventActive(evnt);
             // }
-            animator.SetBool("jumping", true);
             animator.SetTrigger(Atk);
+            animator.SetBool("jumping", isJumping);
         }
 
         protected override void OnCollisionEnter2D(Collision2D collision)
@@ -110,6 +110,7 @@ namespace GameBackend.Objects
             {
                 if (!isJumping)
                 {
+                    animator.SetTrigger("jump");
                     isJumping = true;
                     rigid.velocity = Vector2.zero;
 
