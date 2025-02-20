@@ -23,6 +23,7 @@ namespace GameBackend.Objects
 
         public void Start()
         {
+            this.status = new PlayerStatus(10000, 1000, 100);
             normalSkill = new TestSkill();
             List<GameObject> objs = new List<GameObject>();
             objs.Add(motionHelper1);

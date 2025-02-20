@@ -20,12 +20,12 @@ namespace GameBackend
 
         public virtual void Update()
         {
-            update(Time.deltaTime);
+            update(TimeManager.deltaTime);
         }
 
         protected virtual void OnTriggerEnter2D(Collider2D other)
         {
-            
+            //Debug.Log($"{gameObject.tag}와 {other.tag} 충돌");
         }
 
         protected void destroy()

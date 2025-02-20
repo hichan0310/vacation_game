@@ -60,7 +60,7 @@ namespace GameBackend
         {
             int def = status.def;
             int C = 200;
-            int realDmg = (int)(dmg.trueDmg * ((float)(def) / (def + C)));
+            int realDmg = (int)(dmg.trueDmg * ((float)(C) / (def + C)));
             
             eventActive(new DmgTakeEvent(realDmg, dmg.attacker, dmg.target, dmg.atkTags));
             status.nowHp -= realDmg;

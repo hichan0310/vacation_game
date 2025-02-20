@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace GameBackend.Status
 {
@@ -12,6 +13,7 @@ namespace GameBackend.Status
         {
             get { return (int)(baseHp * (increaseHp / 100 + 1) + addHp); }
         }
+
         public int nowHp { get; set; }
 
         private int baseAtk { get; }
@@ -38,11 +40,35 @@ namespace GameBackend.Status
 
         public PlayerStatus(int baseHp, int baseAtk, int baseDef)
         {
-            this.baseHp = baseHp; this.addHp = 0; this.increaseHp = 0; this.nowHp = this.maxHp;
-            this.baseAtk = baseAtk; this.addAtk = 0; this.increaseAtk = 0;
-            this.baseDef = baseDef; this.addDef = 0; this.increaseDef = 0;
-            this.crit = 5; this.critDmg = 50;
+            this.baseHp = baseHp;
+            this.addHp = 0;
+            this.increaseHp = 0;
+            this.nowHp = this.maxHp;
+            this.baseAtk = baseAtk;
+            this.addAtk = 0;
+            this.increaseAtk = 0;
+            this.baseDef = baseDef;
+            this.addDef = 0;
+            this.increaseDef = 0;
+            this.crit = 5;
+            this.critDmg = 50;
             this.dmgUp = new float[Tag.atkTagCount];
+        }
+
+        public int calculateTrueDamage(List<AtkTags> atkTags, float atkCoef=0, float hpCoef=0, float defCoef=0)
+        {
+            int dmg = (int)(atkCoef * atk + defCoef * def + hpCoef * maxHp);
+            if (Random.value < crit / 100)
+            {
+                dmg = (int)(dmg * (1 + critDmg / 100));
+                atkTags.Add(AtkTags.criticalHit);
+            }
+            
+            foreach (AtkTags atkTag in atkTags)
+            {
+                dmg = (int)((dmgUp[(int)atkTag] / 100 + 1) * dmg);
+            }
+            return dmg;
         }
     }
 

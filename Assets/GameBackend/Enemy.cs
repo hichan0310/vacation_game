@@ -72,7 +72,7 @@ namespace GameBackend
             else direction = false;
             
             Vector3 pos = this.transform.position;
-            pos.x += (direction?0.2f:-0.2f)*deltaTime;
+            pos.x += (direction?0.3f:-0.3f)*deltaTime;
             this.transform.position = pos;
         }
 
@@ -88,12 +88,13 @@ namespace GameBackend
             if (staggerTimer == 0)
             {
                 //경직 시작
+                Debug.Log("stagger");
             }
 
             Vector3 pos = this.transform.position;
-            pos.x += (direction?1:-1)*(Mathf.Max(1-staggerTimer, 0)/2)*deltaTime;
+            pos.x += (direction?-1:1)*(Mathf.Max(1-staggerTimer, 0))*deltaTime;
             this.transform.position = pos;
-            if (staggerTimer >= 1)
+            if (staggerTimer >= 1.5)
             {
                 staggered = false;
                 return false;
@@ -109,12 +110,13 @@ namespace GameBackend
             if (knockbackTimer == 0)
             {
                 //넉백 시작
+                Debug.Log("knockback");
             }
 
             Vector3 pos = this.transform.position;
-            pos.x += (direction?1:-1)*(Mathf.Max(3-knockbackTimer, 0)/2)*deltaTime;
+            pos.x += (direction?-1:1)*(Mathf.Max(3-knockbackTimer, 0))*deltaTime;
             this.transform.position = pos;
-            if (knockbackTimer >= 3)
+            if (knockbackTimer >= 4)
             {
                 knockbacked = false;
                 return false;

@@ -30,7 +30,7 @@ namespace GameBackend.Objects
         protected override void OnTriggerEnter2D(Collider2D other)
         {
             base.OnTriggerEnter2D(other); 
-            Debug.Log($"{gameObject.tag}와 {other.tag} 충돌");
+            
         }
         
         void destroy()

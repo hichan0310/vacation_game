@@ -162,7 +162,7 @@ namespace GameBackend
                 atkTags.Add(AtkTags.physicalAttack);
                 atkTags.Add(AtkTags.specialSkill);
                 DmgGiveEvent dmgGiveEvent = new DmgGiveEvent(
-                    (int)(0.4*status.atk*target.Value),
+                    status.calculateTrueDamage(atkTags, atkCoef:40),
                     1, 
                     player, 
                     target.Key, 
