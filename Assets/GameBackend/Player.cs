@@ -14,6 +14,11 @@ namespace GameBackend
             status = info.getPlayerStatus();
         }
 
+        protected override void OnCollisionEnter2D(Collision2D collision)
+        {
+            
+        }
+
         protected override void update(float deltaTime)
         {
             base.update(deltaTime);

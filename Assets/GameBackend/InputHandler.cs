@@ -4,14 +4,14 @@ public class InputHandler : MonoBehaviour
 {
     public static InputHandler Instance { get; private set; }
 
-    public bool MoveUp { get; private set; }
-    public bool MoveDown { get; private set; }
-    public bool MoveLeft { get; private set; }
-    public bool MoveRight { get; private set; }
-    public bool Jump { get; private set; }
-    public bool Skill { get; private set; }
-    public bool Ultimate { get; private set; }
-    public bool Attack { get; private set; }
+    public static KeyCode MoveUp { get; private set; } = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("MoveUp"));
+    public static KeyCode MoveDown { get; private set; } = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("MoveDown"));
+    public static KeyCode MoveLeft { get; private set; } = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("MoveLeft"));
+    public static KeyCode MoveRight { get; private set; } = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("MoveRight"));
+    public static KeyCode Jump { get; private set; } = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Jump"));
+    public static KeyCode Skill { get; private set; } = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Skill"));
+    public static KeyCode Ultimate { get; private set; } = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Ultimate"));
+
     
     public void Awake()
     {
@@ -28,13 +28,6 @@ public class InputHandler : MonoBehaviour
     // 나중에 키 설정 변경 가능하게 만들 예정
     void Update()
     {
-        MoveUp = Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("MoveUp")));
-        MoveDown = Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("MoveDown")));
-        MoveLeft = Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("MoveLeft")));
-        MoveRight = Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("MoveRight")));
-        Jump = Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Jump")));
-        Skill = Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Skill")));
-        Ultimate = Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Ultimate")));
-        Attack = Input.GetMouseButtonDown(0);
+
     }
 }

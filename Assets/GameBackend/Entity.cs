@@ -38,6 +38,11 @@ namespace GameBackend
             
         }
 
+        protected virtual void OnCollisionEnter2D(Collision2D collision)
+        {
+            
+        }
+
         public virtual void eventActive(EventArgs e)
         {
             foreach (var listener in eventListener)
