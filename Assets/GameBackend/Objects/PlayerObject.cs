@@ -9,14 +9,16 @@ namespace GameBackend.Objects
 {
     public class PlayerObject:Player<TestPlayerInfo1>
     {
-        private static readonly int Atk = Animator.StringToHash("atk");
         private static readonly int Moving = Animator.StringToHash("moving");
+        private int atknum = 0;
 
         private float cooltime_gumgi = 0.5f;
+        private float cooltime_click = 0f;
         private bool direction = true;
         private float movePower = 1f;
         private float jumpPower = 2f;
         private bool isJumping = false;
+        private bool isJumpatk = false;
         private Rigidbody2D rigid;
 
         public GameObject motionHelper1;
@@ -44,6 +46,8 @@ namespace GameBackend.Objects
         protected override void update(float deltaTime)
         {
             base.update(deltaTime);
+            animator.SetBool("jumping", isJumping);
+            animator.SetInteger("atknum", atknum);
             Move(deltaTime);
             Jump(deltaTime);
             // cooltime_gumgi += deltaTime;
@@ -59,9 +63,35 @@ namespace GameBackend.Objects
             //     Invoke("balsa", 0.4f);
             //     NormalAttackExecuteEvent evnt = new NormalAttackExecuteEvent(this, new List<AtkTags>());
             //     this.eventActive(evnt);
-            // }
-            animator.SetTrigger(Atk);
-            animator.SetBool("jumping", isJumping);
+            // } 
+            if(!isJumping) cooltime_click += deltaTime;
+            if(cooltime_click > 1f)
+            {
+                atknum = 0;
+                cooltime_click = 0.0f;
+            }
+            else if(Input.GetMouseButtonDown(0))
+            {
+
+                if (!isJumping)
+                {
+                    if (cooltime_click >= 0.25f)
+                    {
+                    animator.SetTrigger("atk");
+                    Debug.Log(atknum);
+                    atknum = (atknum < 3) ? atknum + 1 : 0;
+                    cooltime_click = 0;
+                    }
+                }
+                else if (!isJumpatk)
+                {
+                    atknum = 0;
+                    cooltime_click = 0;
+                    animator.SetTrigger("jumpatk");
+                    isJumpatk = true;
+                }
+            }
+
         }
 
         protected override void OnCollisionEnter2D(Collision2D collision)
@@ -69,6 +99,7 @@ namespace GameBackend.Objects
             if (collision.gameObject.tag == "Plate")
             {
                 isJumping = false;
+                isJumpatk = false;
             }
         }
         
