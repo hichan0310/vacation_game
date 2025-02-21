@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using GameBackend.Events;
@@ -58,7 +59,7 @@ namespace GameBackend
 
         protected virtual void update(float deltaTime)
         {
-            this.eventListener.ForEach(listener => listener.update(deltaTime));
+            this.eventListener.ToList().ForEach(listener => listener.update(deltaTime));
         }
 
         public virtual void Update()
