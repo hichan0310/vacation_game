@@ -6,6 +6,7 @@ namespace GameBackend.Objects
     {
         public void Start()
         {
+            timeIgnore = true;
             Invoke("destroy", 0.5f);
         }
 

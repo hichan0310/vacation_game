@@ -25,7 +25,7 @@ namespace GameBackend.Skills
 
         public float timeleft { get; private set; }
 
-        public bool active => timeleft == 0 && energy == 20;
+        public bool active => timeleft <= 0 && energy >= 20;
 
         public TestSpecialSkill()
         {
@@ -80,6 +80,7 @@ namespace GameBackend.Skills
         public void execute()
         {
             timeleft = cooltime;
+            energy = 0;
             TimeManager.timeRate *= 0.1f;
             this.slowtime = slowDuration;
         }
