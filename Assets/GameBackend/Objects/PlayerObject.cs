@@ -14,6 +14,7 @@ namespace GameBackend.Objects
         private static readonly int Moving = Animator.StringToHash("moving");
         private List<AtkTags> atkTags = new() { AtkTags.normalAttack, AtkTags.physicalAttack };
         private Dictionary<string, int> normalAttackDamage;
+        private List<Collider2D> collidersInside = new List<Collider2D>();
         private int dmg;
         private int atknum = 0;
 
@@ -145,10 +146,17 @@ namespace GameBackend.Objects
             }
         }
 
+        protected override void OnTriggerEnter2D(Collider2D other)
+        {
+            if (!collidersInside.Contains(other))
+            {
+                collidersInside.Add(other);
+            }
+        }
+
         protected override void OnTriggerStay2D(Collider2D other)
         {
-            Enemy enemy = other.gameObject.GetComponent<Enemy>();
-            if (enemy)
+            if (collidersInside != null)
             {
                 if ((animator.GetCurrentAnimatorStateInfo(0).IsName("attack_a") || animator.GetCurrentAnimatorStateInfo(0).IsName("attack_b") || animator.GetCurrentAnimatorStateInfo(0).IsName("attack_c") || animator.GetCurrentAnimatorStateInfo(0).IsName("attack_d") || (animator.GetCurrentAnimatorStateInfo(0).IsName("attack_jump") && !isJumpatk)) && (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name != $"{tmp}"))
                 {
@@ -161,9 +169,20 @@ namespace GameBackend.Objects
                     player = this;
                     dmg = player.status.calculateTrueDamage(atkTags, atkCoef: normalAttackDamage[tmp]);
                     // Debug.Log(tmp);
-                    new DmgGiveEvent(dmg, (tmp == "attack_jump") ? 0.5f : 0f, player, enemy, atkTags);
+                    foreach (Collider2D enemycollider in collidersInside)
+                    {
+                        if (enemycollider is PolygonCollider2D) new DmgGiveEvent(dmg, (tmp == "attack_jump") ? 0.5f : 0f, player, enemycollider.gameObject.GetComponent<Enemy>(), atkTags);
+                    }
                 }
                 
+            }
+        }
+
+        protected override void OnTriggerExit2D(Collider2D other)
+        {
+            if (collidersInside.Contains(other))
+            {
+                collidersInside.Remove(other);
             }
         }
         
