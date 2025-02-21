@@ -74,10 +74,16 @@ namespace GameBackend
             
             eventActive(new DmgTakeEvent(realDmg, dmg.attacker, dmg.target, dmg.atkTags));
             status.nowHp -= realDmg;
+            if (status.nowHp <= 0) die();
         }
 
         public virtual bool stagger(float deltaTime) { return true; }
         public virtual bool knockback(float deltaTime) { return true; }
+
+        public virtual void die()
+        {
+            Debug.Log($"die : {this.name}");
+        }
     }
 
     public class EmptyEntity:Entity

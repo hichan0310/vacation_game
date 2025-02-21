@@ -1,4 +1,6 @@
-﻿using GameBackend.Events;
+﻿using System;
+using GameBackend.Events;
+using GameBackend.Status;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -20,7 +22,9 @@ namespace GameBackend
         
         protected float staggerTimer = 0;
         protected float knockbackTimer = 0;
+
         
+
         public GameObject getNearestPlayer(Vector2 position)
         {
             GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
@@ -90,7 +94,7 @@ namespace GameBackend
             if (staggerTimer == 0)
             {
                 //경직 시작
-                Debug.Log("stagger");
+                //Debug.Log("stagger");
             }
 
             Vector3 pos = this.transform.position;
@@ -112,7 +116,7 @@ namespace GameBackend
             if (knockbackTimer == 0)
             {
                 //넉백 시작
-                Debug.Log("knockback");
+                //Debug.Log("knockback");
             }
 
             Vector3 pos = this.transform.position;
