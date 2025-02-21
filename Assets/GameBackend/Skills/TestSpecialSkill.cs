@@ -102,7 +102,7 @@ namespace GameBackend.Skills
                 }
                 else if (dmgEvent.atkTags.Contains(AtkTags.normalSkill))
                 {
-                    energy += 10;
+                    energy += 2;
                 }
                 
                 if (slowtime > 0)
