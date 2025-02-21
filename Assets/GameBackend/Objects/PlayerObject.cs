@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GameBackend.Events;
+using GameBackend.Skills;
 using GameBackend.Status;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -21,28 +22,43 @@ namespace GameBackend.Objects
         private bool isJumpatk = false;
         private Rigidbody2D rigid;
 
+        public GameObject normalSkillProgressBar;
         public GameObject motionHelper1;
         public GameObject motionHelper2;
         public GameObject chamgyuck1;
         public GameObject chamgyuck2;
         public GameObject normalSkillEffect;
         
+        public GameObject specialSkillTimeProgressBar;
+        public GameObject specialSkillEnergyProgressBar;
+        
         public ISkill normalSkill{get;private set;}
+        public ISkill specialSkill{get;private set;}
 
         public void Start()
         {
             rigid = this.gameObject.GetComponent<Rigidbody2D>();
             this.status = new PlayerStatus(10000, 1000, 100);
+            
             normalSkill = new TestSkill();
-            List<GameObject> objs = new List<GameObject>();
-            objs.Add(motionHelper1);
-            objs.Add(motionHelper2);
-            objs.Add(chamgyuck1);
-            objs.Add(chamgyuck2);
-            objs.Add(normalSkillEffect);
-            normalSkill.requireObjects(objs);
+            normalSkill.requireObjects(new List<GameObject>
+            {
+                normalSkillProgressBar,
+                motionHelper1,
+                motionHelper2,
+                chamgyuck1,
+                chamgyuck2,
+                normalSkillEffect,
+            });
             normalSkill.registrarTarget(this);
-            //normalSkill.execute();
+            
+            // specialSkill = new TestSpecialSkill();
+            // specialSkill.requireObjects(new List<GameObject>
+            // {
+            //     specialSkillTimeProgressBar,
+            //     specialSkillEnergyProgressBar,
+            // });
+            // specialSkill.registrarTarget(this);
         }
 
         protected override void update(float deltaTime)
@@ -53,6 +69,7 @@ namespace GameBackend.Objects
             Move(deltaTime);
             Jump(deltaTime);
             NormalSkill(deltaTime);
+            // SpecialSkill(deltaTime);
             // cooltime_gumgi += deltaTime;
             // animator.SetTrigger(Atk);
             // if (cooltime_gumgi >= 2)
@@ -125,6 +142,14 @@ namespace GameBackend.Objects
             if (this.normalSkill.active && Input.GetKey(InputHandler.Skill))
             {
                 this.normalSkill.execute();
+            }
+        }
+        
+        void SpecialSkill(float deltaTime)
+        {
+            if (this.specialSkill.active && Input.GetKey(InputHandler.Ultimate))
+            {
+                this.specialSkill.execute();
             }
         }
         

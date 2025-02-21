@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using GameBackend.Events;
 using GameBackend.Objects;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace GameBackend.Skills
@@ -16,12 +17,12 @@ namespace GameBackend.Skills
         private Entity player;
         private int supportAttack = 0;
         
-        
         public GameObject motionHelper1{get;private set;}
         public GameObject motionHelper2{get;private set;}
         public GameObject chamgyuck1{get;private set;}
         public GameObject chamgyuck2{get;private set;}
         public GameObject effect{get;private set;}
+        public ProgressBar progressbar {get; private set;}
 
         public float timeleft { get; private set; }
 
@@ -34,17 +35,20 @@ namespace GameBackend.Skills
 
         public void requireObjects(List<GameObject> objects)
         {
-            this.motionHelper1=objects[0];
-            this.motionHelper2=objects[1];
-            this.chamgyuck1=objects[2];
-            this.chamgyuck2=objects[3];
-            this.effect=objects[4];
+            this.progressbar=objects[0].GetComponent<ProgressBar>();
+            
+            this.motionHelper1=objects[1];
+            this.motionHelper2=objects[2];
+            this.chamgyuck1=objects[3];
+            this.chamgyuck2=objects[4];
+            this.effect=objects[5];
         }
 
         public void update(float deltaTime)
         {
             timeleft-=deltaTime;
             if (timeleft < 0) timeleft = 0;
+            progressbar.ratio = -timeleft / cooltime+1;
         }
 
         public void execute()

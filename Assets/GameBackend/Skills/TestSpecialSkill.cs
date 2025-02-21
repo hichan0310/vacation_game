@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using GameBackend.Buffs;
 using GameBackend.Events;
+using GameBackend.Objects;
 using GameBackend.Status;
 using UnityEngine;
 
@@ -14,8 +15,13 @@ namespace GameBackend.Skills
         private int energy=0;
         private Entity player;
         private float slowtime = 0;
+        private const float slowDuration = 7;
         
-        private Dictionary<Entity, int> targets = new Dictionary<Entity, int>();
+        public ProgressBar energyProgressBar { get; private set; }
+        public ProgressBar timeProgressBar { get; private set; }
+        public GameObject motionHelper{get;private set;}
+        
+        private Dictionary<Entity, int> targets = new();
 
         public float timeleft
         {
@@ -32,15 +38,21 @@ namespace GameBackend.Skills
 
         public void update(float deltaTime)
         {
-            timeleft -= deltaTime;
-            if (timeleft < 0) timeleft = 0;
+            energyProgressBar.ratio = (float)energy / 40;
             if (slowtime > 0)
             {
                 slowtime -= deltaTime;
+                timeProgressBar.ratio = slowtime / slowDuration;
                 if (slowtime <= 0)
                 {
                     finish();
                 }
+            }
+            else
+            {
+                timeleft -= deltaTime;
+                if (timeleft < 0) timeleft = 0;
+                timeProgressBar.ratio = -timeleft / cooltime+1;
             }
         }
 
@@ -73,12 +85,14 @@ namespace GameBackend.Skills
         {
             timeleft = cooltime;
             TimeManager.timeRate *= 0.1f;
-            this.slowtime = 7;
+            this.slowtime = slowDuration;
         }
 
         public void requireObjects(List<GameObject> objects)
         {
-            // 오브젝트 추가해서 여기에서 스킬 이펙트 구현
+            timeProgressBar=objects[0].GetComponent<ProgressBar>();
+            energyProgressBar=objects[1].GetComponent<ProgressBar>();
+            //motionHelper=objects[2];
         }
 
         public void eventActive<T>(T eventArgs) where T : EventArgs

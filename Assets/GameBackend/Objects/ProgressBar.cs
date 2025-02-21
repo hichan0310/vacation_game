@@ -5,9 +5,9 @@ namespace GameBackend.Objects
 {
     public class ProgressBar:MonoBehaviour
     {
-        public PlayerObject player;
         private GameObject progressBar;
         private float length = 1.28f;
+        public float ratio=0;
 
         private void Start()
         {
@@ -16,7 +16,6 @@ namespace GameBackend.Objects
 
         private void Update()
         {
-            float ratio = 1-player.normalSkill.timeleft / 5;
             var scale = progressBar.transform.localScale;
             scale.x = ratio;
             progressBar.transform.localScale = scale;

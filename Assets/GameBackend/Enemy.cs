@@ -16,6 +16,7 @@ namespace GameBackend
         protected float forceStaggered = 0;
         protected float staggerRisist = 0.5f;
         protected float knockbackRisist = 2f;
+        protected float moveSpeed = 0.3f;
         
         protected float staggerTimer = 0;
         protected float knockbackTimer = 0;
@@ -72,7 +73,7 @@ namespace GameBackend
             else direction = false;
             
             Vector3 pos = this.transform.position;
-            pos.x += (direction?0.3f:-0.3f)*deltaTime;
+            pos.x += (direction?moveSpeed:-moveSpeed)*deltaTime;
             this.transform.position = pos;
         }
 
