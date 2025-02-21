@@ -42,7 +42,7 @@ namespace GameBackend
         protected override void update(float deltaTime)
         {
             base.update(deltaTime);
-            Debug.Log($"{forceSum}, {forceStaggered}");
+            // Debug.Log($"{forceSum}, {forceStaggered}");
             
             forceSum -= deltaTime/5;
             forceStaggered -= deltaTime/5;
