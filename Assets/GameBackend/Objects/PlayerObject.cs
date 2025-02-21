@@ -56,13 +56,15 @@ namespace GameBackend.Objects
             };
             Collider2D[] playerColliders = this.gameObject.GetComponents<Collider2D>();
             GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
-            foreach (Collider2D playerCollider in playerColliders)
+            foreach (GameObject enemycol in enemys)
             {
-                if (!playerCollider.isTrigger)
+                Collider2D[] enemyColliders = enemycol.GetComponents<Collider2D>();
+                foreach (Collider2D playerCollider in playerColliders)
                 {
-                    foreach (GameObject enemycol in enemys)
+                    foreach (Collider2D enemyCollider in enemyColliders)
+                    if (!playerCollider.isTrigger && !enemyCollider.isTrigger)
                     {
-                        Physics2D.IgnoreCollision(playerCollider, enemycol.GetComponents<Collider2D>()[0]);
+                        Physics2D.IgnoreCollision(playerCollider, enemyCollider);
                     }
                 }
             }
