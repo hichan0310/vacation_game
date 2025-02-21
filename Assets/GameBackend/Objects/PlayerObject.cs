@@ -63,13 +63,13 @@ namespace GameBackend.Objects
             });
             normalSkill.registrarTarget(this);
             
-            // specialSkill = new TestSpecialSkill();
-            // specialSkill.requireObjects(new List<GameObject>
-            // {
-            //     specialSkillTimeProgressBar,
-            //     specialSkillEnergyProgressBar,
-            // });
-            // specialSkill.registrarTarget(this);
+            specialSkill = new TestSpecialSkill();
+            specialSkill.requireObjects(new List<GameObject>
+            {
+                specialSkillTimeProgressBar,
+                specialSkillEnergyProgressBar,
+            });
+            specialSkill.registrarTarget(this);
         }
 
         protected override void update(float deltaTime)
@@ -80,7 +80,7 @@ namespace GameBackend.Objects
             Move(deltaTime);
             Jump(deltaTime);
             NormalSkill(deltaTime);
-            // SpecialSkill(deltaTime);
+            SpecialSkill(deltaTime);
             // cooltime_gumgi += deltaTime;
             // animator.SetTrigger(Atk);
             // if (cooltime_gumgi >= 2)
