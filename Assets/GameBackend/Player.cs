@@ -29,6 +29,11 @@ namespace GameBackend
             
         }
 
+        protected override void OnTriggerExit2D(Collider2D other)
+        {
+            
+        }
+
         protected override void update(float deltaTime)
         {
             base.update(deltaTime);

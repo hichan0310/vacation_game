@@ -44,6 +44,10 @@ namespace GameBackend
         {
         }
 
+        protected virtual void OnTriggerExit2D(Collider2D other)
+        {
+            
+        }
         protected virtual void OnCollisionEnter2D(Collision2D collision)
         {
         }
