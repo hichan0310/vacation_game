@@ -164,8 +164,6 @@ namespace GameBackend.Objects
                     dmg = player.status.calculateTrueDamage(atkTags, atkCoef: normalAttackDamage[tmp]);
                     Debug.Log(tmp);
                     DmgGiveEvent dmgGiveEvent = new DmgGiveEvent(dmg, (tmp == "attack_jump") ? 0.5f : 0f, player, enemy, atkTags);
-                    player.eventActive(dmgGiveEvent);
-                    enemy.dmgtake(dmgGiveEvent);
                 }
                 
             }
