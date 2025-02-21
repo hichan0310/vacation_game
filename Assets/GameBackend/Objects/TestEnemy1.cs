@@ -21,6 +21,14 @@ namespace GameBackend.Objects
         {
             base.update(deltaTime);
             progressBar.ratio=(float)status.nowHp/status.maxHp;
+            if (!direction && progressBar.transform.localScale.x == 1)
+            {
+                progressBar.transform.localScale = new Vector3(-1, 1, 1);
+            }
+            else if (direction && progressBar.transform.localScale.x == -1)
+            {
+                progressBar.transform.localScale = new Vector3(1, 1, 1);
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using GameBackend.Events;
 using GameBackend.Status;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace GameBackend
 {
@@ -76,6 +77,14 @@ namespace GameBackend
 
             if (target.transform.position.x >= this.transform.position.x) direction = true;
             else direction = false;
+            if (!direction && transform.localScale.x == 1)
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
+            else if (direction && transform.localScale.x == -1)
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+            }
             
             Vector3 pos = this.transform.position;
             pos.x += (direction?moveSpeed:-moveSpeed)*deltaTime;
