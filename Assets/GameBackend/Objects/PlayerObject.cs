@@ -11,6 +11,9 @@ namespace GameBackend.Objects
     public class PlayerObject:Player<TestPlayerInfo1>
     {
         private static readonly int Moving = Animator.StringToHash("moving");
+        private List<AtkTags> atkTags = new() { AtkTags.normalAttack, AtkTags.physicalAttack };
+        private Dictionary<string, int> normalAttackDamage;
+        private int dmg;
         private int atknum = 0;
 
         private float cooltime_gumgi = 0.5f;
@@ -23,6 +26,7 @@ namespace GameBackend.Objects
         private bool isJumpatk = false;
         private bool isnormalattack = false;
         private Rigidbody2D rigid;
+        private Entity player;
 
         public GameObject normalSkillProgressBar;
         public GameObject motionHelper1;
@@ -39,6 +43,14 @@ namespace GameBackend.Objects
 
         public void Start()
         {
+            normalAttackDamage = new Dictionary<string, int>
+            {
+                {"attack_a", 15},
+                {"attack_b", 15},
+                {"attack_c", 20},
+                {"attack_d", 23},
+                {"attack_jump", 50}
+            };
             Collider2D[] playerColliders = this.gameObject.GetComponents<Collider2D>();
             Collider2D enemyCollider = GameObject.Find("Enemy").GetComponent<Collider2D>();
             foreach (Collider2D playerCollider in playerColliders)
@@ -117,7 +129,7 @@ namespace GameBackend.Objects
                 else if (!isJumpatk)
                 {
                     atknum = 0;
-                    cooltime_click = 0;
+                    cooltime_click = 0.20f;
                     animator.SetTrigger("jumpatk");
                     isJumpatk = true;
                 }
@@ -129,6 +141,7 @@ namespace GameBackend.Objects
         {
             if (collision.gameObject.tag == "Plate")
             {
+                if(isJumping) tmp = "";
                 isJumping = false;
                 isJumpatk = false;
             }
@@ -139,7 +152,7 @@ namespace GameBackend.Objects
             Enemy enemy = other.gameObject.GetComponent<Enemy>();
             if (enemy)
             {
-                if ((animator.GetCurrentAnimatorStateInfo(0).IsName("attack_a") || animator.GetCurrentAnimatorStateInfo(0).IsName("attack_b") || animator.GetCurrentAnimatorStateInfo(0).IsName("attack_c") || animator.GetCurrentAnimatorStateInfo(0).IsName("attack_d") || animator.GetCurrentAnimatorStateInfo(0).IsName("attack_jump")) && animator.GetCurrentAnimatorClipInfo(0)[0].clip.name != $"{tmp}")
+                if ((animator.GetCurrentAnimatorStateInfo(0).IsName("attack_a") || animator.GetCurrentAnimatorStateInfo(0).IsName("attack_b") || animator.GetCurrentAnimatorStateInfo(0).IsName("attack_c") || animator.GetCurrentAnimatorStateInfo(0).IsName("attack_d") || (animator.GetCurrentAnimatorStateInfo(0).IsName("attack_jump") && !isJumpatk)) && (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name != $"{tmp}"))
                 {
                     if(tmp == "attack_d" && animator.GetCurrentAnimatorStateInfo(0).IsName("attack_b"))
                         tmp = "attack_a";
@@ -147,7 +160,13 @@ namespace GameBackend.Objects
                         tmp = "attack_c";
                     else
                         tmp = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
+                    Enemy enemy = other.GetComponent<Enemy>();
+                    player = this;
+                    dmg = player.status.calculateTrueDamage(atkTags, atkCoef: normalAttackDamage[tmp]);
                     Debug.Log(tmp);
+                    DmgGiveEvent dmgGiveEvent = new DmgGiveEvent(dmg, (tmp == "attack_jump") ? 0.5f : 0f, player, enemy, atkTags);
+                    player.eventActive(dmgGiveEvent);
+                    enemy.dmgtake(dmgGiveEvent);
                 }
                 
             }
