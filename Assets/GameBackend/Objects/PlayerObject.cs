@@ -20,7 +20,7 @@ namespace GameBackend.Objects
 
         private float cooltime_gumgi = 0.5f;
         private float lastAttackTime = 0f;
-        private float comboResetTime = 1f;
+        private float comboResetTime = 0.8f;
         private float attackCooldown = 0.25f;
         private string tmp = "";
         private bool direction = true;
@@ -109,38 +109,17 @@ namespace GameBackend.Objects
             {
                 if (!isJumping)
                 {
+                    animator.ResetTrigger("walk");
                     AttemptAttack();
                 }
                 else 
                 {
                     if (!isJumpatk)
                     {
-                        animator.SetInteger("atknum", atknum);
                         animator.SetTrigger("jumpatk");
                         isJumpatk = true;
                     }
                 }
-
-                // if (!isJumping)
-                // {
-                //     if (cooltime_click >= 0.25f)
-                //     {
-                //         animator.SetTrigger("atk");
-                //         isnormalattack = true;
-                //         NormalAttackExecuteEvent evnt = new NormalAttackExecuteEvent(this, new List<AtkTags>());
-                //         this.eventActive(evnt);
-                //         atknum = (atknum < 3) ? atknum + 1 : 0;
-                //         cooltime_click = 0;
-                //     }
-                // }
-                // else if (!isJumpatk)
-                // {
-                //     atknum = 0;
-                //     animator.SetInteger("atknum", atknum);
-                //     animator.SetTrigger("jumpatk");
-                //     isJumpatk = true;
-                //     cooltime_click = 0.0f;
-                // }
             }
         }
 
@@ -155,7 +134,8 @@ namespace GameBackend.Objects
 
             if (currentTime - lastAttackTime > comboResetTime)
             {
-                atknum = 0; 
+                tmp = ""; 
+                atknum = 0;
             }
 
             PlayAttackAnimation();
@@ -176,6 +156,7 @@ namespace GameBackend.Objects
         {
             if (collision.gameObject.tag == "Plate")
             { 
+                if (isJumping) animator.ResetTrigger("atk");
                 isJumping = false;
                 isJumpatk = false;
             }
@@ -183,7 +164,7 @@ namespace GameBackend.Objects
 
         protected override void OnTriggerEnter2D(Collider2D other)
         {
-            if (!collidersInside.Contains(other))
+            if (!collidersInside.Contains(other) && other.gameObject.tag == "Enemy")
             {
                 collidersInside.Add(other);
             }
@@ -197,15 +178,12 @@ namespace GameBackend.Objects
                      animator.GetCurrentAnimatorStateInfo(0).IsName("attack_b") ||
                      animator.GetCurrentAnimatorStateInfo(0).IsName("attack_c") ||
                      animator.GetCurrentAnimatorStateInfo(0).IsName("attack_d") ||
-                     (animator.GetCurrentAnimatorStateInfo(0).IsName("attack_jump") && !isJumpatk)) &&
+                     (animator.GetCurrentAnimatorStateInfo(0).IsName("attack_jump") && gameObject.GetComponent<Rigidbody2D>().velocity.y < 0)) &&
                     (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name != $"{tmp}"))
                 {
                     tmp = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
                     player = this;
                     dmg = player.status.calculateTrueDamage(atkTags, atkCoef: normalAttackDamage[tmp]);
-                    Debug.Log(tmp);
-                    Debug.Log(animator.GetCurrentAnimatorClipInfo(0)[0].clip.name);
-                    Debug.Log(atknum);
                     foreach (Collider2D enemycollider in collidersInside)
                     {
                         if (enemycollider is PolygonCollider2D)
@@ -260,6 +238,7 @@ namespace GameBackend.Objects
             Vector3 moveVelocity = Vector3.zero;
             if (InputHandler.MoveLeft.Any(key => Input.GetKey(key)))
             {
+                animator.SetTrigger("walk");
                 if (direction == true)
                 {
                     direction = false;
@@ -268,11 +247,11 @@ namespace GameBackend.Objects
                     transform.localScale = scale;
                 }
 
-                animator.SetBool(Moving, true);
                 moveVelocity = Vector3.left;
             }
             else if (InputHandler.MoveRight.Any(key => Input.GetKey(key)))
             {
+                animator.SetTrigger("walk");
                 if (direction == false)
                 {
                     direction = true;
@@ -281,11 +260,8 @@ namespace GameBackend.Objects
                     transform.localScale = scale;
                 }
 
-                animator.SetBool(Moving, true);
                 moveVelocity = Vector3.right;
             }
-
-            animator.SetBool(Moving, false);
             this.transform.position += moveVelocity * (movePower * deltaTime);
         }
 
@@ -295,8 +271,9 @@ namespace GameBackend.Objects
             {
                 if (!isJumping)
                 {
-                    atknum = 0;
                     tmp = "";
+                    atknum = 0;
+                    animator.SetInteger("atknum", atknum);
                     animator.SetTrigger("jump");
                     isJumping = true;
                     rigid.velocity = Vector2.zero;
