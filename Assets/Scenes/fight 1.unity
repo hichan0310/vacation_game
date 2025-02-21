@@ -906,6 +906,8 @@ MonoBehaviour:
   normalSkillEffect: {fileID: 7574279432512491051, guid: 9a47f91b364eb2f428f55c11062557ba, type: 3}
   specialSkillTimeProgressBar: {fileID: 479724229}
   specialSkillEnergyProgressBar: {fileID: 589540325}
+  specialSkillImpact: {fileID: 3077343761403282166, guid: f78aaaec3b393e24ca74cd6de8194347, type: 3}
+  specialSkillFlame: {fileID: 8793510976239746625, guid: 8fa5143051527e949b0ae174c8430414, type: 3}
 --- !u!60 &1061263773
 PolygonCollider2D:
   m_ObjectHideFlags: 0

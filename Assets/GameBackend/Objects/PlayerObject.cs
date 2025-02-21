@@ -37,6 +37,8 @@ namespace GameBackend.Objects
         
         public GameObject specialSkillTimeProgressBar;
         public GameObject specialSkillEnergyProgressBar;
+        public GameObject specialSkillImpact;
+        public GameObject specialSkillFlame;
         
         public ISkill normalSkill{get;private set;}
         public ISkill specialSkill{get;private set;}
@@ -80,6 +82,8 @@ namespace GameBackend.Objects
             {
                 specialSkillTimeProgressBar,
                 specialSkillEnergyProgressBar,
+                specialSkillImpact,
+                specialSkillFlame,
             });
             specialSkill.registrarTarget(this);
         }

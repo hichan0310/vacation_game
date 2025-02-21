@@ -16,10 +16,12 @@ namespace GameBackend.Skills
         private Entity player;
         private float slowtime = 0;
         private const float slowDuration = 7;
+        private int effectCount = 0;
         
         public ProgressBar energyProgressBar { get; private set; }
         public ProgressBar timeProgressBar { get; private set; }
-        public GameObject motionHelper{get;private set;}
+        public GameObject impact{get;private set;}
+        public GameObject flame{get;private set;}
         
         private Dictionary<Entity, int> targets = new();
 
@@ -32,11 +34,59 @@ namespace GameBackend.Skills
             timeleft = cooltime;
         }
 
+        private void checkImpact(int number)
+        {
+            if (slowtime <= slowDuration - 0.03*number && effectCount == number)
+            {
+                effectCount++;
+                Object.Instantiate(impact).transform.position = 
+                    player.transform.position+ 
+                    new Vector3(Mathf.Sin(2*Mathf.PI/12*number), Mathf.Cos(2*Mathf.PI/12*number), 0);
+            }
+        }
+        
+        private void checkflame(int number)
+        {
+            if (slowtime <= slowDuration - 1 - 0.5*number && effectCount == number+12)
+            {
+                effectCount++;
+                GameObject flameObject = Object.Instantiate(flame, player.transform, true);
+                flameObject.GetComponent<FlameVFX>().time = 0.1f; //(12 - number) * 0.5f;
+                flameObject.transform.localPosition = new Vector3(Mathf.Sin(2*Mathf.PI/12*number), Mathf.Cos(2*Mathf.PI/12*number), 0);
+            }
+        }
+
         public void update(float deltaTime)
         {
             energyProgressBar.ratio = (float)energy / 40;
             if (slowtime > 0)
             {
+                checkImpact(0);
+                checkImpact(1);
+                checkImpact(2);
+                checkImpact(3);
+                checkImpact(4);
+                checkImpact(5);
+                checkImpact(6);
+                checkImpact(7);
+                checkImpact(8);
+                checkImpact(9);
+                checkImpact(10);
+                checkImpact(11);
+                
+                checkflame(0);
+                checkflame(1);
+                checkflame(2);
+                checkflame(3);
+                checkflame(4);
+                checkflame(5);
+                checkflame(6);
+                checkflame(7);
+                checkflame(8);
+                checkflame(9);
+                checkflame(10);
+                checkflame(11);
+                
                 slowtime -= deltaTime;
                 timeProgressBar.ratio = slowtime / slowDuration;
                 if (slowtime <= 0)
@@ -54,6 +104,7 @@ namespace GameBackend.Skills
 
         private void finish()
         {
+            effectCount = 0;
             slowtime = 0;
             TimeManager.timeRate *= 10;
 
@@ -85,7 +136,8 @@ namespace GameBackend.Skills
         {
             timeProgressBar=objects[0].GetComponent<ProgressBar>();
             energyProgressBar=objects[1].GetComponent<ProgressBar>();
-            //motionHelper=objects[2];
+            impact=objects[2];
+            flame=objects[3];
         }
 
         public void eventActive<T>(T eventArgs) where T : EventArgs
