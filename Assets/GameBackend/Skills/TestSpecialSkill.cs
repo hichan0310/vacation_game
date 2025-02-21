@@ -178,7 +178,7 @@ namespace GameBackend.Skills
                 }
             }
 
-            if (energy > 40) energy = 40;
+            if (energy > 100) energy = 100;
         }
 
         public void registrarTarget(Entity target)
