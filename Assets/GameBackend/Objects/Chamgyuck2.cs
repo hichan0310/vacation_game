@@ -40,6 +40,7 @@ namespace GameBackend.Objects
             Enemy enemy = other.GetComponent<Enemy>();
             if (enemy is null) return;
             DmgGiveEvent dmgGiveEvent = new DmgGiveEvent(this.dmg, 0.4f, player, enemy, atkTags);
+            player.eventActive(dmgGiveEvent);
             enemy.dmgtake(dmgGiveEvent);
         }
 
