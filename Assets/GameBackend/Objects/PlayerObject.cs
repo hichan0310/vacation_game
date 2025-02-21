@@ -131,7 +131,6 @@ namespace GameBackend.Objects
             {
                 atknum = 0;
                 tmp = "";
-                cooltime_click = 0.25f;
             }
         }
 
