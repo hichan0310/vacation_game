@@ -160,7 +160,6 @@ namespace GameBackend.Objects
                         tmp = "attack_c";
                     else
                         tmp = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
-                    Enemy enemy = other.GetComponent<Enemy>();
                     player = this;
                     dmg = player.status.calculateTrueDamage(atkTags, atkCoef: normalAttackDamage[tmp]);
                     Debug.Log(tmp);
