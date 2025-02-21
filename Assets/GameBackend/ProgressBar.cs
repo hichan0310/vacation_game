@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace GameBackend.Objects
+namespace GameBackend
 {
     public class ProgressBar:MonoBehaviour
     {
