@@ -63,6 +63,10 @@ namespace GameBackend.Status
                 dmg = (int)(dmg * (1 + critDmg / 100));
                 atkTags.Add(AtkTags.criticalHit);
             }
+            else if (atkTags.Contains(AtkTags.criticalHit))
+            {
+                atkTags.Remove(AtkTags.criticalHit);
+            }
             
             foreach (AtkTags atkTag in atkTags)
             {
