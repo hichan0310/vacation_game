@@ -1,4 +1,6 @@
-﻿namespace GameBackend.Status
+﻿using GameBackend.Skills;
+
+namespace GameBackend.Status
 {
     public interface IPlayerInfo
     {
