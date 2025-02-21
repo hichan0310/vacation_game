@@ -177,6 +177,7 @@ namespace GameBackend.Objects
         
         void SpecialSkill(float deltaTime)
         {
+            Debug.Log(specialSkill);
             if (this.specialSkill.active && Input.GetKey(InputHandler.Ultimate))
             {
                 this.specialSkill.execute();
