@@ -11,7 +11,7 @@ namespace GameBackend.Objects
 
         private void Start()
         {
-            progressBar = transform.Find("progressbar").gameObject;
+            progressBar = GameObject.Find("progressbar");
         }
 
         private void Update()
