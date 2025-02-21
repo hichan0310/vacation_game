@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using GameBackend.Events;
 using GameBackend.Skills;
@@ -208,7 +209,7 @@ namespace GameBackend.Objects
         void Move(float deltaTime)
         {
             Vector3 moveVelocity= Vector3.zero;
-            if(Input.GetKey(InputHandler.MoveLeft))
+            if (InputHandler.MoveLeft.Any(key => Input.GetKey(key)))
             {
                 if (direction == true)
                 {
@@ -220,7 +221,7 @@ namespace GameBackend.Objects
                 animator.SetBool(Moving, true);
                 moveVelocity = Vector3.left;
             }
-            else if(Input.GetKey(InputHandler.MoveRight))
+            else if(InputHandler.MoveRight.Any(key => Input.GetKey(key)))
             {
                 if (direction == false)
                 {
