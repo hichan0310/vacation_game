@@ -63,16 +63,9 @@ namespace GameBackend.Skills
                 List<AtkTags> atkTags = new List<AtkTags>();
                 atkTags.Add(AtkTags.physicalAttack);
                 atkTags.Add(AtkTags.specialSkill);
-                DmgGiveEvent dmgGiveEvent = new DmgGiveEvent(
-                    status.calculateTrueDamage(atkTags, atkCoef:40),
-                    1, 
-                    player, 
-                    target.Key, 
-                    atkTags);
-                player.eventActive(dmgGiveEvent);
-                target.Key.dmgtake(dmgGiveEvent);
+                new DmgGiveEvent(status.calculateTrueDamage(atkTags, atkCoef:40*target.Value), 1, player, target.Key, atkTags);
 
-                BloodLoss bloodLoss = new BloodLoss((int)(0.4 * status.atk), target.Value);
+                BloodLoss bloodLoss = new BloodLoss(status.calculateTrueDamage(new List<AtkTags>(), 40), target.Value);
                 bloodLoss.registrarTarget(target.Key);
             }
         }

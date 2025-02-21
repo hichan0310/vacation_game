@@ -18,6 +18,9 @@ namespace GameBackend.Events
             this.attacker = attacker;
             this.target = target;
             this.atkTags = atkTags;
+            
+            attacker.eventActive(this);
+            target.dmgtake(this);
         }
     }
 }

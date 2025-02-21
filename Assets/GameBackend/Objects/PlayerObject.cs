@@ -136,7 +136,8 @@ namespace GameBackend.Objects
 
         protected override void OnTriggerStay2D(Collider2D other)
         {
-            if (other.gameObject.tag == "Enemy")
+            Enemy enemy = other.gameObject.GetComponent<Enemy>();
+            if (enemy)
             {
                 if ((animator.GetCurrentAnimatorStateInfo(0).IsName("attack_a") || animator.GetCurrentAnimatorStateInfo(0).IsName("attack_b") || animator.GetCurrentAnimatorStateInfo(0).IsName("attack_c") || animator.GetCurrentAnimatorStateInfo(0).IsName("attack_d") || animator.GetCurrentAnimatorStateInfo(0).IsName("attack_jump")) && animator.GetCurrentAnimatorClipInfo(0)[0].clip.name != $"{tmp}")
                 {

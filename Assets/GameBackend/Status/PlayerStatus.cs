@@ -57,7 +57,7 @@ namespace GameBackend.Status
 
         public int calculateTrueDamage(List<AtkTags> atkTags, float atkCoef=0, float hpCoef=0, float defCoef=0)
         {
-            int dmg = (int)(atkCoef * atk + defCoef * def + hpCoef * maxHp);
+            int dmg = (int)((atkCoef * atk + defCoef * def + hpCoef * maxHp)/100);
             if (Random.value < crit / 100)
             {
                 dmg = (int)(dmg * (1 + critDmg / 100));
