@@ -40,7 +40,7 @@ namespace GameBackend.Objects
             this.atkObjects.Add(other.gameObject);
             Enemy enemy = other.GetComponent<Enemy>();
             if (enemy is null) return;
-            new DmgGiveEvent(this.dmg, 0.4f, player, enemy, atkTags);
+            new DmgGiveEvent(this.dmg, 0.3f, player, enemy, atkTags);
         }
 
         public void setInfo(Entity player)
