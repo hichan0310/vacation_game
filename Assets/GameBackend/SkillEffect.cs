@@ -8,6 +8,7 @@ namespace GameBackend
         protected float timer = 0;
         protected Animator animator;
         protected SpriteRenderer spriteRenderer;
+        protected bool timeIgnore = false;
 
 
         private void Awake()
@@ -20,7 +21,8 @@ namespace GameBackend
 
         public virtual void Update()
         {
-            update(TimeManager.deltaTime);
+            if (timeIgnore) update(Time.deltaTime);
+            else update(TimeManager.deltaTime);
         }
 
         protected virtual void OnTriggerEnter2D(Collider2D other)
@@ -63,6 +65,14 @@ namespace GameBackend
             {
                 Vector3 pos = Vector3.Lerp(startScale, endScale, (timer-start)/(end-start));
                 this.transform.localScale = pos;
+            }
+        }
+
+        protected void checkDestroy(float time)
+        {
+            if (time <= timer)
+            {
+                destroy();
             }
         }
     }

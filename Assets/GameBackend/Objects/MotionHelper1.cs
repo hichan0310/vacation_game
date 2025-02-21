@@ -13,8 +13,8 @@ namespace GameBackend.Objects
 
         public void Start()
         {
+            timeIgnore = true;
             setAlpha(0);
-            Invoke("destroy", 0.7f);
         }
 
         protected override void update(float deltaTime)
@@ -25,6 +25,7 @@ namespace GameBackend.Objects
             checkMove(0, 0.3f,
                 this.playerPosition + new Vector3(-0.54f * direction, 1.56f, 0f),
                 this.playerPosition + new Vector3(0.34f * direction, 0.76f, 0f));
+            checkDestroy(0.7f);
 
             if (!actived && timer >= 0.2)
             {

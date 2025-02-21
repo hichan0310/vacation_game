@@ -15,9 +15,9 @@ namespace GameBackend.Objects
 
         public void Start()
         {
+            timeIgnore = true;
             timer = -0.2f;
             setAlpha(0);
-            Invoke("destroy", 1f);
             this.transform.localScale = new Vector3(0, 0, 0);
         }
 
@@ -30,6 +30,7 @@ namespace GameBackend.Objects
             checkMove(0.2f, 0.3f,
                 this.playerPosition + new Vector3(0.34f * direction, -0.76f, 0f),
                 this.playerPosition + new Vector3(1.09f * direction, -0.36f, 0));
+            checkDestroy(1);
         }
 
         protected override void OnTriggerEnter2D(Collider2D other)
