@@ -8,7 +8,7 @@ namespace GameBackend.Objects
     {
         private Entity player;
         private int dmg;
-        private List<AtkTags> atkTags = new() { AtkTags.normalSkill, AtkTags.physicalAttack };
+        private List<AtkTags> atkTags = new() { AtkTags.normalSkill, AtkTags.fireAttack };
         private HashSet<GameObject> atkObjects = new();
         private int direction;
         private Vector3 playerPosition;

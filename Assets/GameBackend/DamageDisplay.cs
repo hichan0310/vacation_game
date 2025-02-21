@@ -24,9 +24,12 @@ public class DamageDisplay : MonoBehaviour
             text=GetComponent<TextMeshPro>();
             transform.position=value.target.transform.position+new Vector3(x, y, 0f);
             text.text = value.realDmg.ToString();
-            if (value.atkTags.Contains(AtkTags.criticalHit)) text.fontSize = 10; 
-            else text.fontSize = 6;
-            text.color=Color.black;
+            if (value.atkTags.Contains(AtkTags.criticalHit)) text.fontSize = 6; 
+            else text.fontSize = 4;
+            if (value.atkTags.Contains(AtkTags.physicalAttack)) text.color=Color.black;
+            else if (value.atkTags.Contains(AtkTags.fireAttack)) text.color=Color.red;
+            else if (value.atkTags.Contains(AtkTags.StatusEffect)) text.color=Color.grey;
+            else text.color=Color.white;
         }
     }
 
