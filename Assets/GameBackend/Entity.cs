@@ -12,6 +12,7 @@ namespace GameBackend
     public abstract class Entity : MonoBehaviour
     {
         public float speed { get; set; } = 1;
+        private bool dead = false;
 
         public PlayerStatus status { get; set; } = new(1, 0, 0);
         public List<IEntityEventListener> eventListener { get; set; } = new();
@@ -64,6 +65,7 @@ namespace GameBackend
 
         public virtual void Update()
         {
+            if (dead) return;
             update(TimeManager.deltaTime*speed);
         }
 
@@ -83,7 +85,9 @@ namespace GameBackend
 
         public virtual void die()
         {
-            //Debug.Log($"die : {this.name}");
+            if (dead) return;
+            this.dead = true;
+            this.animator.SetTrigger("dead");
         }
     }
 
