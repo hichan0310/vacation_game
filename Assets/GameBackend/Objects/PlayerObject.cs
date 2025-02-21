@@ -55,12 +55,15 @@ namespace GameBackend.Objects
                 {"attack_jump", 50}
             };
             Collider2D[] playerColliders = this.gameObject.GetComponents<Collider2D>();
-            Collider2D enemyCollider = GameObject.Find("Enemy").GetComponent<Collider2D>();
+            GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
             foreach (Collider2D playerCollider in playerColliders)
             {
                 if (!playerCollider.isTrigger)
                 {
-                    Physics2D.IgnoreCollision(playerCollider, enemyCollider);
+                    foreach (GameObject enemycol in enemys)
+                    {
+                        Physics2D.IgnoreCollision(playerCollider, enemycol.GetComponents<Collider2D>()[0]);
+                    }
                 }
             }
             rigid = this.gameObject.GetComponent<Rigidbody2D>();
