@@ -104,13 +104,7 @@ namespace GameBackend.Objects
             //     this.eventActive(evnt);
             // } 
             if (!isJumping) cooltime_click += deltaTime;
-            if (cooltime_click > 1f)
-            {
-                atknum = 0;
-                cooltime_click = 0.25f;
-                tmp = "";
-            }
-            else if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0))
             {
                 if (!isJumping)
                 {
@@ -127,18 +121,24 @@ namespace GameBackend.Objects
                 else if (!isJumpatk)
                 {
                     atknum = 0;
-                    cooltime_click = 0.20f;
+                    animator.SetInteger("atknum", atknum);
                     animator.SetTrigger("jumpatk");
                     isJumpatk = true;
+                    cooltime_click = 0.0f;
                 }
+            }
+            if (cooltime_click > 1f)
+            {
+                atknum = 0;
+                tmp = "";
+                cooltime_click = 0.25f;
             }
         }
 
         protected override void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.tag == "Plate")
-            {
-                if (isJumping) tmp = "";
+            { 
                 isJumping = false;
                 isJumpatk = false;
             }
@@ -163,15 +163,12 @@ namespace GameBackend.Objects
                      (animator.GetCurrentAnimatorStateInfo(0).IsName("attack_jump") && !isJumpatk)) &&
                     (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name != $"{tmp}"))
                 {
-                    if (tmp == "attack_d" && animator.GetCurrentAnimatorStateInfo(0).IsName("attack_b"))
-                        tmp = "attack_a";
-                    else if (tmp == "attack_b" && animator.GetCurrentAnimatorStateInfo(0).IsName("attack_d"))
-                        tmp = "attack_c";
-                    else
-                        tmp = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
+                    tmp = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
                     player = this;
                     dmg = player.status.calculateTrueDamage(atkTags, atkCoef: normalAttackDamage[tmp]);
-                    // Debug.Log(tmp);
+                    Debug.Log(tmp);
+                    Debug.Log(animator.GetCurrentAnimatorClipInfo(0)[0].clip.name);
+                    Debug.Log(atknum);
                     foreach (Collider2D enemycollider in collidersInside)
                     {
                         if (enemycollider is PolygonCollider2D)
@@ -261,6 +258,8 @@ namespace GameBackend.Objects
             {
                 if (!isJumping)
                 {
+                    atknum = 0;
+                    tmp = "";
                     animator.SetTrigger("jump");
                     isJumping = true;
                     rigid.velocity = Vector2.zero;

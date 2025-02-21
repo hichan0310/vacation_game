@@ -77,11 +77,11 @@ namespace GameBackend
 
             if (target.transform.position.x >= this.transform.position.x) direction = true;
             else direction = false;
-            if (!direction && transform.localScale.x == 1 && Vector3.Distance(getNearestPlayer(transform.position).transform.position, transform.position) >= 0.20f)
+            if (!direction && transform.localScale.x == 1 && Math.Abs(getNearestPlayer(transform.position).transform.position.x - transform.position.x) >= 0.20f)
             {
                 transform.localScale = new Vector3(-1, 1, 1);
             }
-            else if (direction && transform.localScale.x == -1 && Vector3.Distance(getNearestPlayer(transform.position).transform.position, transform.position) >= 0.20f)
+            else if (direction && transform.localScale.x == -1 && Math.Abs(getNearestPlayer(transform.position).transform.position.x - transform.position.x) >= 0.20f)
             {
                 transform.localScale = new Vector3(1, 1, 1);
             }
