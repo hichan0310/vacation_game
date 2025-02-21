@@ -403,7 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c82eae67be14b49bd32ca4f6c1f10c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ratio: 0
+  length: 1.28
 --- !u!4 &479724231
 Transform:
   m_ObjectHideFlags: 0
@@ -551,7 +551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c82eae67be14b49bd32ca4f6c1f10c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ratio: 0
+  length: 1.28
 --- !u!1 &628813275
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,7 +757,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c82eae67be14b49bd32ca4f6c1f10c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ratio: 0
+  length: 1.28
 --- !u!4 &723033563
 Transform:
   m_ObjectHideFlags: 0
@@ -1318,6 +1318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dbef6fa0c874ba082262bd943039e78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hpBar: {fileID: 1783433148201511955, guid: 5e11762db03dfa54ab94ba26667b4c03, type: 3}
 --- !u!50 &1448656358
 Rigidbody2D:
   serializedVersion: 4
