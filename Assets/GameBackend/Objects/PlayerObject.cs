@@ -162,8 +162,8 @@ namespace GameBackend.Objects
                         tmp = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
                     player = this;
                     dmg = player.status.calculateTrueDamage(atkTags, atkCoef: normalAttackDamage[tmp]);
-                    Debug.Log(tmp);
-                    DmgGiveEvent dmgGiveEvent = new DmgGiveEvent(dmg, (tmp == "attack_jump") ? 0.5f : 0f, player, enemy, atkTags);
+                    // Debug.Log(tmp);
+                    new DmgGiveEvent(dmg, (tmp == "attack_jump") ? 0.5f : 0f, player, enemy, atkTags);
                 }
                 
             }

@@ -42,9 +42,10 @@ namespace GameBackend
         protected override void update(float deltaTime)
         {
             base.update(deltaTime);
+            Debug.Log($"{forceSum}, {forceStaggered}");
             
-            forceSum -= deltaTime;
-            forceStaggered -= deltaTime;
+            forceSum -= deltaTime/5;
+            forceStaggered -= deltaTime/5;
             forceSum = Mathf.Max(forceSum, 0);
             forceStaggered = Mathf.Max(forceStaggered, 0);
             
@@ -69,7 +70,7 @@ namespace GameBackend
                 target = nearest;
             }
 
-            if (target.transform.position.x > this.transform.position.x) direction = true;
+            if (target.transform.position.x >= this.transform.position.x) direction = true;
             else direction = false;
             
             Vector3 pos = this.transform.position;
@@ -115,7 +116,7 @@ namespace GameBackend
             }
 
             Vector3 pos = this.transform.position;
-            pos.x += (direction?-1:1)*(Mathf.Max(3-knockbackTimer, 0))*deltaTime*0.7f;
+            pos.x += (direction?-1:1)*(Mathf.Max(3-knockbackTimer, 0))*deltaTime*0.5f;
             this.transform.position = pos;
             if (knockbackTimer >= 4)
             {
