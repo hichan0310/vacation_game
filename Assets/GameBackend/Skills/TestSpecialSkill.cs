@@ -9,8 +9,8 @@ namespace GameBackend.Skills
 {
     public class TestSpecialSkill : ISkill, IEntityEventListener
     {
-        public string name => "TestSkill";
-        public string description => "TestSkillDescription";
+        public string name => "TestSpecialSkill";
+        public string description => "TestSpecialSkillDescription";
         private const float cooltime = 10;
         private int energy=0;
         private Entity player;
@@ -23,11 +23,7 @@ namespace GameBackend.Skills
         
         private Dictionary<Entity, int> targets = new();
 
-        public float timeleft
-        {
-            get => timeleft;
-            private set => timeleft = value;
-        }
+        public float timeleft { get; private set; }
 
         public bool active => timeleft == 0 && energy == 20;
 
