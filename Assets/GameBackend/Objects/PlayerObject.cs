@@ -15,11 +15,13 @@ namespace GameBackend.Objects
 
         private float cooltime_gumgi = 0.5f;
         private float cooltime_click = 0f;
+        private string tmp = "";
         private bool direction = true;
         private float movePower = 1f;
         private float jumpPower = 2f;
         private bool isJumping = false;
         private bool isJumpatk = false;
+        private bool isnormalattack = false;
         private Rigidbody2D rigid;
 
         public GameObject normalSkillProgressBar;
@@ -37,6 +39,15 @@ namespace GameBackend.Objects
 
         public void Start()
         {
+            Collider2D[] playerColliders = this.gameObject.GetComponents<Collider2D>();
+            Collider2D enemyCollider = GameObject.Find("Enemy").GetComponent<Collider2D>();
+            foreach (Collider2D playerCollider in playerColliders)
+            {
+                if (!playerCollider.isTrigger)
+                {
+                    Physics2D.IgnoreCollision(playerCollider, enemyCollider);
+                }
+            }
             rigid = this.gameObject.GetComponent<Rigidbody2D>();
             this.status = new PlayerStatus(10000, 1000, 100);
             
@@ -96,6 +107,7 @@ namespace GameBackend.Objects
                     if (cooltime_click >= 0.25f)
                     {
                     animator.SetTrigger("atk");
+                    isnormalattack = true;
                     NormalAttackExecuteEvent evnt = new NormalAttackExecuteEvent(this, new List<AtkTags>());
                     this.eventActive(evnt);
                     atknum = (atknum < 3) ? atknum + 1 : 0;
@@ -119,6 +131,24 @@ namespace GameBackend.Objects
             {
                 isJumping = false;
                 isJumpatk = false;
+            }
+        }
+
+        protected override void OnTriggerStay2D(Collider2D other)
+        {
+            if (other.gameObject.tag == "Enemy")
+            {
+                if ((animator.GetCurrentAnimatorStateInfo(0).IsName("attack_a") || animator.GetCurrentAnimatorStateInfo(0).IsName("attack_b") || animator.GetCurrentAnimatorStateInfo(0).IsName("attack_c") || animator.GetCurrentAnimatorStateInfo(0).IsName("attack_d") || animator.GetCurrentAnimatorStateInfo(0).IsName("attack_jump")) && animator.GetCurrentAnimatorClipInfo(0)[0].clip.name != $"{tmp}")
+                {
+                    if(tmp == "attack_d" && animator.GetCurrentAnimatorStateInfo(0).IsName("attack_b"))
+                        tmp = "attack_a";
+                    else if(tmp == "attack_b" && animator.GetCurrentAnimatorStateInfo(0).IsName("attack_d"))
+                        tmp = "attack_c";
+                    else
+                        tmp = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
+                    Debug.Log(tmp);
+                }
+                
             }
         }
         
