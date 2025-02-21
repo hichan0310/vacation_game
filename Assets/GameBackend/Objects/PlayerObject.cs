@@ -114,6 +114,7 @@ namespace GameBackend.Objects
             {
                 atknum = 0;
                 cooltime_click = 0.25f;
+                tmp = "";
             }
             else if(Input.GetMouseButtonDown(0))
             {
