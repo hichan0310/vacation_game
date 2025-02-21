@@ -83,7 +83,7 @@ namespace GameBackend
 
         public virtual void die()
         {
-            Debug.Log($"die : {this.name}");
+            //Debug.Log($"die : {this.name}");
         }
     }
 

@@ -4899,6 +4899,7 @@ GameObject:
   - component: {fileID: 1972487910709877232}
   - component: {fileID: 5709827444404199806}
   - component: {fileID: 7980029976762078213}
+  - component: {fileID: 152142855626110309}
   m_Layer: 0
   m_Name: vfx_MuzzleFlash_01
   m_TagString: Untagged
@@ -9722,6 +9723,18 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &152142855626110309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6980259576133684760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65115b5ae1644f35979db220b6317c5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7222628775867560472
 GameObject:
   m_ObjectHideFlags: 0

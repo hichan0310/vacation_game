@@ -15,6 +15,7 @@ namespace GameBackend.Objects
 
         protected override void update(float deltaTime)
         {
+            timer += deltaTime;
             checkDestroy(time);
         }
     }

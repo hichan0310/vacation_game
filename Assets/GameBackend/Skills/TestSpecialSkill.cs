@@ -12,17 +12,17 @@ namespace GameBackend.Skills
         public string name => "TestSpecialSkill";
         public string description => "TestSpecialSkillDescription";
         private const float cooltime = 10;
-        private int energy=0;
+        private int energy = 0;
         private Entity player;
         private float slowtime = 0;
         private const float slowDuration = 7;
         private int effectCount = 0;
-        
+
         public ProgressBar energyProgressBar { get; private set; }
         public ProgressBar timeProgressBar { get; private set; }
-        public GameObject impact{get;private set;}
-        public GameObject flame{get;private set;}
-        
+        public GameObject impact { get; private set; }
+        public GameObject flame { get; private set; }
+
         private Dictionary<Entity, int> targets = new();
 
         public float timeleft { get; private set; }
@@ -36,23 +36,26 @@ namespace GameBackend.Skills
 
         private void checkImpact(int number)
         {
-            if (slowtime <= slowDuration - 0.03*number && effectCount == number)
+            if (slowtime <= slowDuration - 0.03 * number && effectCount == number)
             {
                 effectCount++;
-                Object.Instantiate(impact).transform.position = 
-                    player.transform.position+ 
-                    new Vector3(Mathf.Sin(2*Mathf.PI/12*number), Mathf.Cos(2*Mathf.PI/12*number), 0);
+                GameObject obj = Object.Instantiate(impact);
+                obj.transform.position =
+                    player.transform.position +
+                    new Vector3(Mathf.Sin(2 * Mathf.PI / 12 * number), Mathf.Cos(2 * Mathf.PI / 12 * number), 0);
+                obj.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
             }
         }
-        
+
         private void checkflame(int number)
         {
-            if (slowtime <= slowDuration - 1 - 0.5*number && effectCount == number+12)
+            if (slowtime <= slowDuration - 1 - 0.5 * number && effectCount == number + 12)
             {
                 effectCount++;
                 GameObject flameObject = Object.Instantiate(flame, player.transform, true);
-                flameObject.GetComponent<FlameVFX>().time = 0.1f; //(12 - number) * 0.5f;
-                flameObject.transform.localPosition = new Vector3(Mathf.Sin(2*Mathf.PI/12*number), Mathf.Cos(2*Mathf.PI/12*number), 0);
+                flameObject.GetComponent<FlameVFX>().time = (12 - number) * 0.5f;
+                flameObject.transform.localPosition = new Vector3(Mathf.Sin(2 * Mathf.PI / 12 * number),
+                    Mathf.Cos(2 * Mathf.PI / 12 * number), 0);
             }
         }
 
@@ -73,7 +76,7 @@ namespace GameBackend.Skills
                 checkImpact(9);
                 checkImpact(10);
                 checkImpact(11);
-                
+
                 checkflame(0);
                 checkflame(1);
                 checkflame(2);
@@ -86,7 +89,8 @@ namespace GameBackend.Skills
                 checkflame(9);
                 checkflame(10);
                 checkflame(11);
-                
+
+
                 slowtime -= deltaTime;
                 timeProgressBar.ratio = slowtime / slowDuration;
                 if (slowtime <= 0)
@@ -98,7 +102,7 @@ namespace GameBackend.Skills
             {
                 timeleft -= deltaTime;
                 if (timeleft < 0) timeleft = 0;
-                timeProgressBar.ratio = -timeleft / cooltime+1;
+                timeProgressBar.ratio = -timeleft / cooltime + 1;
             }
         }
 
@@ -107,6 +111,13 @@ namespace GameBackend.Skills
             effectCount = 0;
             slowtime = 0;
             TimeManager.timeRate *= 10;
+            for (int i = 0; i < 10; i++)
+            {
+                GameObject obj = Object.Instantiate(impact);
+                obj.transform.position = player.transform.position;
+                obj.transform.localScale = new Vector3(1, 1, 1);
+            }
+
 
             foreach (var target in targets)
             {
@@ -114,12 +125,13 @@ namespace GameBackend.Skills
                 List<AtkTags> atkTags = new List<AtkTags>();
                 atkTags.Add(AtkTags.physicalAttack);
                 atkTags.Add(AtkTags.specialSkill);
-                new DmgGiveEvent(status.calculateTrueDamage(atkTags, atkCoef:40*target.Value), 1, player, target.Key, atkTags);
+                new DmgGiveEvent(status.calculateTrueDamage(atkTags, atkCoef: 40 * target.Value), 1, player, target.Key,
+                    atkTags);
 
                 BloodLoss bloodLoss = new BloodLoss(status.calculateTrueDamage(new List<AtkTags>
                 {
                     AtkTags.StatusEffect
-                }, atkCoef:40), target.Value, player);
+                }, atkCoef: 40), target.Value, player);
                 bloodLoss.registrarTarget(target.Key);
             }
         }
@@ -134,10 +146,10 @@ namespace GameBackend.Skills
 
         public void requireObjects(List<GameObject> objects)
         {
-            timeProgressBar=objects[0].GetComponent<ProgressBar>();
-            energyProgressBar=objects[1].GetComponent<ProgressBar>();
-            impact=objects[2];
-            flame=objects[3];
+            timeProgressBar = objects[0].GetComponent<ProgressBar>();
+            energyProgressBar = objects[1].GetComponent<ProgressBar>();
+            impact = objects[2];
+            flame = objects[3];
         }
 
         public void eventActive<T>(T eventArgs) where T : EventArgs
@@ -152,7 +164,7 @@ namespace GameBackend.Skills
                 {
                     energy += 2;
                 }
-                
+
                 if (slowtime > 0)
                 {
                     if (targets.ContainsKey(dmgEvent.target))
@@ -165,6 +177,7 @@ namespace GameBackend.Skills
                     }
                 }
             }
+
             if (energy > 40) energy = 40;
         }
 
