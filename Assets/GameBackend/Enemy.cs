@@ -14,7 +14,7 @@ namespace GameBackend
         protected bool knockbacked = false;
         protected float forceSum = 0;
         protected float forceStaggered = 0;
-        protected float staggerRisist = 0.5f;
+        protected float staggerRisist = 0.4f;
         protected float knockbackRisist = 2f;
         protected float moveSpeed = 0.3f;
         
@@ -44,7 +44,7 @@ namespace GameBackend
             base.update(deltaTime);
             
             forceSum -= deltaTime/5;
-            forceStaggered -= deltaTime/5;
+            forceStaggered -= deltaTime;
             forceSum = Mathf.Max(forceSum, 0);
             forceStaggered = Mathf.Max(forceStaggered, 0);
             
