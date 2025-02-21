@@ -166,7 +166,7 @@ public class StartsceneUItext : MonoBehaviour
     {
         if (iswaitkeyset != "")
         {
-            if (Event.current != null && Event.current.isKey)
+            if (Event.current != null && Event.current.isKey && Event.current.keyCode != KeyCode.Escape && Event.current.keyCode != KeyCode.UpArrow && Event.current.keyCode != KeyCode.DownArrow && Event.current.keyCode != KeyCode.LeftArrow && Event.current.keyCode != KeyCode.RightArrow)
             {
                 KeyCode detectedKey = Event.current.keyCode;
                 keytemp = FindKeyByValue(keysetting, detectedKey);

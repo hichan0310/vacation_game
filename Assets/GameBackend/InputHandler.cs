@@ -4,10 +4,10 @@ public class InputHandler : MonoBehaviour
 {
     public static InputHandler Instance { get; private set; }
 
-    public static KeyCode MoveUp { get; private set; } = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("MoveUp"));
-    public static KeyCode MoveDown { get; private set; } = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("MoveDown"));
-    public static KeyCode MoveLeft { get; private set; } = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("MoveLeft"));
-    public static KeyCode MoveRight { get; private set; } = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("MoveRight"));
+    public static KeyCode[] MoveUp { get; private set; } = {(KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("MoveUp")), KeyCode.UpArrow};
+    public static KeyCode[] MoveDown { get; private set; } = {(KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("MoveDown")), KeyCode.DownArrow};
+    public static KeyCode[] MoveLeft { get; private set; } = {(KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("MoveLeft")), KeyCode.LeftArrow};
+    public static KeyCode[] MoveRight { get; private set; } = {(KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("MoveRight")), KeyCode.RightArrow};
     public static KeyCode Jump { get; private set; } = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Jump"));
     public static KeyCode Skill { get; private set; } = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Skill"));
     public static KeyCode Ultimate { get; private set; } = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Ultimate"));
