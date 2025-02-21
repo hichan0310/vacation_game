@@ -8,11 +8,13 @@ namespace GameBackend.Buffs
         private float timer = 0;
         private int damage{get;set;}
         private int times{get;set;}
+        private Entity caster{get;set;}
 
-        public BloodLoss(int damage, int times)
+        public BloodLoss(int damage, int times, Entity caster)
         {
             this.damage = damage;
             this.times = times;
+            this.caster = caster;
         }
 
         public override void update(float deltaTime)
@@ -26,7 +28,7 @@ namespace GameBackend.Buffs
                 {
                     List<AtkTags> atkTags = new List<AtkTags>();
                     atkTags.Add(AtkTags.StatusEffect);
-                    new DmgGiveEvent(damage, 0, EmptyEntity.Instance, target, atkTags);
+                    new DmgGiveEvent(damage, 0, caster, target, atkTags);
                 }
 
                 if (times <= 0)
