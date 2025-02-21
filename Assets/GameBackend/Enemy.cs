@@ -119,6 +119,7 @@ namespace GameBackend
             this.transform.position = pos;
             if (knockbackTimer >= 4)
             {
+                staggered = false;
                 knockbacked = false;
                 return false;
             }
