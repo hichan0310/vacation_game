@@ -19,7 +19,9 @@ namespace GameBackend.Objects
         private int atknum = 0;
 
         private float cooltime_gumgi = 0.5f;
-        private float cooltime_click = 0f;
+        private float lastAttackTime = 0f;
+        private float comboResetTime = 1f;
+        private float attackCooldown = 0.25f;
         private string tmp = "";
         private bool direction = true;
         private float movePower = 1f;
@@ -103,35 +105,71 @@ namespace GameBackend.Objects
             //     NormalAttackExecuteEvent evnt = new NormalAttackExecuteEvent(this, new List<AtkTags>());
             //     this.eventActive(evnt);
             // } 
-            if (!isJumping) cooltime_click += deltaTime;
             if (Input.GetMouseButtonDown(0))
             {
                 if (!isJumping)
                 {
-                    if (cooltime_click >= 0.25f)
+                    AttemptAttack();
+                }
+                else 
+                {
+                    if (!isJumpatk)
                     {
-                        animator.SetTrigger("atk");
-                        isnormalattack = true;
-                        NormalAttackExecuteEvent evnt = new NormalAttackExecuteEvent(this, new List<AtkTags>());
-                        this.eventActive(evnt);
-                        atknum = (atknum < 3) ? atknum + 1 : 0;
-                        cooltime_click = 0;
+                        animator.SetInteger("atknum", atknum);
+                        animator.SetTrigger("jumpatk");
+                        isJumpatk = true;
                     }
                 }
-                else if (!isJumpatk)
-                {
-                    atknum = 0;
-                    animator.SetInteger("atknum", atknum);
-                    animator.SetTrigger("jumpatk");
-                    isJumpatk = true;
-                    cooltime_click = 0.0f;
-                }
+
+                // if (!isJumping)
+                // {
+                //     if (cooltime_click >= 0.25f)
+                //     {
+                //         animator.SetTrigger("atk");
+                //         isnormalattack = true;
+                //         NormalAttackExecuteEvent evnt = new NormalAttackExecuteEvent(this, new List<AtkTags>());
+                //         this.eventActive(evnt);
+                //         atknum = (atknum < 3) ? atknum + 1 : 0;
+                //         cooltime_click = 0;
+                //     }
+                // }
+                // else if (!isJumpatk)
+                // {
+                //     atknum = 0;
+                //     animator.SetInteger("atknum", atknum);
+                //     animator.SetTrigger("jumpatk");
+                //     isJumpatk = true;
+                //     cooltime_click = 0.0f;
+                // }
             }
-            if (cooltime_click > 1f)
+        }
+
+        void AttemptAttack()
+        {
+            float currentTime = Time.time;
+            
+            if (currentTime - lastAttackTime < attackCooldown)
             {
-                atknum = 0;
-                tmp = "";
+                return; 
             }
+
+            if (currentTime - lastAttackTime > comboResetTime)
+            {
+                atknum = 0; 
+            }
+
+            PlayAttackAnimation();
+            lastAttackTime = currentTime;
+            atknum = (atknum + 1) % 4; 
+        }
+
+        void PlayAttackAnimation()
+        {
+            animator.SetInteger("atknum", atknum);
+            animator.SetTrigger("atk");
+            isnormalattack = true;
+            NormalAttackExecuteEvent evnt = new NormalAttackExecuteEvent(this, new List<AtkTags>());
+            this.eventActive(evnt);
         }
 
         protected override void OnCollisionEnter2D(Collision2D collision)
