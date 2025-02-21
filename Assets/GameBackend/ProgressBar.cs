@@ -1,17 +1,18 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace GameBackend.Objects
+namespace GameBackend
 {
     public class ProgressBar:MonoBehaviour
     {
         private GameObject progressBar;
         private float length = 1.28f;
         public float ratio=0;
+        private Vector3 startPosition;
 
         private void Start()
         {
-            progressBar = GameObject.Find("progressbar");
+            progressBar = GameObject.Find("progressbar"); 
+            startPosition = progressBar.transform.localPosition;
         }
 
         private void Update()
@@ -19,7 +20,7 @@ namespace GameBackend.Objects
             var scale = progressBar.transform.localScale;
             scale.x = ratio;
             progressBar.transform.localScale = scale;
-            progressBar.transform.localPosition = new Vector3(length*ratio/2-length/2,0,2);
+            progressBar.transform.localPosition = new Vector3(length*ratio/2-length/2,0,2)+startPosition;
         }
     }
 }
