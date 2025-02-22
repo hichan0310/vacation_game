@@ -85,11 +85,11 @@ namespace GameBackend
             if (target.transform.position.x >= this.transform.position.x) direction = true;
             else direction = false;
             float distance = Math.Abs(target.transform.position.x - transform.position.x);
-            if (!direction && transform.localScale.x == 1 && distance >= 0.30f)
+            if (!direction && transform.localScale.x == 1 && (distance >= 0.30f || isAttack == true))
             {
                 transform.localScale = new Vector3(-1, 1, 1);
             }
-            else if (direction && transform.localScale.x == -1 && distance >= 0.30f)
+            else if (direction && transform.localScale.x == -1 && (distance >= 0.30f || isAttack == true))
             {
                 transform.localScale = new Vector3(1, 1, 1);
             }
