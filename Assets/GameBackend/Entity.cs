@@ -11,19 +11,29 @@ namespace GameBackend
 {
     public abstract class Entity : MonoBehaviour
     {
-        public float speed { get; set; } = 1;
+        private float _speed = 1;
+        public float speed
+        {
+            get => _speed;
+            set
+            {
+                _speed = value;
+                animator.speed = _speed*TimeManager.timeRate;
+            }
+        }
+
         public bool dead { get; set; } = false;
         private bool rightBefore = false;
 
         public PlayerStatus status { get; set; } = new(1, 0, 0);
         public List<IEntityEventListener> eventListener { get; set; } = new();
 
-        protected Animator animator;
+        public Animator animator;
 
         private void Awake()
         {
-            speed = 1;
             animator = GetComponent<Animator>();
+            TimeManager.registrarEntity(this);
         }
 
         public void addListener(IEntityEventListener listener)
@@ -65,16 +75,20 @@ namespace GameBackend
             this.eventListener.ToList().ForEach(listener => listener.update(deltaTime));
         }
 
+        protected void destroy()
+        {
+            TimeManager.removerEntity(this);
+            Destroy(this.gameObject);
+        }
+
         public virtual void Update()
         {
-            
-            
             if (dead)
             {
                 {
                     if (this.animator.GetCurrentAnimatorStateInfo(0).IsName("dead") && this.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
                     {
-                        Destroy(this.gameObject);
+                        destroy();
                     }
                 }
                 if (!rightBefore) return;

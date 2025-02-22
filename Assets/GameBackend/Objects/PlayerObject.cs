@@ -46,6 +46,11 @@ namespace GameBackend.Objects
 
         public ISkill normalSkill { get; private set; }
         public ISkill specialSkill { get; private set; }
+        
+        private void Awake()
+        {
+            animator = GetComponent<Animator>();
+        }
 
         public void Start()
         {
@@ -202,20 +207,20 @@ namespace GameBackend.Objects
             }
         }
 
-        public void balsa()
-        {
-            GameObject obj = Instantiate(gumgi, this.transform);
-            Gumgi gumgiCompo = obj.GetComponent<Gumgi>();
-            gumgiCompo.direction = direction;
-            gumgiCompo.position = transform.position;
-            gumgiCompo.time = 0.4f;
-            gumgiCompo.speed = 6;
-            List<AtkTags> atkTag = new List<AtkTags>();
-            atkTag.Add(AtkTags.fireAttack);
-            atkTag.Add(AtkTags.normalAttack);
-            gumgiCompo.dmgInfo = new DmgInfo(100, 10, this, atkTag);
-            gumgiCompo.apply();
-        }
+        // public void balsa()
+        // {
+        //     GameObject obj = Instantiate(gumgi, this.transform);
+        //     Gumgi gumgiCompo = obj.GetComponent<Gumgi>();
+        //     gumgiCompo.direction = direction;
+        //     gumgiCompo.position = transform.position;
+        //     gumgiCompo.time = 0.4f;
+        //     gumgiCompo.speed = 6;
+        //     List<AtkTags> atkTag = new List<AtkTags>();
+        //     atkTag.Add(AtkTags.fireAttack);
+        //     atkTag.Add(AtkTags.normalAttack);
+        //     gumgiCompo.dmgInfo = new DmgInfo(100, 10, this, atkTag);
+        //     gumgiCompo.apply();
+        // }
 
         void NormalSkill(float deltaTime)
         {
