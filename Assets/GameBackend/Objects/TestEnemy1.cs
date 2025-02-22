@@ -15,6 +15,7 @@ namespace GameBackend.Objects
         private ProgressBar progressBar;
         private GameObject[] players;
         
+        
         private void Start()
         {
             players = GameObject.FindGameObjectsWithTag("Player");
@@ -43,15 +44,21 @@ namespace GameBackend.Objects
             if(other is PolygonCollider2D && other.gameObject.tag == "Player" && isAttack == true)
             {
                 isAttack = false;
-                Player<TestPlayerInfo1> player = other.GetComponent<Player<TestPlayerInfo1>>();
-                StartCoroutine(Damage(player));
+                PlayerObject player = other.GetComponent<PlayerObject>();
+                invokeManager.invoke(normalAttackDamage, new List<object> {player}, 0.2f);
             }
         }
-        IEnumerator Damage(Player<TestPlayerInfo1> player)
-        {
-            yield return new WaitForSeconds(0.2f);
-            new DmgGiveEvent(this.status.calculateTrueDamage(atkTags, atkCoef: 100), 0, this, player, atkTags);
-        }
 
+        private void normalAttackDamage(List<object> players)
+        {
+            foreach (PlayerObject player in players)
+            {
+                var tag = new List<AtkTags> { AtkTags.normalAttack };
+                new DmgGiveEvent(
+                    this.status.calculateTrueDamage(tag, atkCoef: 100),
+                    0, this, player, tag
+                );
+            }
+        }
     }
 }
