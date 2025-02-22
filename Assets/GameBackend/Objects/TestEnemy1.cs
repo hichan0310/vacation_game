@@ -53,7 +53,7 @@ namespace GameBackend.Objects
         {
             foreach (PlayerObject player in players)
             {
-                var tag = new List<AtkTags> { AtkTags.normalAttack };
+                var tag = new List<AtkTags> { AtkTags.normalAttack, AtkTags.physicalAttack };
                 new DmgGiveEvent(
                     this.status.calculateTrueDamage(tag, atkCoef: 100),
                     0, this, player, tag
