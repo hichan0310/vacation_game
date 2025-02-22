@@ -31,7 +31,15 @@ namespace GameBackend.Objects
             {
                 progressBar.ratio=(float)status.nowHp/status.maxHp;
                 progressBar.transform.localScale = new Vector3(transform.localScale.x, 1, 1);
+            }
+        }
 
+        protected override void OnTriggerStay2D(Collider2D other)
+        {
+            if(other is PolygonCollider2D && other.gameObject.tag == "Player" && isAttack == true)
+            {
+                isAttack = false;
+                Debug.Log("Attacked");
             }
         }
     }
