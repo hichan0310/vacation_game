@@ -19,7 +19,7 @@ namespace GameBackend.Objects
         {
             GameObject.FindGameObjectsWithTag("Player");
             hpBarObject=Instantiate(hpBar, transform, true);
-            hpBarObject.transform.localPosition = new Vector3(0, 0.5f, GameObject.FindGameObjectsWithTag("Enemy").Length * 0.1f + 0.1f);
+            hpBarObject.transform.localPosition = new Vector3(0, 0.5f, 0.1f);
             progressBar = hpBarObject.GetComponent<ProgressBar>();
             this.status = new PlayerStatus(10000, 100, 100);
         }

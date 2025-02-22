@@ -157,7 +157,7 @@ namespace GameBackend.Objects
 
         protected override void OnTriggerEnter2D(Collider2D other)
         {
-            if (!collidersInside.Contains(other) && other.gameObject.tag == "Enemy")
+            if (!collidersInside.Contains(other) && other.gameObject.tag == "Enemy" && other is PolygonCollider2D)
             {
                 collidersInside.Add(other);
             }
@@ -165,14 +165,14 @@ namespace GameBackend.Objects
 
         protected override void OnTriggerStay2D(Collider2D other)
         {
-            if (collidersInside != null)
+            if (collidersInside != null && other.gameObject.tag == "Enemy" && other is PolygonCollider2D)
             {
                 if ((animator.GetCurrentAnimatorStateInfo(0).IsName("attack_a") ||
                      animator.GetCurrentAnimatorStateInfo(0).IsName("attack_b") ||
                      animator.GetCurrentAnimatorStateInfo(0).IsName("attack_c") ||
                      animator.GetCurrentAnimatorStateInfo(0).IsName("attack_d") ||
                      animator.GetCurrentAnimatorStateInfo(0).IsName("attack_jump")) &&
-                    (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name != $"{tmp}"))
+                    !animator.GetCurrentAnimatorStateInfo(0).IsName($"{tmp}"))
                 {
                     tmp = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
                     player = this;
