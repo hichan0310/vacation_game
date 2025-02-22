@@ -186,7 +186,7 @@ namespace GameBackend.Objects
                     dmg = player.status.calculateTrueDamage(atkTags, atkCoef: normalAttackDamage[tmp]);
                     foreach (Collider2D enemycollider in collidersInside)
                     {
-                        if (enemycollider is PolygonCollider2D)
+                        if (enemycollider is PolygonCollider2D && !enemycollider.gameObject.GetComponent<Enemy>().dead)
                             new DmgGiveEvent(dmg, (tmp == "attack_jump") ? 0.5f : 0f, player,
                                 enemycollider.gameObject.GetComponent<Enemy>(), atkTags);
                     }

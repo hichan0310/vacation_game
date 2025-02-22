@@ -1,4 +1,5 @@
 ﻿using GameBackend.Status;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace GameBackend.Objects
@@ -24,6 +25,7 @@ namespace GameBackend.Objects
             base.update(deltaTime);
             progressBar.ratio=(float)status.nowHp/status.maxHp;
             progressBar.transform.localScale = new Vector3(transform.localScale.x, 1, 1);
+            if(this.dead) Destroy(hpBarObject);
         }
     }
 }
