@@ -1,65 +1,50 @@
-﻿using System.Collections.Generic;
-using GameBackend.Events;
+﻿using GameBackend.Events;
 using GameBackend.Objects;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace GameBackend.Skills
 {
-    public class TestSkill : ISkill
+    public class TestSkill : Skill
     {
-        private static readonly int Atk = Animator.StringToHash("atk");
-        public string name => "TestSkill";
+        public override string skillName => "TestSkill";
 
-        public string description => "TestSkillDescription";
+        public override string description => "TestSkillDescription";
 
         private const float cooltime = 5;
-        private Entity player;
-        private int supportAttack = 0;
-        
-        public GameObject motionHelper1{get;private set;}
-        public GameObject motionHelper2{get;private set;}
-        public GameObject chamgyuck1{get;private set;}
-        public GameObject chamgyuck2{get;private set;}
-        public GameObject effect{get;private set;}
-        public ProgressBar progressbar {get; private set;}
+        private int supportAttack;
 
-        public float timeleft { get; private set; }
+        public MotionHelper1 motionHelper1;
+        public MotionHelper2 motionHelper2;
+        public Chamgyuck1 chamgyuck1;
+        public Chamgyuck2 chamgyuck2;
+        public NormalSkillEffect effect;
+        public ProgressBar progressbar;
 
-        public bool active => timeleft <= 0;
+        public override float timeleft { get; set; }
 
-        public TestSkill()
+        public override bool active => timeleft <= 0;
+
+        private void Start()
         {
             timeleft = cooltime;
         }
 
-        public void requireObjects(List<GameObject> objects)
-        {
-            this.progressbar=objects[0].GetComponent<ProgressBar>();
-            
-            this.motionHelper1=objects[1];
-            this.motionHelper2=objects[2];
-            this.chamgyuck1=objects[3];
-            this.chamgyuck2=objects[4];
-            this.effect=objects[5];
-        }
-
-        public void update(float deltaTime)
+        public override void update(float deltaTime)
         {
             timeleft-=deltaTime;
             if (timeleft < 0) timeleft = 0;
             progressbar.ratio = -timeleft / cooltime+1;
         }
 
-        public void execute()
+        public override void execute()
         {
             timeleft = cooltime;
             supportAttack = 3;
-            GameObject obj=Object.Instantiate(effect, this.player.transform);
+            NormalSkillEffect obj=Instantiate(effect, this.player.transform);
             obj.transform.localPosition = new Vector3(0, 0.2f, 0);
         }
-        
-        public void eventActive<T>(T eventArgs) where T : EventArgs
+
+        public override void eventActive<T>(T eventArgs)
         {
             if (eventArgs is NormalAttackExecuteEvent)
             {
@@ -73,10 +58,10 @@ namespace GameBackend.Skills
 
         private void activateAttack()
         {
-            GameObject instance1 = Object.Instantiate(motionHelper1);
-            GameObject instance2 = Object.Instantiate(motionHelper2);
-            GameObject chamgyuckInstance1 = Object.Instantiate(chamgyuck1);
-            GameObject chamgyuckInstance2 = Object.Instantiate(chamgyuck2);
+            MotionHelper1 instance1 = Instantiate(motionHelper1);
+            MotionHelper2 instance2 = Instantiate(motionHelper2);
+            Chamgyuck1 chamgyuckInstance1 = Instantiate(chamgyuck1);
+            Chamgyuck2 chamgyuckInstance2 = Instantiate(chamgyuck2);
 
             MotionHelper1 helper1 = instance1.GetComponent<MotionHelper1>();
             helper1.setInfo(player);
@@ -87,17 +72,5 @@ namespace GameBackend.Skills
             Chamgyuck2 cham2 = chamgyuckInstance2.GetComponent<Chamgyuck2>();
             cham2.setInfo(player);
         }
-
-        public void registrarTarget(Entity target)
-        {
-            player = target;
-            player.addListener(this);
-        }
-
-        public void removeSelf()
-        {
-            player.removeListener(this);
-        }
-
     }
 }
