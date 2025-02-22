@@ -58,8 +58,8 @@ namespace GameBackend.Status
 
         public PlayerStatus(PlayerStatus copy)
         {
+            this.baseHp = copy.baseHp;
             this.addHp = copy.addHp;
-            this.addAtk = copy.addAtk;
             this.increaseHp = copy.increaseHp;
             this.nowHp = copy.nowHp;
             this.baseAtk = copy.baseAtk;
@@ -71,7 +71,7 @@ namespace GameBackend.Status
             this.crit = copy.crit;
             this.critDmg = copy.critDmg;
             this.dmgUp = new float[Tag.atkTagCount];
-            Array.Copy(copy.dmgUp, dmgUp, Tag.atkTagCount);
+            Array.Copy(copy.dmgUp, this.dmgUp, Tag.atkTagCount);
         }
 
         public int calculateTrueDamage(List<AtkTags> atkTags, float atkCoef=0, float hpCoef=0, float defCoef=0)

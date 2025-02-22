@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace GameBackend.Objects
 {
-    public class Gumgi : Entity
+    public class Gumgi : SkillEffect
     {
         public bool direction { get; set; } // true==right
         public Vector3 position { get; set; }
@@ -23,7 +23,6 @@ namespace GameBackend.Objects
 
         protected override void update(float deltaTime)
         {
-            base.update(deltaTime);
             transform.position += new Vector3(gumgiSpeed * deltaTime, 0, 0);
         }
         

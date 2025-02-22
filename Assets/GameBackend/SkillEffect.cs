@@ -5,6 +5,7 @@ namespace GameBackend
 {
     public abstract class SkillEffect : MonoBehaviour
     {
+        protected readonly InvokeManager invokeManager=new();
         protected float timer = 0;
         protected Animator animator;
         protected SpriteRenderer spriteRenderer;

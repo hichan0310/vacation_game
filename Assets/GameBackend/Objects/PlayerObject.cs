@@ -11,10 +11,9 @@ namespace GameBackend.Objects
 {
     public class PlayerObject : Player<TestPlayerInfo1>
     {
-        private static readonly int Moving = Animator.StringToHash("moving");
         private List<AtkTags> atkTags = new() { AtkTags.normalAttack, AtkTags.physicalAttack };
         private Dictionary<string, int> normalAttackDamage;
-        private List<Collider2D> collidersInside = new List<Collider2D>();
+        private List<Collider2D> collidersInside = new();
         private int dmg;
         private int atknum = 0;
 
@@ -32,7 +31,7 @@ namespace GameBackend.Objects
         private Rigidbody2D rigid;
         private Entity player;
         
-        public List<GameObject> artifects;
+        public List<Artifect> artifects;
 
         public Skill normalSkill;
         public Skill specialSkill;
@@ -61,7 +60,7 @@ namespace GameBackend.Objects
 
             foreach (var artifect in artifects)
             {
-                artifect.GetComponent<Artifect>().registrarTarget(this);
+                artifect.registrarTarget(this);
             }
         }
 
@@ -74,18 +73,7 @@ namespace GameBackend.Objects
             Jump(deltaTime);
             NormalSkill(deltaTime);
             SpecialSkill(deltaTime);
-            // cooltime_gumgi += deltaTime;
-            // animator.SetTrigger(Atk);
-            // if (cooltime_gumgi >= 2)
-            // {
-            //     
-            //     animator.SetTrigger(Atk);
-            //     cooltime_gumgi = 0;
-            //     direction = !direction;
-            //     Invoke("balsa", 0.4f);
-            //     NormalAttackExecuteEvent evnt = new NormalAttackExecuteEvent(this, new List<AtkTags>());
-            //     this.eventActive(evnt);
-            // } 
+            
             if (Input.GetMouseButtonDown(0))
             {
                 if (!isJumping)
@@ -182,21 +170,6 @@ namespace GameBackend.Objects
                 collidersInside.Remove(other);
             }
         }
-
-        // public void balsa()
-        // {
-        //     GameObject obj = Instantiate(gumgi, this.transform);
-        //     Gumgi gumgiCompo = obj.GetComponent<Gumgi>();
-        //     gumgiCompo.direction = direction;
-        //     gumgiCompo.position = transform.position;
-        //     gumgiCompo.time = 0.4f;
-        //     gumgiCompo.speed = 6;
-        //     List<AtkTags> atkTag = new List<AtkTags>();
-        //     atkTag.Add(AtkTags.fireAttack);
-        //     atkTag.Add(AtkTags.normalAttack);
-        //     gumgiCompo.dmgInfo = new DmgInfo(100, 10, this, atkTag);
-        //     gumgiCompo.apply();
-        // }
 
         void NormalSkill(float deltaTime)
         {

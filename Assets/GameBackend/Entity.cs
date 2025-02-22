@@ -11,7 +11,7 @@ namespace GameBackend
 {
     public abstract class Entity : MonoBehaviour
     {
-        protected InvokeManager invokeManager=new();
+        protected readonly InvokeManager invokeManager=new();
         
         private float _speed = 1;
         public float speed
@@ -134,8 +134,8 @@ namespace GameBackend
             int realDmg = (int)(dmg.trueDmg * ((float)(C) / (def + C)));
 
             eventActive(new DmgTakeEvent(realDmg, dmg.attacker, dmg.target, dmg.atkTags));
-            status.nowHp -= realDmg;
-            if (status.nowHp <= 0) die();
+            statusData.nowHp -= realDmg;
+            if (statusData.nowHp <= 0) die();
         }
 
         public virtual bool stagger(float deltaTime)

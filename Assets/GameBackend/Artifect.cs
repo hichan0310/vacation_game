@@ -13,8 +13,11 @@ namespace GameBackend
 
         public void registrarTarget(Entity target)
         {
-            player = target.GetComponent<PlayerObject>();
-            player.addListener(this);
+            if (target is PlayerObject player)
+            {
+                this.player = player;
+                player.addListener(this);
+            }
         }
 
         public void removeSelf()
@@ -22,6 +25,6 @@ namespace GameBackend
             player.removeListener(this);
         }
 
-        public void update(float deltaTime){}
+        public virtual void update(float deltaTime){}
     }
 }

@@ -933,51 +933,6 @@ Transform:
   - {fileID: 703264258}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &732775447
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 732775449}
-  - component: {fileID: 732775448}
-  m_Layer: 0
-  m_Name: FireStone
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &732775448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 732775447}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3c09c42a61044fa95c7223aeb3abcdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gumgi: {fileID: 0}
---- !u!4 &732775449
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 732775447}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5111275, y: 2.3842459, z: -7.4573946}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1061263768
 GameObject:
   m_ObjectHideFlags: 0
@@ -1102,7 +1057,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   gumgi: {fileID: 5507106251822291962, guid: 6cf34944f8473a140a520811d77dd999, type: 3}
-  artifects: []
+  artifects:
+  - {fileID: 8362568016873022257, guid: 89e75b46055e9804ab02d4835e91b8e2, type: 3}
   normalSkill: {fileID: 1957325592}
   specialSkill: {fileID: 1401358922}
 --- !u!60 &1061263773
@@ -1852,6 +1808,5 @@ SceneRoots:
   - {fileID: 723033563}
   - {fileID: 1167016302}
   - {fileID: 1589944214}
-  - {fileID: 732775449}
   - {fileID: 1957325593}
   - {fileID: 1401358923}
