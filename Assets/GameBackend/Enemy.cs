@@ -12,8 +12,9 @@ namespace GameBackend
         protected int targetingRange=100;
         protected GameObject target;
         protected bool direction; // 오른쪽이 true
-        
         protected bool staggered = false;
+        protected bool isAttack;
+
         protected bool knockbacked = false;
         protected float forceSum = 0;
         protected float forceStaggered = 0;
@@ -92,13 +93,13 @@ namespace GameBackend
             {
                 transform.localScale = new Vector3(1, 1, 1);
             }
-
             if (distance < 0.5f)
             {
                 if (!atk && atkTimer == 0) 
                 {
                     atk = true;
                     animator.SetTrigger("atk");
+                    isAttack = true;
                 }
 
                 if (atk)
@@ -112,10 +113,20 @@ namespace GameBackend
                     return;
                 }
             }
+
+            if(isAttack && animator.GetCurrentAnimatorStateInfo(0).IsName("idle"))
+            {
+                isAttack = false;
+            }
             
             Vector3 pos = this.transform.position;
             pos.x += (direction?moveSpeed:-moveSpeed)*deltaTime;
             this.transform.position = pos;
+        }
+
+        protected override void OnTriggerStay2D(Collider2D other)
+        {
+
         }
 
         public override void dmgtake(DmgGiveEvent dmg)

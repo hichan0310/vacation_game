@@ -1055,6 +1055,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 721503506a7144298ca0553a60ca7ea9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   gumgi: {fileID: 5507106251822291962, guid: 6cf34944f8473a140a520811d77dd999, type: 3}
   normalSkillProgressBar: {fileID: 723033561}
   motionHelper1: {fileID: 4195510907091317960, guid: 755d4dd957832114297b4b83bac5ae6b, type: 3}
