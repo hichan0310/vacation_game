@@ -27,8 +27,24 @@ namespace GameBackend
         public bool dead { get; set; } = false;
         private bool rightBefore = false;
 
-        public PlayerStatus status { get; set; } = new(1, 0, 0);
+        public PlayerStatus statusData=new(1, 0, 0);
+
+        public PlayerStatus status
+        {
+            get
+            {
+                var copy=new PlayerStatus(statusData);
+                foreach (var buffs in buffStatus)
+                {
+                    buffs.buffStatus(copy);
+                }
+                return copy;
+            }
+            protected set => statusData = value;
+        }
+
         public List<IEntityEventListener> eventListener { get; set; } = new();
+        public List<IBuffStatus> buffStatus { get; set; } = new();
 
         public Animator animator;
 
@@ -43,9 +59,19 @@ namespace GameBackend
             this.eventListener.Add(listener);
         }
 
+        public void addBuff(IBuffStatus buffStatus)
+        {
+            this.buffStatus.Add(buffStatus);
+        }
+
         public void removeListener(IEntityEventListener listener)
         {
             this.eventListener.Remove(listener);
+        }
+
+        public void removeBuff(IBuffStatus buffStatus)
+        {
+            this.buffStatus.Remove(buffStatus);
         }
 
         protected virtual void OnTriggerEnter2D(Collider2D other)

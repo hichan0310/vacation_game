@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using Random = UnityEngine.Random;
 
 namespace GameBackend.Status
 {
@@ -53,6 +54,24 @@ namespace GameBackend.Status
             this.crit = 5;
             this.critDmg = 50;
             this.dmgUp = new float[Tag.atkTagCount];
+        }
+
+        public PlayerStatus(PlayerStatus copy)
+        {
+            this.addHp = copy.addHp;
+            this.addAtk = copy.addAtk;
+            this.increaseHp = copy.increaseHp;
+            this.nowHp = copy.nowHp;
+            this.baseAtk = copy.baseAtk;
+            this.addAtk = copy.addAtk;
+            this.increaseAtk = copy.increaseAtk;
+            this.baseDef = copy.baseDef;
+            this.addDef = copy.addDef;
+            this.increaseDef = copy.increaseDef;
+            this.crit = copy.crit;
+            this.critDmg = copy.critDmg;
+            this.dmgUp = new float[Tag.atkTagCount];
+            Array.Copy(copy.dmgUp, dmgUp, Tag.atkTagCount);
         }
 
         public int calculateTrueDamage(List<AtkTags> atkTags, float atkCoef=0, float hpCoef=0, float defCoef=0)

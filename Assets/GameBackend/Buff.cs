@@ -19,7 +19,7 @@ namespace GameBackend
             target.addListener(this);
         }
 
-        public void removeSelf()
+        public virtual void removeSelf()
         {
             foreach (var target in targets)
             {
