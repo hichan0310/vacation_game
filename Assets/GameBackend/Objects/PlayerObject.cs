@@ -16,8 +16,7 @@ namespace GameBackend.Objects
         private List<Collider2D> collidersInside = new();
         private int dmg;
         private int atknum = 0;
-
-        private float cooltime_gumgi = 0.5f;
+        
         private float lastAttackTime = 0f;
         private float comboResetTime = 0.8f;
         private float attackCooldown = 0.25f;

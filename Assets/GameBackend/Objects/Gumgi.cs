@@ -1,4 +1,6 @@
-﻿using GameBackend.Events;
+﻿using System.Collections.Generic;
+using GameBackend.Buffs;
+using GameBackend.Events;
 using UnityEngine;
 
 namespace GameBackend.Objects
@@ -10,6 +12,8 @@ namespace GameBackend.Objects
         public float time { get; set; }
         public float gumgiSpeed { get; set; } = 1.5f;
         public DmgInfo dmgInfo { get; set; }
+        
+        private readonly HashSet<Enemy> atkObjects = new();
 
         public void apply()
         {
@@ -28,8 +32,12 @@ namespace GameBackend.Objects
         
         protected override void OnTriggerEnter2D(Collider2D other)
         {
-            base.OnTriggerEnter2D(other); 
-            
+            Enemy enemy = other.gameObject.GetComponentInParent<Enemy>();
+            if (atkObjects.Contains(enemy) || !enemy) return;
+            new DmgGiveEvent(dmgInfo.trueDmg, dmgInfo.force, dmgInfo.attacker, enemy, dmgInfo.atkTags);
+            DefIgnore defIgnore = new DefIgnore(50, 4);
+            defIgnore.registrarTarget(enemy);
+            atkObjects.Add(enemy);
         }
         
         void destroy()
