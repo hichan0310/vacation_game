@@ -12,7 +12,7 @@ namespace GameBackend
     public abstract class Entity : MonoBehaviour
     {
         public float speed { get; set; } = 1;
-        private bool dead = false;
+        public bool dead { get; set; } = false;
         private bool rightBefore = false;
 
         public PlayerStatus status { get; set; } = new(1, 0, 0);
@@ -69,6 +69,12 @@ namespace GameBackend
         {
             if (dead)
             {
+                {
+                    if (this.animator.GetCurrentAnimatorStateInfo(0).IsName("dead") && this.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+                    {
+                        Destroy(this.gameObject);
+                    }
+                }
                 if (!rightBefore) return;
                 else rightBefore = false;
             }
@@ -84,7 +90,7 @@ namespace GameBackend
 
             eventActive(new DmgTakeEvent(realDmg, dmg.attacker, dmg.target, dmg.atkTags));
             status.nowHp -= realDmg;
-            if (status.nowHp <= 0) die();
+            if (status.nowHp <= 0) die(dmg.target);
         }
 
         public virtual bool stagger(float deltaTime)
@@ -97,7 +103,7 @@ namespace GameBackend
             return true;
         }
 
-        public virtual void die()
+        public virtual void die(Entity dietarget)
         {
             if (dead) return;
             this.dead = true;
