@@ -121,6 +121,7 @@ namespace GameBackend.Skills
 
             foreach (var target in targets)
             {
+                if (!target.Key) continue;
                 PlayerStatus status = player.status;
                 List<AtkTags> atkTags = new List<AtkTags>();
                 atkTags.Add(AtkTags.physicalAttack);

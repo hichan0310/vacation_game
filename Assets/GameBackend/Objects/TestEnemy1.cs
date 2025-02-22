@@ -23,9 +23,16 @@ namespace GameBackend.Objects
         protected override void update(float deltaTime)
         {
             base.update(deltaTime);
-            progressBar.ratio=(float)status.nowHp/status.maxHp;
-            progressBar.transform.localScale = new Vector3(transform.localScale.x, 1, 1);
-            if(this.dead) Destroy(hpBarObject);
+            if (this.dead)
+            {
+                Destroy(hpBarObject);
+            }
+            else
+            {
+                progressBar.ratio=(float)status.nowHp/status.maxHp;
+                progressBar.transform.localScale = new Vector3(transform.localScale.x, 1, 1);
+
+            }
         }
     }
 }
