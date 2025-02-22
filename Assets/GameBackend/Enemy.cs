@@ -43,12 +43,9 @@ namespace GameBackend
             }
             return nearest;
         }
-        
-        protected override void update(float deltaTime)
+
+        private void checkForce(float deltaTime)
         {
-            base.update(deltaTime);
-            // Debug.Log($"{forceSum}, {forceStaggered}");
-            
             forceSum -= deltaTime/5;
             forceStaggered -= deltaTime;
             forceSum = Mathf.Max(forceSum, 0);
@@ -66,6 +63,15 @@ namespace GameBackend
                 knockbacked = true;
                 knockbackTimer = 0;
             }
+        }
+        
+        private bool atk = false;
+        private float atkTimer = 0;
+        
+        protected override void update(float deltaTime)
+        {
+            base.update(deltaTime);
+            checkForce(deltaTime);
             if (knockbacked) { if (knockback(deltaTime)) return; }
             else if (staggered) { if (stagger(deltaTime)) return; }
             
@@ -77,13 +83,34 @@ namespace GameBackend
 
             if (target.transform.position.x >= this.transform.position.x) direction = true;
             else direction = false;
-            if (!direction && transform.localScale.x == 1 && Math.Abs(getNearestPlayer(transform.position).transform.position.x - transform.position.x) >= 0.20f)
+            float distance = Math.Abs(target.transform.position.x - transform.position.x);
+            if (!direction && transform.localScale.x == 1 && distance >= 0.30f)
             {
                 transform.localScale = new Vector3(-1, 1, 1);
             }
-            else if (direction && transform.localScale.x == -1 && Math.Abs(getNearestPlayer(transform.position).transform.position.x - transform.position.x) >= 0.20f)
+            else if (direction && transform.localScale.x == -1 && distance >= 0.30f)
             {
                 transform.localScale = new Vector3(1, 1, 1);
+            }
+
+            if (distance < 0.5f)
+            {
+                if (!atk && atkTimer == 0) 
+                {
+                    atk = true;
+                    animator.SetTrigger("atk");
+                }
+
+                if (atk)
+                {
+                    atkTimer += deltaTime;
+                    if (atkTimer >= 1)
+                    {
+                        atk = false;
+                        atkTimer = 0;
+                    }
+                    return;
+                }
             }
             
             Vector3 pos = this.transform.position;

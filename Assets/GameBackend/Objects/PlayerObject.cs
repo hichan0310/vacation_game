@@ -24,8 +24,8 @@ namespace GameBackend.Objects
         private float attackCooldown = 0.25f;
         private string tmp = "";
         private bool direction = true;
-        private float movePower = 1f;
-        private float jumpPower = 2f;
+        private float movePower = 1.6f;
+        private float jumpPower = 3.5f;
         private bool isJumping = false;
         private bool isJumpatk = false;
         private bool isnormalattack = false;
