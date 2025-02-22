@@ -67,6 +67,8 @@ namespace GameBackend
 
         public virtual void Update()
         {
+            
+            
             if (dead)
             {
                 {
@@ -90,7 +92,7 @@ namespace GameBackend
 
             eventActive(new DmgTakeEvent(realDmg, dmg.attacker, dmg.target, dmg.atkTags));
             status.nowHp -= realDmg;
-            if (status.nowHp <= 0) die(dmg.target);
+            if (status.nowHp <= 0) die();
         }
 
         public virtual bool stagger(float deltaTime)
@@ -103,13 +105,15 @@ namespace GameBackend
             return true;
         }
 
-        public virtual void die(Entity dietarget)
+
+        public virtual void die()
         {
             if (dead) return;
             this.dead = true;
             this.rightBefore = true;
             this.animator.SetTrigger("dead");
         }
+
     }
 
     public class EmptyEntity : Entity
