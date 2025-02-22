@@ -13,12 +13,11 @@ namespace GameBackend.Objects
         public GameObject hpBar;
         private GameObject hpBarObject;
         private ProgressBar progressBar;
-        private GameObject[] players;
-        
-        
+
+
         private void Start()
         {
-            players = GameObject.FindGameObjectsWithTag("Player");
+            GameObject.FindGameObjectsWithTag("Player");
             hpBarObject=Instantiate(hpBar, transform, true);
             hpBarObject.transform.localPosition = new Vector3(0, 0.5f, 0);
             progressBar = hpBarObject.GetComponent<ProgressBar>();
@@ -53,10 +52,9 @@ namespace GameBackend.Objects
         {
             foreach (PlayerObject player in players)
             {
-                var tag = new List<AtkTags> { AtkTags.normalAttack, AtkTags.physicalAttack };
                 new DmgGiveEvent(
-                    this.status.calculateTrueDamage(tag, atkCoef: 100),
-                    0, this, player, tag
+                    this.status.calculateTrueDamage(atkTags, atkCoef: 100),
+                    0, this, player, atkTags
                 );
             }
         }

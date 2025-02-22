@@ -30,10 +30,14 @@ namespace GameBackend.Objects
         private Rigidbody2D rigid;
         private Entity player;
         
-        public List<Artifect> artifects;
+        public GameObject hpBar;
+        private GameObject hpBarObject;
+        private ProgressBar progressBar;        
 
         public Skill normalSkill;
         public Skill specialSkill;
+        public List<Artifect> artifects;
+        
         
         private void Awake()
         {
@@ -42,6 +46,10 @@ namespace GameBackend.Objects
 
         public void Start()
         {
+            hpBarObject=Instantiate(hpBar, transform, true);
+            hpBarObject.transform.localPosition = new Vector3(0, 0.5f, 0);
+            progressBar = hpBarObject.GetComponent<ProgressBar>();
+            
             normalAttackDamage = new Dictionary<string, int>
             {
                 { "attack_a", 15 },
@@ -88,6 +96,16 @@ namespace GameBackend.Objects
                         isJumpatk = true;
                     }
                 }
+            }
+            
+            if (this.dead)
+            {
+                Destroy(hpBarObject);
+            }
+            else
+            {
+                progressBar.ratio=(float)status.nowHp/status.maxHp;
+                progressBar.transform.localScale = new Vector3(transform.localScale.x, 1, 1);
             }
         }
 
