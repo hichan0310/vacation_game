@@ -31,21 +31,11 @@ namespace GameBackend.Objects
         private bool isnormalattack = false;
         private Rigidbody2D rigid;
         private Entity player;
+        
+        public List<GameObject> artifects;
 
-        public GameObject normalSkillProgressBar;
-        public GameObject motionHelper1;
-        public GameObject motionHelper2;
-        public GameObject chamgyuck1;
-        public GameObject chamgyuck2;
-        public GameObject normalSkillEffect;
-
-        public GameObject specialSkillTimeProgressBar;
-        public GameObject specialSkillEnergyProgressBar;
-        public GameObject specialSkillImpact;
-        public GameObject specialSkillFlame;
-
-        public ISkill normalSkill { get; private set; }
-        public ISkill specialSkill { get; private set; }
+        public Skill normalSkill;
+        public Skill specialSkill;
         
         private void Awake()
         {
@@ -66,27 +56,13 @@ namespace GameBackend.Objects
             rigid = this.gameObject.GetComponent<Rigidbody2D>();
             this.status = new PlayerStatus(10000, 1000, 100);
 
-            normalSkill = new TestSkill();
-            normalSkill.requireObjects(new List<GameObject>
-            {
-                normalSkillProgressBar,
-                motionHelper1,
-                motionHelper2,
-                chamgyuck1,
-                chamgyuck2,
-                normalSkillEffect,
-            });
             normalSkill.registrarTarget(this);
-
-            specialSkill = new TestSpecialSkill();
-            specialSkill.requireObjects(new List<GameObject>
-            {
-                specialSkillTimeProgressBar,
-                specialSkillEnergyProgressBar,
-                specialSkillImpact,
-                specialSkillFlame,
-            });
             specialSkill.registrarTarget(this);
+
+            foreach (var artifect in artifects)
+            {
+                artifect.GetComponent<Artifect>().registrarTarget(this);
+            }
         }
 
         protected override void update(float deltaTime)
