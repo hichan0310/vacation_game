@@ -16,6 +16,9 @@ namespace GameBackend.Objects
         private List<Collider2D> collidersInside = new();
         private int dmg;
         private int atknum = 0;
+        public GameObject hpBar;
+        private GameObject hpBarObject;
+        private ProgressBar progressBar;
         
         private float lastAttackTime = 0f;
         private float comboResetTime = 0.8f;
@@ -28,11 +31,7 @@ namespace GameBackend.Objects
         private bool isJumpatk = false;
         private bool isnormalattack = false;
         private Rigidbody2D rigid;
-        private Entity player;
-        
-        public GameObject hpBar;
-        private GameObject hpBarObject;
-        private ProgressBar progressBar;        
+        private Entity player;     
 
         public Skill normalSkill;
         public Skill specialSkill;
@@ -46,10 +45,6 @@ namespace GameBackend.Objects
 
         public void Start()
         {
-            hpBarObject=Instantiate(hpBar, transform, true);
-            hpBarObject.transform.localPosition = new Vector3(0, 0.5f, 0);
-            progressBar = hpBarObject.GetComponent<ProgressBar>();
-            
             normalAttackDamage = new Dictionary<string, int>
             {
                 { "attack_a", 15 },
@@ -60,6 +55,9 @@ namespace GameBackend.Objects
             };
 
             rigid = this.gameObject.GetComponent<Rigidbody2D>();
+            hpBarObject=Instantiate(hpBar, transform, true);
+            hpBarObject.transform.localPosition = new Vector3(0, 0.65f, 0);
+            progressBar = hpBarObject.GetComponent<ProgressBar>();
             this.status = new PlayerStatus(10000, 1000, 100);
 
             normalSkill.registrarTarget(this);
@@ -74,6 +72,15 @@ namespace GameBackend.Objects
         protected override void update(float deltaTime)
         {
             base.update(deltaTime);
+            if (this.dead)
+            {
+                Destroy(hpBarObject);
+            }
+            else
+            {
+                progressBar.ratio=(float)status.nowHp/status.maxHp;
+                progressBar.transform.localScale = new Vector3(transform.localScale.x, 1, 1);
+            }
             animator.SetBool("jumping", isJumping);
             animator.SetInteger("atknum", atknum);
             Move(deltaTime);
@@ -164,7 +171,7 @@ namespace GameBackend.Objects
                      animator.GetCurrentAnimatorStateInfo(0).IsName("attack_b") ||
                      animator.GetCurrentAnimatorStateInfo(0).IsName("attack_c") ||
                      animator.GetCurrentAnimatorStateInfo(0).IsName("attack_d") ||
-                     (animator.GetCurrentAnimatorStateInfo(0).IsName("attack_jump") && gameObject.GetComponent<Rigidbody2D>().velocity.y < 0)) &&
+                     animator.GetCurrentAnimatorStateInfo(0).IsName("attack_jump")) &&
                     (animator.GetCurrentAnimatorClipInfo(0)[0].clip.name != $"{tmp}"))
                 {
                     tmp = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
