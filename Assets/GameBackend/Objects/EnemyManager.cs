@@ -5,13 +5,13 @@ namespace GameBackend.Objects
 {
     public class EnemyManager:MonoBehaviour
     {
-        private float timer = 0;
+        private float timer = 6;
         public List<Enemy> enemies;
 
         private void Update()
         {
             timer += Time.deltaTime;
-            if (timer >= 6f)
+            if (timer >= 6)
             {
                 timer = 0;
                 Enemy enemy = enemies[Random.Range(0, enemies.Count)];

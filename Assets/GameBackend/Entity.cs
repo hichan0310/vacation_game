@@ -67,6 +67,9 @@ namespace GameBackend
 
         public virtual void Update()
         {
+            
+            deadTimer(TimeManager.deltaTime * speed, 2);
+            
             if (dead)
             {
                 if (!rightBefore) return;
@@ -97,12 +100,31 @@ namespace GameBackend
             return true;
         }
 
+        protected void destroy()
+        {
+            Destroy(gameObject);
+        }
+
         public virtual void die()
         {
             if (dead) return;
             this.dead = true;
             this.rightBefore = true;
             this.animator.SetTrigger("dead");
+        }
+
+        private float dtimer = 0;
+        protected void deadTimer(float deltaTime, float disappearTime)
+        {
+            if (dead)
+            {
+                dtimer += deltaTime;
+            }
+
+            if (dtimer >= disappearTime)
+            {
+                destroy();
+            }
         }
     }
 

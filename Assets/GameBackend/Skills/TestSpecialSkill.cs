@@ -134,6 +134,7 @@ namespace GameBackend.Skills
                 }, atkCoef: 40), target.Value, player);
                 bloodLoss.registrarTarget(target.Key);
             }
+            this.targets.Clear();
         }
 
         public void execute()
