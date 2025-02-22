@@ -1,11 +1,15 @@
 ﻿using GameBackend.Status;
+using GameBackend.Events;
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace GameBackend.Objects
 {
     public class TestEnemy1:Enemy
     {
+        private List<AtkTags> atkTags = new() { AtkTags.normalAttack, AtkTags.physicalAttack };
         public GameObject hpBar;
         private GameObject hpBarObject;
         private ProgressBar progressBar;
@@ -39,8 +43,15 @@ namespace GameBackend.Objects
             if(other is PolygonCollider2D && other.gameObject.tag == "Player" && isAttack == true)
             {
                 isAttack = false;
-                Debug.Log("Attacked");
+                Player<TestPlayerInfo1> player = other.GetComponent<Player<TestPlayerInfo1>>();
+                StartCoroutine(Damage(player));
             }
         }
+        IEnumerator Damage(Player<TestPlayerInfo1> player)
+        {
+            yield return new WaitForSeconds(0.2f);
+            new DmgGiveEvent(this.status.calculateTrueDamage(atkTags, atkCoef: 100), 0, this, player, atkTags);
+        }
+
     }
 }
