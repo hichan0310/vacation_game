@@ -11,6 +11,8 @@ namespace GameBackend
 {
     public abstract class Entity : MonoBehaviour
     {
+        protected InvokeManager invokeManager=new();
+        
         private float _speed = 1;
         public float speed
         {
@@ -72,6 +74,7 @@ namespace GameBackend
 
         protected virtual void update(float deltaTime)
         {
+            invokeManager.update(deltaTime);
             this.eventListener.ToList().ForEach(listener => listener.update(deltaTime));
         }
 
