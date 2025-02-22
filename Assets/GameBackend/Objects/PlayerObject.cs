@@ -56,7 +56,7 @@ namespace GameBackend.Objects
 
             rigid = this.gameObject.GetComponent<Rigidbody2D>();
             hpBarObject=Instantiate(hpBar, transform, true);
-            hpBarObject.transform.localPosition = new Vector3(0, 0.65f, 0);
+            hpBarObject.transform.localPosition = new Vector3(0, 0.8f, 0);
             progressBar = hpBarObject.GetComponent<ProgressBar>();
             this.status = new PlayerStatus(10000, 1000, 100);
 
