@@ -9,6 +9,7 @@ TagManager:
   - Gumgi
   - Chamgyuck
   - Plate
+  - Skilleffect
   layers:
   - Default
   - TransparentFX
