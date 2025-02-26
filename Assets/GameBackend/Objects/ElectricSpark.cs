@@ -1,16 +1,24 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using GameBackend.Events;
+using GameBackend.Status;
 using UnityEngine;
 
 namespace GameBackend.Objects
 {
     public class ElectricSpark:SkillEffect
     {
-        public BoxCollider2D targetCollider{ get; set; }
-        public CircleCollider2D explodeCollider{get;set;}
         public GameObject target { get; set; }
+        public LayerMask enemyLayer; 
         public float sparkSpeed { get; set; } = 5;
         public float angle { get; set; } = 0;
         public float homingAngle { get; set; }= Mathf.PI/200;
+        private List<AtkTags> atkTags = new() { AtkTags.normalSkill, AtkTags.lightningAttack };
+        private ContactFilter2D filter;
+        private int dmg;
+        private Entity player;
+        private Enemy enemy;
+        private Enemy enemys;
+        private bool isCrash;
         
         private GameObject getNearestEnemy(Vector2 position)
         {
@@ -32,8 +40,10 @@ namespace GameBackend.Objects
 
         private void Start()
         {
-            targetCollider = this.gameObject.GetComponent<BoxCollider2D>();
-            explodeCollider = this.gameObject.GetComponent<CircleCollider2D>();
+            Physics2D.IgnoreCollision(GetComponent<CircleCollider2D>(), GameObject.FindWithTag("Player").GetComponent<Player<TestPlayerInfo1>>().GetComponent<PolygonCollider2D>());
+            player = GameObject.FindWithTag("Player").GetComponent<Player<TestPlayerInfo1>>();
+            filter.SetLayerMask(enemyLayer);
+            isCrash = true;
         }
 
         protected override void update(float deltaTime)
@@ -57,18 +67,36 @@ namespace GameBackend.Objects
                 target = getNearestEnemy(this.transform.position);
             }
             this.transform.position = transform.position+new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * (sparkSpeed * deltaTime);
+            foreach(GameObject enemy_n in GameObject.FindGameObjectsWithTag("Enemy"))
+            {
+                Physics2D.IgnoreCollision(GetComponent<CircleCollider2D>(), enemy_n.GetComponent<PolygonCollider2D>()); 
+            }
+            foreach(GameObject skillefect_n in GameObject.FindGameObjectsWithTag("Skilleffect"))
+            {
+                if (skillefect_n == GetComponent<CircleCollider2D>()) continue;
+                Physics2D.IgnoreCollision(GetComponent<CircleCollider2D>(), skillefect_n.GetComponent<CircleCollider2D>()); 
+            }
         }
 
         protected override void OnTriggerEnter2D(Collider2D other)
         {
-            if (!other.CompareTag("Enemy")) return;
-            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(explodeCollider.transform.position, explodeCollider.radius);
-
-            foreach (var hitCollider in hitColliders)
+            if (other.gameObject.tag == "Enemy" && other is PolygonCollider2D && isCrash)
             {
-                Debug.Log($"Detected object tag: {hitCollider.tag}");
+                enemy = other.gameObject.GetComponent<Enemy>();
+                dmg = player.status.calculateTrueDamage(atkTags, atkCoef: 50);
+                new DmgGiveEvent(dmg, 0f, player, enemy, atkTags);
+                isCrash = false;
+                PolygonCollider2D[] colliders = new PolygonCollider2D[30];
+                GetComponent<CircleCollider2D>().OverlapCollider(filter, colliders);
+                foreach (PolygonCollider2D collider in colliders)
+                {
+                    if (collider == null || collider == other) continue;
+                    enemys = collider.gameObject.GetComponent<Enemy>();
+                    dmg = player.status.calculateTrueDamage(atkTags, atkCoef: 100);
+                    new DmgGiveEvent(dmg, 0f, player, enemys, atkTags);
+                }
+                Destroy(this.gameObject);
             }
-            destroy();
         }
     }
 }
