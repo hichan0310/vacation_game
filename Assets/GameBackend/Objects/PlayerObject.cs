@@ -90,7 +90,7 @@ namespace GameBackend.Objects
             
             if (Input.GetMouseButtonDown(0))
             {
-                if (!isJumping)
+                if (!isJumping && !animator.GetCurrentAnimatorStateInfo(0).IsName("attack_jump"))
                 {
                     animator.ResetTrigger("walk");
                     AttemptAttack();
