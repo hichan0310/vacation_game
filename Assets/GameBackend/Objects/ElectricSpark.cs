@@ -80,7 +80,7 @@ namespace GameBackend.Objects
 
         protected override void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.tag == "Enemy" && other is PolygonCollider2D && isCrash)
+            if (other.gameObject.tag == "Enemy" && other is PolygonCollider2D && isCrash && !other.gameObject.GetComponent<Enemy>().dead)
             {
                 enemy = other.gameObject.GetComponent<Enemy>();
                 dmg = player.status.calculateTrueDamage(atkTags, atkCoef: 50);
@@ -90,7 +90,7 @@ namespace GameBackend.Objects
                 GetComponent<CircleCollider2D>().OverlapCollider(filter, colliders);
                 foreach (PolygonCollider2D collider in colliders)
                 {
-                    if (collider == null || collider == other) continue;
+                    if (collider == null || collider == other || collider.gameObject.GetComponent<Enemy>().dead) continue;
                     enemys = collider.gameObject.GetComponent<Enemy>();
                     dmg = player.status.calculateTrueDamage(atkTags, atkCoef: 100);
                     new DmgGiveEvent(dmg, 0f, player, enemys, atkTags);
