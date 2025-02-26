@@ -1057,10 +1057,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   hpBar: {fileID: 1783433148201511955, guid: a0f840cb6bec5004b9fca0f4d4bd7e5a, type: 3}
-  artifects:
-  - {fileID: 8362568016873022257, guid: 89e75b46055e9804ab02d4835e91b8e2, type: 3}
   normalSkill: {fileID: 1957325592}
   specialSkill: {fileID: 1401358922}
+  artifects:
+  - {fileID: 8362568016873022257, guid: 89e75b46055e9804ab02d4835e91b8e2, type: 3}
+  - {fileID: 8953073456295524750, guid: 4234cd41959a23c4c9a4ea825672f261, type: 3}
 --- !u!60 &1061263773
 PolygonCollider2D:
   m_ObjectHideFlags: 0
