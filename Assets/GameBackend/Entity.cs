@@ -133,9 +133,17 @@ namespace GameBackend
             int C = 200;
             int realDmg = (int)(dmg.trueDmg * ((float)(C) / (def + C)));
 
-            eventActive(new DmgTakeEvent(realDmg, dmg.attacker, dmg.target, dmg.atkTags));
-            statusData.nowHp -= realDmg;
-            if (statusData.nowHp <= 0) die();
+            if (status.shieldHp >= realDmg)
+            {
+                statusData.shieldHp -= realDmg;
+            }
+            else
+            {
+                this.statusData.shieldHp = 0;
+                eventActive(new DmgTakeEvent(realDmg-status.shieldHp, dmg.attacker, dmg.target, dmg.atkTags));
+                statusData.nowHp -= realDmg;
+                if (statusData.nowHp <= 0) die();
+            }
         }
 
         public virtual bool stagger(float deltaTime)

@@ -16,6 +16,7 @@ namespace GameBackend.Status
         }
 
         public int nowHp { get; set; }
+        public int shieldHp { get; set; }
 
         private int baseAtk { get; }
         public int addAtk { get; set; }
@@ -45,6 +46,7 @@ namespace GameBackend.Status
             this.addHp = 0;
             this.increaseHp = 0;
             this.nowHp = this.maxHp;
+            this.shieldHp = 0;
             this.baseAtk = baseAtk;
             this.addAtk = 0;
             this.increaseAtk = 0;
@@ -62,6 +64,7 @@ namespace GameBackend.Status
             this.addHp = copy.addHp;
             this.increaseHp = copy.increaseHp;
             this.nowHp = copy.nowHp;
+            this.shieldHp = copy.shieldHp;
             this.baseAtk = copy.baseAtk;
             this.addAtk = copy.addAtk;
             this.increaseAtk = copy.increaseAtk;
