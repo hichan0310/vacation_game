@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using TMPro;
 using DG.Tweening;
 
 namespace GameBackend.StoryScript
