@@ -75,8 +75,9 @@ public class DialogueManager : MonoBehaviour
 
     public void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && Luna.coroutines.Count == 0)
         {
+            Debug.Log(Luna.coroutines.Count);
             if(!Dialogue.isTalking && text_index < 4)
             {
                 foreach (var func in functions[text_index])
@@ -84,16 +85,15 @@ public class DialogueManager : MonoBehaviour
                     func.Invoke();
                 }
                 
-                
                 coroutine = Dialogue.Typing(textfield_name, textfield_text, name1[text_index], talk1[text_index], speed1[text_index]);
                 StartCoroutine(coroutine);
                 text_index++;
             }
-            else 
+            else if(Dialogue.isTalking)
             {
                 StopCoroutine(coroutine);
                 StartCoroutine(Dialogue.Typing_All(textfield_name, textfield_text, name1[text_index - 1], talk1[text_index - 1]));
-                Luna.complete();
+
                 Luna.setFinal();
             }
         }
