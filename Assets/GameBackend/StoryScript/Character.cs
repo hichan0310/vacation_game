@@ -45,15 +45,18 @@ namespace GameBackend.StoryScript
 
         public void complete()
         {
-            setPosition(finalPosition);
-            SetAlpha(finalAlpha);
-            setScale(finalScale);
-            setRotation(finalRotation);
             StopAllStoredCoroutines();
-            setPosition(finalPosition);
+            Invoke("setFinal", 1);
+        }
+
+
+        public void setFinal()
+        {
+            transform.position = finalPosition;
+            transform.eulerAngles=new Vector3(0, 0, finalRotation);
+            transform.localScale=finalScale;
             SetAlpha(finalAlpha);
-            setScale(finalScale);
-            setRotation(finalRotation);
+            Debug.Log($"fucking work({finalPosition})");
         }
 
         private IEnumerator completeCoroutine()
@@ -117,7 +120,7 @@ namespace GameBackend.StoryScript
             var cor = movex(-9, 0.7f);
             StartAndStoreCoroutine(cor);
             coroutines.Add(cor);
-            finalPosition = tmp+new Vector3(6, 0, 0);
+            finalPosition = tmp+new Vector3(-9, 0, 0);
         }
         public void disappear_right_move()
         {
@@ -134,7 +137,7 @@ namespace GameBackend.StoryScript
             tmp.y = y;
             transform.position = tmp;
             StartAndStoreCoroutine(movex(9, 0.7f));
-            finalPosition = tmp+new Vector3(-6, 0, 0);
+            finalPosition = tmp+new Vector3(9, 0, 0);
         }
         
         public void disappear_left_move()
@@ -171,10 +174,10 @@ namespace GameBackend.StoryScript
 
         private IEnumerator littleJump()
         {
-            yield return transform.DOMoveY(transform.position.y + 0.8f, 0.4f)
+            yield return transform.DOMoveY(transform.position.y + 1.2f, 0.6f)
                 .SetEase(Ease.OutCubic)
                 .WaitForCompletion();
-            yield return transform.DOMoveY(transform.position.y - 0.8f, 0.4f)
+            yield return transform.DOMoveY(transform.position.y - 1.2f, 0.6f)
                 .SetEase(Ease.InCubic)
                 .WaitForCompletion();
         }
