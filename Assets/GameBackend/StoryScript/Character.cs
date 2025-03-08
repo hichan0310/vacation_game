@@ -18,7 +18,7 @@ namespace GameBackend.StoryScript
         private Vector3 finalScale;
         private float finalRotation;
         
-        private List<IEnumerator> coroutines = new();
+        public List<IEnumerator> coroutines = new();
         
         public void StartAndStoreCoroutine(IEnumerator coroutine)
         {
@@ -43,21 +43,16 @@ namespace GameBackend.StoryScript
             coroutines.Clear();
         }
 
-        public void complete()
-        {
-            StopAllStoredCoroutines();
-            Invoke("setFinal", 1);
-        }
 
-
-        public void setFinal()
-        {
-            transform.position = finalPosition;
-            transform.eulerAngles=new Vector3(0, 0, finalRotation);
-            transform.localScale=finalScale;
-            SetAlpha(finalAlpha);
-            Debug.Log($"fucking work({finalPosition})");
-        }
+        // public void setFinal()
+        // {
+        //     StopAllStoredCoroutines();
+        //     transform.position = finalPosition;
+        //     transform.eulerAngles=new Vector3(0, 0, finalRotation);
+        //     transform.localScale=finalScale;
+        //     SetAlpha(finalAlpha);
+        //     Debug.Log($"fucking work({finalPosition})");
+        // }
 
         private IEnumerator completeCoroutine()
         {
@@ -70,45 +65,34 @@ namespace GameBackend.StoryScript
             finalRotation = transform.eulerAngles.z;
             finalScale = transform.localScale;
             y = transform.position.y;
-            
-            
             setPosition(new Vector3(0, -20, 0));
             finalPosition = transform.position;
         }
         
         public void SetAlpha(float alpha)
         {
-            // 알파값을 0~1 범위로 제한
             alpha = Mathf.Clamp01(alpha);
-
             Color c = renderer.color;
             c.a = alpha;
             renderer.color = c;
             finalAlpha = alpha;
         }
-
-        public void setPosition(float x, float y)
-        {
-            this.transform.position = new Vector3(x, y, 0);
-            finalPosition = transform.position;
-        }
-
         public void setPosition(Vector3 position)
         {
             transform.position = position;
-            finalPosition = transform.position;
+            // finalPosition = transform.position;
         }
 
         public void setRotation(float degree)
         {
             this.transform.eulerAngles = new Vector3(0, 0, degree);
-            finalRotation = transform.eulerAngles.z;
+            // finalRotation = transform.eulerAngles.z;
         }
 
         public void setScale(Vector3 scale)
         {
             transform.localScale = scale;
-            finalScale = transform.localScale;
+            // finalScale = transform.localScale;
         }
 
         public void appear_right_move()
@@ -117,17 +101,16 @@ namespace GameBackend.StoryScript
             tmp.x = 15;
             tmp.y = y;
             transform.position = tmp;
-            var cor = movex(-9, 0.7f);
-            StartAndStoreCoroutine(cor);
-            coroutines.Add(cor);
-            finalPosition = tmp+new Vector3(-9, 0, 0);
+            StartAndStoreCoroutine(movex(-9, 0.7f));
+            // finalPosition = tmp+new Vector3(-9, 0, 0);
         }
+
         public void disappear_right_move()
         {
             var tmp = transform.position;
             tmp.x = 18;
             StartAndStoreCoroutine(movex(18-transform.position.x, 0.7f));
-            finalPosition = tmp;
+            // finalPosition = tmp;
         }
 
         public void appear_left_move()
@@ -137,7 +120,7 @@ namespace GameBackend.StoryScript
             tmp.y = y;
             transform.position = tmp;
             StartAndStoreCoroutine(movex(9, 0.7f));
-            finalPosition = tmp+new Vector3(9, 0, 0);
+            // finalPosition = tmp+new Vector3(9, 0, 0);
         }
         
         public void disappear_left_move()
@@ -145,7 +128,7 @@ namespace GameBackend.StoryScript
             var tmp = transform.position;
             tmp.x = -18;
             StartAndStoreCoroutine(movex(-18-transform.position.x, 0.7f));
-            finalPosition = tmp;
+            // finalPosition = tmp;
         }
 
         public void little_jump()
@@ -156,13 +139,13 @@ namespace GameBackend.StoryScript
         public void fall_down()
         {
             StartAndStoreCoroutine(fallDown());
-            finalPosition=transform.position+new Vector3(0, -10f, 0);
+            // finalPosition=transform.position+new Vector3(0, -10f, 0);
         }
 
         public void move_x(float deltax, float time)
         {
             StartAndStoreCoroutine(movex(deltax, time));
-            finalPosition = transform.position+new Vector3(deltax, 0, 0);
+            // finalPosition = transform.position+new Vector3(deltax, 0, 0);
         }
         
         private IEnumerator movex(float deltax, float time)

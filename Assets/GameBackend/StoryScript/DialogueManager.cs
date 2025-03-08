@@ -77,7 +77,6 @@ public class DialogueManager : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0) && Luna.coroutines.Count == 0)
         {
-            Debug.Log(Luna.coroutines.Count);
             if(!Dialogue.isTalking && text_index < 4)
             {
                 foreach (var func in functions[text_index])
@@ -94,7 +93,7 @@ public class DialogueManager : MonoBehaviour
                 StopCoroutine(coroutine);
                 StartCoroutine(Dialogue.Typing_All(textfield_name, textfield_text, name1[text_index - 1], talk1[text_index - 1]));
 
-                Luna.setFinal();
+                // Luna.setFinal();
             }
         }
 
