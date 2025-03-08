@@ -19,4 +19,13 @@ public class Dialogue : MonoBehaviour
         isTalking = false;
         yield break;
     } 
+
+    public static IEnumerator Typing_All(TMP_Text textfield_name, TMP_Text textfield_text, string name, string talk) 
+    { 
+        textfield_name.text = name; 
+        textfield_text.text = talk; 
+        yield return null;
+        isTalking = false;
+        yield break;
+    }
 }
