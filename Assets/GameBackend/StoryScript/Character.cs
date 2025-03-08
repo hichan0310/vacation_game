@@ -14,16 +14,26 @@ namespace GameBackend.StoryScript
             y = transform.position.y;
             Invoke("fall_down", 2);
             Invoke("little_jump", 1);
+            Invoke("appear_right", 4);
+            Invoke("appear_left", 6);
         }
 
         public void appear_right()
         {
-            
+            var tmp = transform.position;
+            tmp.x = 13;
+            tmp.y = y;
+            transform.position = tmp;
+            StartCoroutine(movex(-7, 0.7f));
         }
 
         public void appear_left()
         {
-            
+            var tmp = transform.position;
+            tmp.x = -13;
+            tmp.y = y;
+            transform.position = tmp;
+            StartCoroutine(movex(7, 0.7f));
         }
 
         public void little_jump()
@@ -34,6 +44,11 @@ namespace GameBackend.StoryScript
         public void fall_down()
         {
             StartCoroutine(fallDown());
+        }
+
+        public void move_x(float deltax, float time)
+        {
+            StartCoroutine(movex(deltax, time));
         }
         
         private IEnumerator movex(float deltax, float time)
@@ -64,6 +79,10 @@ namespace GameBackend.StoryScript
                 .WaitForCompletion();
             
             yield return transform.DOMoveY(transform.position.y - 10, 0.5f)
+                .SetEase(Ease.Unset)
+                .WaitForCompletion();
+            
+            yield return transform.DORotate(Vector3.zero, 0.01f)
                 .SetEase(Ease.Unset)
                 .WaitForCompletion();
         }
