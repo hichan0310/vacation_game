@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
@@ -11,24 +12,97 @@ namespace GameBackend.StoryScript
         private SpriteRenderer renderer;
         private float fadeDuration = 1f;
         private float y;
+
+        private Vector3 finalPosition;
+        private float finalAlpha = 1f;
+        private Vector3 finalScale;
+        private float finalRotation;
+        
+        private List<IEnumerator> coroutines = new();
+        
+        public void StartAndStoreCoroutine(IEnumerator coroutine)
+        {
+            coroutines.Add(coroutine);
+            StartCoroutine(CoroutineWrapper(coroutine));
+        }
+
+        private IEnumerator CoroutineWrapper(IEnumerator coroutine)
+        {
+            // 실제 코루틴 실행
+            yield return StartCoroutine(coroutine);
+            // 코루틴이 끝나면 리스트에서 제거
+            coroutines.Remove(coroutine);
+        }
+        
+        public void StopAllStoredCoroutines()
+        {
+            foreach (IEnumerator coroutine in coroutines)
+            {
+                StopCoroutine(coroutine);
+            }
+            coroutines.Clear();
+        }
+
+        public void complete()
+        {
+            StopAllStoredCoroutines();
+            setPosition(finalPosition);
+            SetAlpha(finalAlpha);
+            setScale(finalScale);
+            setRotation(finalRotation);
+        }
+        
         private void Awake()
         {
             renderer = GetComponent<SpriteRenderer>();
+            finalRotation = transform.eulerAngles.z;
+            finalScale = transform.localScale;
             y = transform.position.y;
-            Invoke("fall_down", 2);
-            Invoke("little_jump", 1);
-            Invoke("appear_right_move", 4);
-            Invoke("disappear_right_move", 5);
-            Invoke("appear_left_move", 6);
-            Invoke("disappear_left_move", 7);
-            Invoke("appear_right_move", 8);
-            Invoke("StartFadeOut", 9);
-            Invoke("StartFadeIn", 11);
+            
+            
+            setPosition(new Vector3(0, -20, 0));
+            finalPosition = transform.position;
+        }
+        
+        public void SetAlpha(float alpha)
+        {
+            if (renderer == null)
+            {
+                Debug.LogError("SpriteRenderer가 할당되지 않았습니다!");
+                return;
+            }
+
+            // 알파값을 0~1 범위로 제한
+            alpha = Mathf.Clamp01(alpha);
+
+            Color c = renderer.color;
+            c.a = alpha;
+            renderer.color = c;
+            finalAlpha = alpha;
         }
 
         public void setPosition(float x, float y)
         {
             this.transform.position = new Vector3(x, y, 0);
+            finalPosition = transform.position;
+        }
+
+        public void setPosition(Vector3 position)
+        {
+            transform.position = position;
+            finalPosition = transform.position;
+        }
+
+        public void setRotation(float degree)
+        {
+            this.transform.eulerAngles = new Vector3(0, 0, degree);
+            finalRotation = transform.eulerAngles.z;
+        }
+
+        public void setScale(Vector3 scale)
+        {
+            transform.localScale = scale;
+            finalScale = transform.localScale;
         }
 
         public void appear_right_move()
@@ -37,11 +111,17 @@ namespace GameBackend.StoryScript
             tmp.x = 15;
             tmp.y = y;
             transform.position = tmp;
-            StartCoroutine(movex(-9, 0.7f));
+            var cor = movex(-9, 0.7f);
+            StartAndStoreCoroutine(cor);
+            coroutines.Add(cor);
+            finalPosition = tmp+new Vector3(6, 0, 0);
         }
         public void disappear_right_move()
         {
-            StartCoroutine(movex(18-transform.position.x, 0.7f));
+            var tmp = transform.position;
+            tmp.x = 18;
+            StartAndStoreCoroutine(movex(18-transform.position.x, 0.7f));
+            finalPosition = tmp;
         }
 
         public void appear_left_move()
@@ -50,27 +130,33 @@ namespace GameBackend.StoryScript
             tmp.x = -15;
             tmp.y = y;
             transform.position = tmp;
-            StartCoroutine(movex(9, 0.7f));
+            StartAndStoreCoroutine(movex(9, 0.7f));
+            finalPosition = tmp+new Vector3(-6, 0, 0);
         }
         
         public void disappear_left_move()
         {
-            StartCoroutine(movex(-18-transform.position.x, 0.7f));
+            var tmp = transform.position;
+            tmp.x = -18;
+            StartAndStoreCoroutine(movex(-18-transform.position.x, 0.7f));
+            finalPosition = tmp;
         }
 
         public void little_jump()
         {
-            StartCoroutine(littleJump());
+            StartAndStoreCoroutine(littleJump());
         }
 
         public void fall_down()
         {
-            StartCoroutine(fallDown());
+            StartAndStoreCoroutine(fallDown());
+            finalPosition=transform.position+new Vector3(0, -10f, 0);
         }
 
         public void move_x(float deltax, float time)
         {
-            StartCoroutine(movex(deltax, time));
+            StartAndStoreCoroutine(movex(deltax, time));
+            finalPosition = transform.position+new Vector3(deltax, 0, 0);
         }
         
         private IEnumerator movex(float deltax, float time)
@@ -111,11 +197,11 @@ namespace GameBackend.StoryScript
         
         public void StartFadeOut()
         {
-            StartCoroutine(FadeOutRoutine(fadeDuration));
+            StartAndStoreCoroutine(FadeOutRoutine(fadeDuration));
         }
         public void StartFadeIn()
         {
-            StartCoroutine(FadeInRoutine(fadeDuration));
+            StartAndStoreCoroutine(FadeInRoutine(fadeDuration));
         }
 
         private IEnumerator FadeOutRoutine(float time)
