@@ -28,16 +28,19 @@ public class DialogueManager : MonoBehaviour
     
     private int text_index;
     private IEnumerator coroutine;
-    private string[] name1 = {"아로나", "아로나", "아로나", "아로나"};
+    private string[] name1 = {"루나", "나", "루나", "나", "루나", "나", "루나", "나", "루나", " "};
     private string[] talk1 = {
-        "좋은 아침이에요, 선생님!", 
-        "요 며칠 샬레에 대한 소문도 많이 퍼져나간것 같고, 다른 학생들의 도움 요청 편지도 도착한 것도 있어요.", 
-        "좋은 신호에요! 저희의 활약이 시작될 거란 얘기니까요!",
-        "근데 왜 complete 한수는 작동을 안 하는 건가요?"
+        "좋은 아침이야!", 
+        "안녕, 루나.",
+        "오늘도 이 꽃을 보러 왔구나.", 
+        "이 꽃을 보고 있으면 마음이 편안해져. 루나는 뭐하러 나온거야?",
+        "산책하러 나왔어. 오늘은 바람도 선선하고, 하늘도 맑고, 산책하기 딱 좋은 날씨거든.",
+        "정말 좋은 날씨네. 계속 방에만 있느라 눈치채지 못했어.",
+        "아직도 코드가 제대로 작동하지 않는거야?",
+        "coroutine 작동 방식이 너무 어려워서 어떻게 해결해야 할지 모르겠어.",
+        "나랑 같이 잠깐 산책하러 가자. 맑은 공기를 마시면 도움이 될거야!",
+        " "
     }; 
-    private float[] speed1 = {0.05f, 0.03f, 0.05f, 0.05f};
-    
-    
     
     private TMP_Text textfield_name;
     private TMP_Text textfield_text;
@@ -61,40 +64,68 @@ public class DialogueManager : MonoBehaviour
             new FunctionCall(new Action(Luna.little_jump)),
             new FunctionCall(new Action<float, float>(Luna.move_x), 1f, 0.1f)
         });
+        
 
         functions.Add(new List<FunctionCall> {
             //new FunctionCall(new Action(Luna.complete)),
-            new FunctionCall(new Action(Luna.fall_down))
+            new FunctionCall(new Action<float>(Luna.fast_jump), 0f),
+            new FunctionCall(new Action<float>(Luna.fast_jump), 0.5f)
         });
-        
+
         functions.Add(new List<FunctionCall> {
             //new FunctionCall(new Action(Luna.complete)),
-            new FunctionCall(new Action(Luna.appear_right_move)),
+            new FunctionCall(new Action(Luna.dori_dori)),
         });
+
+        functions.Add(new List<FunctionCall> {
+            //new FunctionCall(new Action(Luna.complete)),
+            new FunctionCall(new Action<float>(Luna.fast_jump), 0f),
+            new FunctionCall(new Action<float>(Luna.fast_jump), 0.5f)
+        });
+
+        functions.Add(new List<FunctionCall> {
+            //new FunctionCall(new Action(Luna.complete)),
+            new FunctionCall(new Action(Luna.disappear_left_move))
+        });
+
     }
 
     public void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetKeyDown(KeyCode.Space))
         {
-            if(!Dialogue.isTalking && text_index < 4)
+            Debug.Log(Luna.coroutines.Count);
+        }
+        if(Input.GetMouseButtonDown(0) && Luna.coroutines.Count == 0)
+        {
+            if(!Dialogue.isTalking && text_index < 10)
             {
-                foreach (var func in functions[text_index])
+
+                if (text_index == 9)
                 {
-                    func.Invoke();
+                    foreach (var func in functions[5])
+                    {
+                        func.Invoke();
+                    }
+                }
+                else if (name1[text_index] == "루나")
+                {
+                    foreach (var func in functions[text_index / 2])
+                    {
+                        func.Invoke();
+                    }
                 }
                 
-                
-                coroutine = Dialogue.Typing(textfield_name, textfield_text, name1[text_index], talk1[text_index], speed1[text_index]);
+                coroutine = Dialogue.Typing(textfield_name, textfield_text, name1[text_index], talk1[text_index], 0.05f);
                 StartCoroutine(coroutine);
                 text_index++;
             }
-            else 
+            else if(Dialogue.isTalking && name1[text_index - 1] != "나")
             {
                 StopCoroutine(coroutine);
                 StartCoroutine(Dialogue.Typing_All(textfield_name, textfield_text, name1[text_index - 1], talk1[text_index - 1]));
-                Luna.complete();
-                Luna.setFinal();
+
+                // Luna.setFinal();
             }
         }
 

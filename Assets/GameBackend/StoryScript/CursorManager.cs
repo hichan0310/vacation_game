@@ -13,11 +13,6 @@ public class UICursorChanger : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            Debug.Log(Input.mousePosition.y);
-            Debug.Log(Screen.height / 3);
-        }
         cursorUI.position = Input.mousePosition;
         if (Input.mousePosition.y <= Screen.height / 3)
         {
