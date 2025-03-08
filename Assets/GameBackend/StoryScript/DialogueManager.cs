@@ -5,7 +5,6 @@ using GameBackend.StoryScript;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
-using Microsoft.CodeAnalysis.CSharp.Scripting;
 
 
 public class FunctionCall
@@ -41,6 +40,8 @@ public class DialogueManager : MonoBehaviour
 
     private TMP_Text textfield_name;
     private TMP_Text textfield_text;
+    
+    private List<Character> characters;
     public Character MainCharacter;
     public Character Luna;
     public Character Luna_fire;
@@ -49,8 +50,26 @@ public class DialogueManager : MonoBehaviour
 
     public List<List<FunctionCall>> functions = new();
 
+    private bool motionEnd()
+    {
+        foreach (var character in characters)
+        {
+            if (character.coroutines.Count!=0) return false;
+        }
+        return true;
+    }
+
     private void Awake()
     {
+        characters = new List<Character>()
+        {
+            MainCharacter,
+            Luna,
+            Luna_fire,
+            Astra,
+            Helios,
+        };
+        
         if (Instance == null)
         {
             Instance = this; // Singleton 초기화
@@ -59,13 +78,13 @@ public class DialogueManager : MonoBehaviour
         {
             Destroy(gameObject); // 중복된 매니저 제거
         }
+
+        this.story = new TestStory1();
         
         text_index = 0;
         textfield_name = GameObject.Find("CharName").GetComponent<TMP_Text>();
         textfield_text = GameObject.Find("dialogue").GetComponent<TMP_Text>();
 
-
-        story = new TestStory1();
 
         foreach (StoryUnit unit in story.units)
         {
@@ -82,7 +101,7 @@ public class DialogueManager : MonoBehaviour
             Debug.Log(Luna.coroutines.Count);
         }
 
-        if (Input.GetMouseButtonDown(0) && Luna.coroutines.Count == 0)
+        if (Input.GetMouseButtonDown(0) && motionEnd())
         {
             if (!Dialogue.isTalking && text_index < 10)
             {
