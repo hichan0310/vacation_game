@@ -132,6 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 17411756}
   - component: {fileID: 17411755}
+  - component: {fileID: 17411757}
   m_Layer: 0
   m_Name: helios
   m_TagString: Untagged
@@ -200,12 +201,24 @@ Transform:
   m_GameObject: {fileID: 17411754}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.25, y: -20, z: 0}
+  m_LocalPosition: {x: 4.8600006, y: -2.5700006, z: 0}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &17411757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17411754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6244cd8154449a81d0e9da63ba29c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &292088154
 GameObject:
   m_ObjectHideFlags: 0
@@ -829,6 +842,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1151188105}
   - component: {fileID: 1151188104}
+  - component: {fileID: 1151188106}
   m_Layer: 0
   m_Name: astra
   m_TagString: Untagged
@@ -897,12 +911,24 @@ Transform:
   m_GameObject: {fileID: 1151188103}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2, y: -20, z: 0}
+  m_LocalPosition: {x: -1.19, y: -2.57, z: 0}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1151188106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151188103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6244cd8154449a81d0e9da63ba29c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1398938385
 GameObject:
   m_ObjectHideFlags: 0
@@ -913,6 +939,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1398938387}
   - component: {fileID: 1398938386}
+  - component: {fileID: 1398938388}
   m_Layer: 0
   m_Name: luna_fire
   m_TagString: Untagged
@@ -981,12 +1008,24 @@ Transform:
   m_GameObject: {fileID: 1398938385}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.31, y: -20, z: 0}
+  m_LocalPosition: {x: -6.7, y: -2.5700006, z: 0}
   m_LocalScale: {x: 1.1, y: 1.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1398938388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398938385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6244cd8154449a81d0e9da63ba29c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1424854334
 GameObject:
   m_ObjectHideFlags: 0
@@ -1199,7 +1238,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9a442f9241af4845aa1792a295d2302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MainCharacter: {fileID: 2088709319}
   Luna: {fileID: 520908611}
+  Luna_fire: {fileID: 1398938388}
+  Astra: {fileID: 1151188106}
+  Helios: {fileID: 17411757}
 --- !u!114 &1991429346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1223,6 +1266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2088709318}
   - component: {fileID: 2088709317}
+  - component: {fileID: 2088709319}
   m_Layer: 0
   m_Name: mainchar
   m_TagString: Untagged
@@ -1291,12 +1335,24 @@ Transform:
   m_GameObject: {fileID: 2088709316}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.6, y: -20, z: 0}
+  m_LocalPosition: {x: 2.2099996, y: -2.5700006, z: 0}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2088709319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2088709316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6244cd8154449a81d0e9da63ba29c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

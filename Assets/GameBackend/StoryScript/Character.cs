@@ -14,10 +14,10 @@ namespace GameBackend.StoryScript
         private float fadeDuration = 1f;
         private float y;
 
-        private Vector3 finalPosition;
-        private float finalAlpha = 1f;
-        private Vector3 finalScale;
-        private float finalRotation;
+        // private Vector3 finalPosition;
+        // private float finalAlpha = 1f;
+        // private Vector3 finalScale;
+        // private float finalRotation;
         
         public List<IEnumerator> coroutines = new();
         
@@ -63,11 +63,11 @@ namespace GameBackend.StoryScript
         private void Awake()
         {
             renderer = GetComponent<SpriteRenderer>();
-            finalRotation = transform.eulerAngles.z;
-            finalScale = transform.localScale;
+            // finalRotation = transform.eulerAngles.z;
+            // finalScale = transform.localScale;
             y = transform.position.y;
             setPosition(new Vector3(0, -20, 0));
-            finalPosition = transform.position;
+            // finalPosition = transform.position;
         }
         
         public void SetAlpha(float alpha)
@@ -76,7 +76,7 @@ namespace GameBackend.StoryScript
             Color c = renderer.color;
             c.a = alpha;
             renderer.color = c;
-            finalAlpha = alpha;
+            // finalAlpha = alpha;
         }
         public void setPosition(Vector3 position)
         {
@@ -168,10 +168,10 @@ namespace GameBackend.StoryScript
 
         private IEnumerator littleJump()
         {
-            yield return transform.DOMoveY(transform.position.y + 1.2f, 0.6f)
+            yield return transform.DOMoveY(transform.position.y + 0.4f, 0.15f)
                 .SetEase(Ease.OutCubic)
                 .WaitForCompletion();
-            yield return transform.DOMoveY(transform.position.y - 1.2f, 0.6f)
+            yield return transform.DOMoveY(transform.position.y - 0.4f, 0.15f)
                 .SetEase(Ease.InCubic)
                 .WaitForCompletion();
         }
