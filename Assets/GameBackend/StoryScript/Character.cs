@@ -54,7 +54,6 @@ namespace GameBackend.StoryScript
             SetAlpha(finalAlpha);
             setScale(finalScale);
             setRotation(finalRotation);
-            //왜 씨발 final값은 다 동일한데 복귀를 안 하지?
         }
 
         private IEnumerator completeCoroutine()
