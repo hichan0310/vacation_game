@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
+using Unity.VisualScripting;
 
 namespace GameBackend.StoryScript
 {
@@ -136,6 +137,16 @@ namespace GameBackend.StoryScript
             StartAndStoreCoroutine(littleJump());
         }
 
+        public void fast_jump(float delaytime)
+        {
+            StartAndStoreCoroutine(fastJump(delaytime));
+        }
+
+        public void dori_dori()
+        {
+            StartAndStoreCoroutine(doridori());
+        }
+
         public void fall_down()
         {
             StartAndStoreCoroutine(fallDown());
@@ -165,6 +176,17 @@ namespace GameBackend.StoryScript
                 .WaitForCompletion();
         }
 
+        private IEnumerator fastJump(float delaytime)
+        {
+            yield return new WaitForSeconds(delaytime);
+            yield return transform.DOMoveY(transform.position.y + 1.2f, 0.2f)
+                .SetEase(Ease.OutCubic)
+                .WaitForCompletion();
+            yield return transform.DOMoveY(transform.position.y - 1.2f, 0.2f)
+                .SetEase(Ease.InCubic)
+                .WaitForCompletion();
+        }
+
         private IEnumerator fallDown()
         {
             yield return transform.DORotate(new Vector3(0, 0, -10), 0.5f)
@@ -180,6 +202,21 @@ namespace GameBackend.StoryScript
                 .WaitForCompletion();
             
             yield return transform.DORotate(Vector3.zero, 0.01f)
+                .SetEase(Ease.Unset)
+                .WaitForCompletion();
+        }
+
+        private IEnumerator doridori()
+        {
+            yield return transform.DORotate(new Vector3(0, 0, -5), 0.3f)
+                .SetEase(Ease.Unset) 
+                .WaitForCompletion();
+            
+            yield return transform.DORotate(new Vector3(0, 0, 5), 0.6f)
+                .SetEase(Ease.Unset) 
+                .WaitForCompletion();
+            
+            yield return transform.DORotate(Vector3.zero, 0.3f)
                 .SetEase(Ease.Unset)
                 .WaitForCompletion();
         }
