@@ -45,11 +45,21 @@ namespace GameBackend.StoryScript
 
         public void complete()
         {
+            setPosition(finalPosition);
+            SetAlpha(finalAlpha);
+            setScale(finalScale);
+            setRotation(finalRotation);
             StopAllStoredCoroutines();
             setPosition(finalPosition);
             SetAlpha(finalAlpha);
             setScale(finalScale);
             setRotation(finalRotation);
+            //왜 씨발 final값은 다 동일한데 복귀를 안 하지?
+        }
+
+        private IEnumerator completeCoroutine()
+        {
+            yield return null;
         }
         
         private void Awake()
@@ -66,12 +76,6 @@ namespace GameBackend.StoryScript
         
         public void SetAlpha(float alpha)
         {
-            if (renderer == null)
-            {
-                Debug.LogError("SpriteRenderer가 할당되지 않았습니다!");
-                return;
-            }
-
             // 알파값을 0~1 범위로 제한
             alpha = Mathf.Clamp01(alpha);
 
@@ -168,10 +172,10 @@ namespace GameBackend.StoryScript
 
         private IEnumerator littleJump()
         {
-            yield return transform.DOMoveY(transform.position.y + 0.4f, 0.15f)
+            yield return transform.DOMoveY(transform.position.y + 0.8f, 0.4f)
                 .SetEase(Ease.OutCubic)
                 .WaitForCompletion();
-            yield return transform.DOMoveY(transform.position.y - 0.4f, 0.15f)
+            yield return transform.DOMoveY(transform.position.y - 0.8f, 0.4f)
                 .SetEase(Ease.InCubic)
                 .WaitForCompletion();
         }

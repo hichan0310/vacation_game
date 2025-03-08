@@ -78,9 +78,10 @@ public class Dialogue_manager : MonoBehaviour
             }
             else 
             {
-                Luna.complete();
                 StopCoroutine(coroutine);
                 StartCoroutine(Dialogue.Typing_All(textfield_name, textfield_text, name1[text_index - 1], talk1[text_index - 1]));
+                Luna.complete();
+                Luna.complete();
             }
         }
 
