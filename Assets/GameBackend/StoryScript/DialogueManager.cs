@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Dialogue_manager : MonoBehaviour
+public class DialogueManager : MonoBehaviour
 {
     private int text_index;
     private IEnumerator coroutine;
