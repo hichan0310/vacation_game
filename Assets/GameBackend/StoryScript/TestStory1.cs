@@ -12,8 +12,8 @@ namespace GameBackend.StoryScript
                 "안녕, 루나",
                 new List<FunctionCall>
                 {
-                new(new Action(MainCharacter.appear_right_move)),
-                new(new Action(Luna.appear_left_move))
+                    new(new Action(MainCharacter.appear_right_move)),
+                    new(new Action(Luna.appear_left_move))
                 }
             ));
             
@@ -84,19 +84,12 @@ namespace GameBackend.StoryScript
             ));
             
             this.units.Add(new StoryUnit(
-                "",
-                "",
+                " ",
+                " ",
                 new List<FunctionCall>
                 {
                     new(new Action(MainCharacter.disappear_right_move)),
                     new (new Action(Luna.disappear_left_move))
-                }
-            ));
-            this.units.Add(new StoryUnit(
-                "",
-                "",
-                new List<FunctionCall>
-                {
                 }
             ));
         }
