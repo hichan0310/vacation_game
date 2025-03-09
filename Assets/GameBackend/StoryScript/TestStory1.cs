@@ -22,6 +22,14 @@ namespace GameBackend.StoryScript
         public TestStory1()
         {
 
+            object GetObjectByName(string objectName)
+            {
+                Type dialogueManagerType = typeof(DialogueManager);
+                object dialogueManagerInstance = dialogueManagerType.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static)?.GetValue(null);
+                FieldInfo fieldInfo = dialogueManagerType.GetField(objectName, BindingFlags.Public | BindingFlags.Instance);
+                return fieldInfo.GetValue(dialogueManagerInstance);
+            }
+
             using (StreamReader sr = new StreamReader(filePath, Encoding.GetEncoding("euc-kr")))
             {
                 string headerLine = sr.ReadLine();
@@ -38,7 +46,6 @@ namespace GameBackend.StoryScript
                         values.Add(value);
                     }
 
-                    Debug.Log($"{values[0]} + {values[1]} + {values[2]} + {values[3]} + {values[4]} + {values[5]}");
                     name_text.Add(values[0]);
                     dialogue_text.Add(values[1]);
                     firstaction.Add(values[2]);
@@ -48,14 +55,6 @@ namespace GameBackend.StoryScript
                     secondaction_firstarg.Add(float.Parse(values[6]));
                     secondaction_secondarg.Add(float.Parse(values[7]));
                 }
-            }
-
-            object GetObjectByName(string objectName)
-            {
-                Type dialogueManagerType = typeof(DialogueManager);
-                object dialogueManagerInstance = dialogueManagerType.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static)?.GetValue(null);
-                FieldInfo fieldInfo = dialogueManagerType.GetField(objectName, BindingFlags.Public | BindingFlags.Instance);
-                return fieldInfo.GetValue(dialogueManagerInstance);
             }
 
             for(int i = 0; i < 9; i++)

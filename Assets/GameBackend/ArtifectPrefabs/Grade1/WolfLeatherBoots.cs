@@ -17,7 +17,7 @@ namespace GameBackend.Artifects
 
         public void buffStatus(PlayerStatus status)
         {
-            status.dmgUp[(int)AtkTags.JumpAttack] += 10;
+            // status.dmgUp[(int)AtkTags.JumpAttack] += 10; 오류나길래 주석채워둠
             status.movePower *= 1.1f;
         }
 
