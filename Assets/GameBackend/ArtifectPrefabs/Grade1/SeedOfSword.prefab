@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2487638181761624806}
-  - component: {fileID: 108057670562393779}
+  - component: {fileID: 4932699005845246618}
   m_Layer: 0
   m_Name: SeedOfSword
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &108057670562393779
+--- !u!114 &4932699005845246618
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,6 +41,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8948239135133620228}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31d099cae46e4f959f56a743d9639c92, type: 3}
+  m_Script: {fileID: 11500000, guid: 2b65d2df55aba0442934072044ad49b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4601660368961340382}
-  - component: {fileID: 2828954043154831548}
+  - component: {fileID: 3703947815527082943}
   m_Layer: 0
   m_Name: CoreOfLightning
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2828954043154831548
+--- !u!114 &3703947815527082943
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,6 +41,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1096483944717975005}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b65e31ee3efa40e0b64cb22c88ee8023, type: 3}
+  m_Script: {fileID: 11500000, guid: 487b9fdbf03a4cb43a927fa5fd58738d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

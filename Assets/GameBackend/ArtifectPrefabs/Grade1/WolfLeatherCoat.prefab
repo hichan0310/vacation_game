@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1007856330083580211}
-  - component: {fileID: 6965334944790385625}
+  - component: {fileID: 7942605397268610272}
   m_Layer: 0
   m_Name: WolfLeatherCoat
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6965334944790385625
+--- !u!114 &7942605397268610272
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,6 +41,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1115942239957351642}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb34ad674cc1464db7df975bf2f47eb3, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a9e9dd082ea73f4bb530ff554983e81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

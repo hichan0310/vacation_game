@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4601660368961340382}
-  - component: {fileID: 2350345583729094784}
+  - component: {fileID: 950760733132416483}
   m_Layer: 0
   m_Name: SeedOfLightning
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2350345583729094784
+--- !u!114 &950760733132416483
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,6 +41,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1096483944717975005}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcd8ecf6b1744867b97f4b7d6f3a1b40, type: 3}
+  m_Script: {fileID: 11500000, guid: 88f776b3a20a5fc41800322da3d690a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

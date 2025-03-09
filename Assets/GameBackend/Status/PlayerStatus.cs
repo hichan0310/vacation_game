@@ -77,6 +77,7 @@ namespace GameBackend.Status
             this.crit = copy.crit;
             this.critDmg = copy.critDmg;
             this.dmgUp = new float[Tag.atkTagCount];
+            this.movePower=copy.movePower;
             Array.Copy(copy.dmgUp, this.dmgUp, Tag.atkTagCount);
         }
 

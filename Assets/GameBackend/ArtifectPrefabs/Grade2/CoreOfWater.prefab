@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 628528181447699048}
-  - component: {fileID: 2318084954401350501}
+  - component: {fileID: 7162006904042297584}
   m_Layer: 0
   m_Name: CoreOfWater
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2318084954401350501
+--- !u!114 &7162006904042297584
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,6 +41,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 804157629824004447}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33437a3f97fa42d5baee594d0e537e58, type: 3}
+  m_Script: {fileID: 11500000, guid: e71253dd6eb30ed478a5da05263b24c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

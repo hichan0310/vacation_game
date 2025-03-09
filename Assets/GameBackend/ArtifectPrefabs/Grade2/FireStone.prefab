@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7117188568700957779}
-  - component: {fileID: 8362568016873022257}
+  - component: {fileID: 3632243553363690961}
   m_Layer: 0
   m_Name: FireStone
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8362568016873022257
+--- !u!114 &3632243553363690961
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8038341074902349331}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3c09c42a61044fa95c7223aeb3abcdc, type: 3}
+  m_Script: {fileID: 11500000, guid: aaee8ef3928bd8a44b9fcd6834591e02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gumgi: {fileID: 3745619452524707944, guid: 6cf34944f8473a140a520811d77dd999, type: 3}

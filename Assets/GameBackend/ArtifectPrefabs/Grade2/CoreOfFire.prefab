@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4317495526193118651}
-  - component: {fileID: 2455608585555863401}
+  - component: {fileID: 7393081587580122100}
   m_Layer: 0
   m_Name: CoreOfFire
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2455608585555863401
+--- !u!114 &7393081587580122100
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,6 +41,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8790407216934129974}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f2a64cffaf8464e80ef5c16a5add3e8, type: 3}
+  m_Script: {fileID: 11500000, guid: 283d93984c5f2f14780383623e2e1cb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3455689359697140276}
-  - component: {fileID: -873127919621945090}
+  - component: {fileID: 1324751296050118918}
   m_Layer: 0
   m_Name: CoreOfEarth
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-873127919621945090
+--- !u!114 &1324751296050118918
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,6 +41,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1079445999161384785}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ede1940bf51f48058ab0d43be5ae0289, type: 3}
+  m_Script: {fileID: 11500000, guid: 2fe5f9f4795c22a4ab3fa20cb33c30e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
