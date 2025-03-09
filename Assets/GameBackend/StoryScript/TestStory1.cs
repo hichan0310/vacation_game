@@ -79,7 +79,7 @@ namespace GameBackend.StoryScript
                 new List<FunctionCall>
                 {
                     new(new Action<float>(Luna.fast_jump), 0f),
-                    new (new Action<float>(Luna.fast_jump), 0.5f)
+                    new(new Action<float>(Luna.fast_jump), 0.5f)
                 }
             ));
             
@@ -89,7 +89,7 @@ namespace GameBackend.StoryScript
                 new List<FunctionCall>
                 {
                     new(new Action(MainCharacter.disappear_right_move)),
-                    new (new Action(Luna.disappear_left_move))
+                    new(new Action(Luna.disappear_left_move))
                 }
             ));
         }

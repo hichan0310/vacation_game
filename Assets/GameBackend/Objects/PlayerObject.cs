@@ -25,7 +25,6 @@ namespace GameBackend.Objects
         private float attackCooldown = 0.25f;
         private string tmp = "";
         private bool direction = true;
-        private float movePower = 1.6f;
         private float jumpPower = 3.5f;
         private bool isJumping = false;
         private bool isJumpatk = false;
@@ -240,7 +239,7 @@ namespace GameBackend.Objects
 
                 moveVelocity = Vector3.right;
             }
-            this.transform.position += moveVelocity * (movePower * deltaTime);
+            this.transform.position += moveVelocity * (status.movePower * deltaTime);
         }
 
         void Jump(float deltaTime)

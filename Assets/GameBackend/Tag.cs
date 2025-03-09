@@ -18,6 +18,8 @@ namespace GameBackend
         shadowAttack = 9,
         criticalHit = 10,
         StatusEffect = 11,
+        SelfHit = 12,
+        JumpAttack = 13,
     }
 
     public static class Tag

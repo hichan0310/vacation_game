@@ -4,14 +4,15 @@ using UnityEngine;
 namespace GameBackend
 {
     public abstract class Artifect : MonoBehaviour, IEntityEventListener
-    {
+    { 
+        public virtual int grade => 1;
         public string name { get; set; }
         public string description { get; set; }
         public PlayerObject player { get; set; }
 
         public abstract void eventActive<T>(T eventArgs) where T : EventArgs;
 
-        public void registrarTarget(Entity target)
+        public virtual void registrarTarget(Entity target)
         {
             if (target is PlayerObject player)
             {

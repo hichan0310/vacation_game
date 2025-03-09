@@ -19,7 +19,9 @@ namespace GameBackend.Objects
         private Enemy enemy;
         private Enemy enemys;
         private bool isCrash;
-        
+        public float time { get; set; }=0;
+        public ElectricSparkexplosion explosion;
+
         private GameObject getNearestEnemy(Vector2 position)
         {
             GameObject[] players = GameObject.FindGameObjectsWithTag("Enemy");
@@ -48,6 +50,8 @@ namespace GameBackend.Objects
 
         protected override void update(float deltaTime)
         {
+            timer += deltaTime;
+            checkDestroy(time);
             this.transform.rotation = Quaternion.Euler(0,0,angle*Mathf.Rad2Deg);
             if (target)
             {
@@ -96,6 +100,8 @@ namespace GameBackend.Objects
                     new DmgGiveEvent(dmg, 0f, player, enemys, atkTags);
                 }
                 Destroy(this.gameObject);
+                ElectricSparkexplosion obj = Instantiate(explosion);
+                obj.transform.position = this.transform.position;
             }
         }
     }
