@@ -11,8 +11,8 @@ namespace GameBackend.Objects
         public LayerMask enemyLayer; 
         public float sparkSpeed { get; set; } = 5;
         public float angle { get; set; } = 0;
-        public float homingAngle { get; set; }= Mathf.PI/200;
-        private List<AtkTags> atkTags = new() { AtkTags.normalSkill, AtkTags.lightningAttack };
+        public float homingAngle { get; set; }= Mathf.PI*1.5f;
+        private List<AtkTags> atkTags = new() { AtkTags.lightningAttack, AtkTags.artifectDamage };
         private ContactFilter2D filter;
         private int dmg;
         private Entity player;
@@ -63,8 +63,8 @@ namespace GameBackend.Objects
                     if (direction.y < 0) targetAngle -= Mathf.PI;
                     else targetAngle += Mathf.PI;
                 }
-                if (Mathf.Sin(targetAngle-angle)>0) angle += homingAngle;
-                else angle -= homingAngle;
+                if (Mathf.Sin(targetAngle-angle)>0) angle += homingAngle*deltaTime;
+                else angle -= homingAngle*deltaTime;
             }
             else
             {

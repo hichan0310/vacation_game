@@ -17,7 +17,7 @@ namespace GameBackend.Objects
 
         public void apply()
         {
-            Invoke("destroy", time);
+            this.timeIgnore = true;
             transform.position = position;
             if (!direction)
             {
@@ -28,6 +28,7 @@ namespace GameBackend.Objects
         protected override void update(float deltaTime)
         {
             transform.position += new Vector3(gumgiSpeed * deltaTime, 0, 0);
+            checkDestroy(time);
         }
         
         protected override void OnTriggerEnter2D(Collider2D other)
