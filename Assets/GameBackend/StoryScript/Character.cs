@@ -95,12 +95,7 @@ namespace GameBackend.StoryScript
             transform.localScale = scale;
             // finalScale = transform.localScale;
         }
-        
-        public void none_move(float a, float b)
-        {
-
-        }
-        public void appear_right_move(float a, float b)
+        public void appear_right_move(float[] param_list)
         {
             var tmp = transform.position;
             tmp.x = 15;
@@ -110,7 +105,7 @@ namespace GameBackend.StoryScript
             // finalPosition = tmp+new Vector3(-9, 0, 0);
         }
 
-        public void disappear_right_move(float a, float b)
+        public void disappear_right_move(float[] param_list)
         {
             var tmp = transform.position;
             tmp.x = 18;
@@ -118,7 +113,7 @@ namespace GameBackend.StoryScript
             // finalPosition = tmp;
         }
 
-        public void appear_left_move(float a, float b)
+        public void appear_left_move(float[] param_list)
         {
             var tmp = transform.position;
             tmp.x = -15;
@@ -128,7 +123,7 @@ namespace GameBackend.StoryScript
             // finalPosition = tmp+new Vector3(9, 0, 0);
         }
         
-        public void disappear_left_move(float a, float b)
+        public void disappear_left_move(float[] param_list)
         {
             var tmp = transform.position;
             tmp.x = -18;
@@ -136,29 +131,32 @@ namespace GameBackend.StoryScript
             // finalPosition = tmp;
         }
 
-        public void little_jump(float a, float b)
+        public void little_jump(float[] param_list)
         {
-            StartAndStoreCoroutine(littleJump(a, b));
+            StartAndStoreCoroutine(littleJump());
         }
 
-        public void fast_jump(float time, float b)
+        public void fast_jump(float[] param_list)
         {
-            StartAndStoreCoroutine(fastJump(time, b));
+            float time = param_list[0];
+            StartAndStoreCoroutine(fastJump(time));
         }
 
-        public void dori_dori(float a, float b)
+        public void dori_dori(float[] param_list)
         {
-            StartAndStoreCoroutine(doridori(a, b));
+            StartAndStoreCoroutine(doridori());
         }
 
-        public void fall_down(float a, float b)
+        public void fall_down(float[] param_list)
         {
-            StartAndStoreCoroutine(fallDown(a, b));
+            StartAndStoreCoroutine(fallDown());
             // finalPosition=transform.position+new Vector3(0, -10f, 0);
         }
 
-        public void move_x(float deltax, float time)
+        public void move_x(float[] param_list)
         {
+            float deltax = param_list[0];
+            float time = param_list[1];
             StartAndStoreCoroutine(movex(deltax, time));
             // finalPosition = transform.position+new Vector3(deltax, 0, 0);
         }
@@ -170,7 +168,7 @@ namespace GameBackend.StoryScript
                 .WaitForCompletion();
         }
 
-        private IEnumerator littleJump(float a, float b)
+        private IEnumerator littleJump()
         {
             yield return transform.DOMoveY(transform.position.y + 0.4f, 0.15f)
                 .SetEase(Ease.OutCubic)
@@ -180,7 +178,7 @@ namespace GameBackend.StoryScript
                 .WaitForCompletion();
         }
 
-        private IEnumerator fastJump(float time, float b)
+        private IEnumerator fastJump(float time)
         {
             yield return new WaitForSeconds(time);
             yield return transform.DOMoveY(transform.position.y + 1.2f, 0.2f)
@@ -191,7 +189,7 @@ namespace GameBackend.StoryScript
                 .WaitForCompletion();
         }
 
-        private IEnumerator fallDown(float a, float b)
+        private IEnumerator fallDown()
         {
             yield return transform.DORotate(new Vector3(0, 0, -10), 0.5f)
                 .SetEase(Ease.Unset) 
@@ -210,7 +208,7 @@ namespace GameBackend.StoryScript
                 .WaitForCompletion();
         }
 
-        private IEnumerator doridori(float a, float b)
+        private IEnumerator doridori()
         {
             yield return transform.DORotate(new Vector3(0, 0, -5), 0.3f)
                 .SetEase(Ease.Unset) 
@@ -225,7 +223,7 @@ namespace GameBackend.StoryScript
                 .WaitForCompletion();
         }
         
-        public void StartFadeOut(float a, float b)
+        public void StartFadeOut()
         {
             StartAndStoreCoroutine(FadeOutRoutine(fadeDuration));
         }
