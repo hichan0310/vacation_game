@@ -7,6 +7,7 @@ namespace GameBackend.Objects
     {
         private void Start()
         {
+            this.timeIgnore = true;
             this.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         }
 

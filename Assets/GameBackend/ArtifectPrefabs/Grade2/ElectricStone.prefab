@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2501290118606710842}
-  - component: {fileID: 8953073456295524750}
+  - component: {fileID: 7233067106190636567}
   m_Layer: 0
   m_Name: ElectricStone
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8953073456295524750
+--- !u!114 &7233067106190636567
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4575806194570975980}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01338cf3247a4d2ebbf7bbef1ce00db6, type: 3}
+  m_Script: {fileID: 11500000, guid: 57b06f7a5f7fc894091d5b203e94f18d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ElectricSpark: {fileID: 1771649435272789821, guid: 0bd94d21b5bf76f46b926f2d88e211bc, type: 3}

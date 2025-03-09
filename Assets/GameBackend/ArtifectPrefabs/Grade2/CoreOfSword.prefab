@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2487638181761624806}
-  - component: {fileID: 4392551529254582337}
+  - component: {fileID: 8360029700866997114}
   m_Layer: 0
   m_Name: CoreOfSword
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4392551529254582337
+--- !u!114 &8360029700866997114
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,6 +41,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8948239135133620228}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ea9eb32068a4b6b8ece930205a8a240, type: 3}
+  m_Script: {fileID: 11500000, guid: 45442d04496f4b941ab352346ff85ec0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3455689359697140276}
-  - component: {fileID: 4271850764736395276}
+  - component: {fileID: 6180332225695492417}
   m_Layer: 0
   m_Name: SeedOfEarth
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4271850764736395276
+--- !u!114 &6180332225695492417
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,6 +41,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1079445999161384785}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9049b86e3d845f4bfb613bc77e54155, type: 3}
+  m_Script: {fileID: 11500000, guid: 4744df65e965f4849ba19c220c120c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
