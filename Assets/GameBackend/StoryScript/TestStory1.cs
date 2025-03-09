@@ -1,22 +1,55 @@
 ﻿using System;
 using System.Reflection;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+using System.Text.RegularExpressions;
+using System.Text;
 
 namespace GameBackend.StoryScript
 {
     public class TestStory1:Story
     {
-        private List<string> list1 = new() {"나", "루나"};
-        private List<string> list2 = new() {"안녕, 루나", "오늘도 이 꽃을 보러 왔구나."};
-        private List<string> list3 = new() {"MainCharacter.appear_right_move", "Luna.little_jump"};
-        private List<string> list4 = new() {"Luna.appear_left_move", "Luna.move_x"};
-        private List<float> list3_1 = new() {0, 0};
-        private List<float> list3_2 = new() {0, 0};
-        private List<float> list4_1 = new() {0, 1};
-        private List<float> list4_2 = new() {0, 0.1f};
+        public string filePath = "Assets/GameBackend/CSV/dialogue.csv";
+        private List<string> name_text = new();
+        private List<string> dialogue_text = new();
+        private List<string> firstaction = new();
+        private List<string> secondaction = new();
+        private List<float> firstaction_firstarg = new();
+        private List<float> firstaction_secondarg = new();
+        private List<float> secondaction_firstarg = new();
+        private List<float> secondaction_secondarg = new();
         public TestStory1()
         {
+
+            using (StreamReader sr = new StreamReader(filePath, Encoding.GetEncoding("euc-kr")))
+            {
+                string headerLine = sr.ReadLine();
+                
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+                    var matches = Regex.Matches(line, @"(?<=^|,)(\"".*?\"")|([^,]+)(?=,|$)");
+                    List<string> values = new List<string>();
+
+                    foreach (Match match in matches)
+                    {
+                        string value = match.Value.Trim('"');
+                        values.Add(value);
+                    }
+
+                    Debug.Log($"{values[0]} + {values[1]} + {values[2]} + {values[3]} + {values[4]} + {values[5]}");
+                    name_text.Add(values[0]);
+                    dialogue_text.Add(values[1]);
+                    firstaction.Add(values[2]);
+                    firstaction_firstarg.Add(float.Parse(values[3]));
+                    firstaction_secondarg.Add(float.Parse(values[4]));
+                    secondaction.Add(values[5]);
+                    secondaction_firstarg.Add(float.Parse(values[6]));
+                    secondaction_secondarg.Add(float.Parse(values[7]));
+                }
+            }
+
             object GetObjectByName(string objectName)
             {
                 Type dialogueManagerType = typeof(DialogueManager);
@@ -25,12 +58,12 @@ namespace GameBackend.StoryScript
                 return fieldInfo.GetValue(dialogueManagerInstance);
             }
 
-            for(int i = 0; i < 2; i++)
+            for(int i = 0; i < 9; i++)
             {
-                string objectName1 = list3[i].Split(".")[0];
-                string methodName1 = list3[i].Split(".")[1];
-                string objectName2 = list4[i].Split(".")[0];
-                string methodName2 = list4[i].Split(".")[1];
+                string objectName1 = firstaction[i].Split(".")[0];
+                string methodName1 = firstaction[i].Split(".")[1];
+                string objectName2 = secondaction[i].Split(".")[0];
+                string methodName2 = secondaction[i].Split(".")[1];
                 object targetObject1 = GetObjectByName(objectName1);
                 object targetObject2 = GetObjectByName(objectName2);
                 Type type1 = targetObject1.GetType();
@@ -38,12 +71,12 @@ namespace GameBackend.StoryScript
                 MethodInfo method1 = type1.GetMethod(methodName1);
                 MethodInfo method2 = type2.GetMethod(methodName2);
                 this.units.Add(new StoryUnit(
-                    list1[i],
-                    list2[i],
+                    name_text[i],
+                    dialogue_text[i],
                     new List<FunctionCall>
                     {
-                        new(Delegate.CreateDelegate(typeof(Action<float, float>), targetObject1, method1), list3_1[i], list3_2[i]),
-                        new(Delegate.CreateDelegate(typeof(Action<float, float>), targetObject2, method2), list4_1[i], list4_2[i])
+                        new(Delegate.CreateDelegate(typeof(Action<float, float>), targetObject1, method1), firstaction_firstarg[i], firstaction_secondarg[i]),
+                        new(Delegate.CreateDelegate(typeof(Action<float, float>), targetObject2, method2), secondaction_firstarg[i], secondaction_secondarg[i])
                     }
                 ));
             }
