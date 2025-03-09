@@ -7,4 +7,4 @@ name,dialogue,action,argument,argument,action,argument,argument
 루나,1,아직도 코드가 제대로 작동하지 않는거야?,1,Luna.dori_dori,0
 나,1,coroutine 작동 방식이 너무 어려워서 어떻게 해결해야 할지 모르겠어.,1,MainCharacter.little_jump,0
 루나,1,나랑 같이 잠깐 산책하러 가자. 맑은 공기를 마시면 도움이 될거야!,2,Luna.fast_jump,1,0,Luna.fast_jump,1,0.5
- ,1,  ,2,MainCharacter.disappear_right_move,0,Luna.disappear_left_move,0
+ ,1, ,2,MainCharacter.disappear_right_move,0,Luna.disappear_left_move,0
