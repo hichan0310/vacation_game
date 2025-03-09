@@ -95,8 +95,12 @@ namespace GameBackend.StoryScript
             transform.localScale = scale;
             // finalScale = transform.localScale;
         }
+        
+        public void none_move(float a, float b)
+        {
 
-        public void appear_right_move()
+        }
+        public void appear_right_move(float a, float b)
         {
             var tmp = transform.position;
             tmp.x = 15;
@@ -106,7 +110,7 @@ namespace GameBackend.StoryScript
             // finalPosition = tmp+new Vector3(-9, 0, 0);
         }
 
-        public void disappear_right_move()
+        public void disappear_right_move(float a, float b)
         {
             var tmp = transform.position;
             tmp.x = 18;
@@ -114,7 +118,7 @@ namespace GameBackend.StoryScript
             // finalPosition = tmp;
         }
 
-        public void appear_left_move()
+        public void appear_left_move(float a, float b)
         {
             var tmp = transform.position;
             tmp.x = -15;
@@ -124,7 +128,7 @@ namespace GameBackend.StoryScript
             // finalPosition = tmp+new Vector3(9, 0, 0);
         }
         
-        public void disappear_left_move()
+        public void disappear_left_move(float a, float b)
         {
             var tmp = transform.position;
             tmp.x = -18;
@@ -132,24 +136,24 @@ namespace GameBackend.StoryScript
             // finalPosition = tmp;
         }
 
-        public void little_jump()
+        public void little_jump(float a, float b)
         {
-            StartAndStoreCoroutine(littleJump());
+            StartAndStoreCoroutine(littleJump(a, b));
         }
 
-        public void fast_jump(float delaytime)
+        public void fast_jump(float time, float b)
         {
-            StartAndStoreCoroutine(fastJump(delaytime));
+            StartAndStoreCoroutine(fastJump(time, b));
         }
 
-        public void dori_dori()
+        public void dori_dori(float a, float b)
         {
-            StartAndStoreCoroutine(doridori());
+            StartAndStoreCoroutine(doridori(a, b));
         }
 
-        public void fall_down()
+        public void fall_down(float a, float b)
         {
-            StartAndStoreCoroutine(fallDown());
+            StartAndStoreCoroutine(fallDown(a, b));
             // finalPosition=transform.position+new Vector3(0, -10f, 0);
         }
 
@@ -166,7 +170,7 @@ namespace GameBackend.StoryScript
                 .WaitForCompletion();
         }
 
-        private IEnumerator littleJump()
+        private IEnumerator littleJump(float a, float b)
         {
             yield return transform.DOMoveY(transform.position.y + 0.4f, 0.15f)
                 .SetEase(Ease.OutCubic)
@@ -176,9 +180,9 @@ namespace GameBackend.StoryScript
                 .WaitForCompletion();
         }
 
-        private IEnumerator fastJump(float delaytime)
+        private IEnumerator fastJump(float time, float b)
         {
-            yield return new WaitForSeconds(delaytime);
+            yield return new WaitForSeconds(time);
             yield return transform.DOMoveY(transform.position.y + 1.2f, 0.2f)
                 .SetEase(Ease.OutCubic)
                 .WaitForCompletion();
@@ -187,7 +191,7 @@ namespace GameBackend.StoryScript
                 .WaitForCompletion();
         }
 
-        private IEnumerator fallDown()
+        private IEnumerator fallDown(float a, float b)
         {
             yield return transform.DORotate(new Vector3(0, 0, -10), 0.5f)
                 .SetEase(Ease.Unset) 
@@ -206,7 +210,7 @@ namespace GameBackend.StoryScript
                 .WaitForCompletion();
         }
 
-        private IEnumerator doridori()
+        private IEnumerator doridori(float a, float b)
         {
             yield return transform.DORotate(new Vector3(0, 0, -5), 0.3f)
                 .SetEase(Ease.Unset) 
@@ -221,7 +225,7 @@ namespace GameBackend.StoryScript
                 .WaitForCompletion();
         }
         
-        public void StartFadeOut()
+        public void StartFadeOut(float a, float b)
         {
             StartAndStoreCoroutine(FadeOutRoutine(fadeDuration));
         }
