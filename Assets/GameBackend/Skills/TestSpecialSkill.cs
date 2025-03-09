@@ -132,7 +132,7 @@ namespace GameBackend.Skills
 
                 BloodLoss bloodLoss = new BloodLoss(status.calculateTrueDamage(new List<AtkTags>
                 {
-                    AtkTags.StatusEffect
+                    AtkTags.statusEffect
                 }, atkCoef: 40), target.Value, player);
                 bloodLoss.registrarTarget(target.Key);
             }

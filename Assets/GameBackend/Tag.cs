@@ -17,9 +17,10 @@ namespace GameBackend
         lightningAttack = 8,
         shadowAttack = 9,
         criticalHit = 10,
-        StatusEffect = 11,
-        SelfHit = 12,
-        JumpAttack = 13,
+        statusEffect = 11,
+        selfHit = 12,
+        jumpAttack = 13,
+        bloodLossDamage = 14,
     }
 
     public static class Tag
