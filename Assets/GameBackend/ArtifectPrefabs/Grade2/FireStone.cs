@@ -33,7 +33,11 @@ namespace GameBackend.Artifects
                     gumg.position = player.transform.position;
                     gumg.time = 0.3f;
                     gumg.gumgiSpeed = 6;
-                    List<AtkTags> tag = new List<AtkTags> { AtkTags.fireAttack };
+                    List<AtkTags> tag = new List<AtkTags>
+                    {
+                        AtkTags.fireAttack,
+                        AtkTags.artifectDamage
+                    };
                     gumg.dmgInfo = new DmgInfo(player.status.calculateTrueDamage(tag, atkCoef: 30), 0.1f, player, tag);
                     gumg.apply();
                 }
