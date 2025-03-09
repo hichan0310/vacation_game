@@ -21,6 +21,7 @@ namespace GameBackend
         selfHit = 12,
         jumpAttack = 13,
         bloodLossDamage = 14,
+        artifectDamage = 15,
     }
 
     public static class Tag
