@@ -27,7 +27,7 @@ namespace GameBackend.Buffs
                 foreach (var target in targets)
                 {
                     List<AtkTags> atkTags = new List<AtkTags>();
-                    atkTags.Add(AtkTags.StatusEffect);
+                    atkTags.Add(AtkTags.statusEffect);
                     new DmgGiveEvent(damage, 0, caster, target, atkTags);
                 }
 

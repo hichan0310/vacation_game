@@ -30,11 +30,13 @@ namespace GameBackend.Objects
         private bool isJumpatk = false;
         private bool isnormalattack = false;
         private Rigidbody2D rigid;
-        private Entity player;     
+        private Entity player;
 
         public Skill normalSkill;
         public Skill specialSkill;
         public List<Artifect> artifects;
+
+        public bool controlAble = true;
         
         
         private void Awake()
@@ -82,11 +84,14 @@ namespace GameBackend.Objects
             }
             animator.SetBool("jumping", isJumping);
             animator.SetInteger("atknum", atknum);
-            Move(deltaTime);
-            Jump(deltaTime);
-            NormalSkill(deltaTime);
-            SpecialSkill(deltaTime);
-            
+            if (controlAble)
+            {
+                Move(deltaTime);
+                Jump(deltaTime);
+                NormalSkill(deltaTime);
+                SpecialSkill(deltaTime);
+            }
+
             if (Input.GetMouseButtonDown(0))
             {
                 if (!isJumping && !animator.GetCurrentAnimatorStateInfo(0).IsName("attack_jump"))

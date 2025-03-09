@@ -28,7 +28,7 @@ public class DamageDisplay : MonoBehaviour
             else text.fontSize = 4;
             if (value.atkTags.Contains(AtkTags.physicalAttack)) text.color=Color.black;
             else if (value.atkTags.Contains(AtkTags.fireAttack)) text.color=Color.red;
-            else if (value.atkTags.Contains(AtkTags.StatusEffect)) text.color=Color.grey;
+            else if (value.atkTags.Contains(AtkTags.statusEffect)) text.color=Color.grey;
             else text.color=Color.white;
         }
     }
