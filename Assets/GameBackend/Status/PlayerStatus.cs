@@ -40,6 +40,7 @@ namespace GameBackend.Status
         public float critDmg { get; set; }
         public float[] dmgUp { get; set; }
         public float movePower { get; set; }
+        public float energyRecharge { get; set; }
 
         public PlayerStatus(int baseHp, int baseAtk, int baseDef)
         {
@@ -59,6 +60,7 @@ namespace GameBackend.Status
             this.dmgUp = new float[Tag.atkTagCount];
             
             this.movePower = 1.6f;
+            this.energyRecharge = 100f;
         }
 
         public PlayerStatus(PlayerStatus copy)
@@ -77,7 +79,9 @@ namespace GameBackend.Status
             this.crit = copy.crit;
             this.critDmg = copy.critDmg;
             this.dmgUp = new float[Tag.atkTagCount];
+            
             this.movePower=copy.movePower;
+            this.energyRecharge = copy.energyRecharge;
             Array.Copy(copy.dmgUp, this.dmgUp, Tag.atkTagCount);
         }
 
