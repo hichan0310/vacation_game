@@ -36,20 +36,14 @@ namespace GameBackend.StoryScript
                 while (!sr.EndOfStream)
                 {
                     string line = sr.ReadLine();
-                    var matches = Regex.Matches(line, @"(?<=^|,)(\"".*?\"")|([^,]+)(?=,|$)");
-                    List<string> values = new List<string>();
-
-                    foreach (Match match in matches)
-                    {
-                        string value = match.Value.Trim('"').Replace("<", "'").Replace(">", "\"");;
-                        values.Add(value);
-                    }
+                    string[] values = new string[0];
+                    values = line.Split(',');
                     name = values[0];
                     dialogue_num = int.Parse(values[1]);
                     dialogue_textlist = new StringBuilder();
                     for (int i = 0; i < dialogue_num; i++)
                     {
-                        dialogue_textlist.Append(values[i + 2]);
+                        dialogue_textlist.Append(values[i + 2].Replace("|||", "\"").Replace("||", "'").Replace("|", ","));
                         if (i < dialogue_num - 1)
                         {
                             dialogue_textlist.Append("\n");
