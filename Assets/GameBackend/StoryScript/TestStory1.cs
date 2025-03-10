@@ -1,97 +1,88 @@
 ﻿using System;
+using System.Reflection;
 using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
+using System.Text.RegularExpressions;
+using System.Text;
 
 namespace GameBackend.StoryScript
 {
     public class TestStory1:Story
     {
+        public string filePath = "Assets/GameBackend/CSV/dialogue.csv";
+        private string name;
+        private int dialogue_num;
+        StringBuilder dialogue_textlist = new StringBuilder();
+        private string dialogue_text;
+        private int action_index;
+        private int action_num;
+        private int actionparam_num;
         public TestStory1()
         {
-            this.units.Add(new StoryUnit(
-                "나",
-                "안녕, 루나",
-                new List<FunctionCall>
-                {
-                    new(new Action(MainCharacter.appear_right_move)),
-                    new(new Action(Luna.appear_left_move))
-                }
-            ));
             
-            this.units.Add(new StoryUnit(
-                "루나",
-                "오늘도 이 꽃을 보러 왔구나.",
-                new List<FunctionCall>
-                {
-                    new(new Action(Luna.little_jump)),
-                    new(new Action<float, float>(Luna.move_x), 1f, 0.1f)
-                }
-            ));
-            
-            this.units.Add(new StoryUnit(
-                "나",
-                "이 꽃을 보고 있으면 마음이 편안해져. 루나는 뭐하러 나온거야?",
-                new List<FunctionCall>
-                {
-                    new(new Action(MainCharacter.little_jump))
-                }
-            ));
+            object GetObjectByName(string objectName)
+            {
+                Type dialogueManagerType = typeof(DialogueManager);
+                object dialogueManagerInstance = dialogueManagerType.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static)?.GetValue(null);
+                FieldInfo fieldInfo = dialogueManagerType.GetField(objectName, BindingFlags.Public | BindingFlags.Instance);
+                return fieldInfo.GetValue(dialogueManagerInstance);
+            }
 
-            this.units.Add(new StoryUnit(
-                "루나",
-                "산책하러 나왔어. 오늘은 바람도 선선하고, 하늘도 맑고, 산책하기 딱 좋은 날씨거든.",
-                new List<FunctionCall>
+            using (StreamReader sr = new StreamReader(filePath, Encoding.GetEncoding("euc-kr")))
+            {
+                string headerLine = sr.ReadLine();
+                
+                while (!sr.EndOfStream)
                 {
-                    new(new Action<float>(Luna.fast_jump), 0f),
-                    new (new Action<float>(Luna.fast_jump), 0.5f)
-                }
-            ));
+                    string line = sr.ReadLine();
+                    string[] values = new string[0];
+                    values = line.Split(',');
+                    name = values[0];
+                    dialogue_num = int.Parse(values[1]);
+                    dialogue_textlist = new StringBuilder();
+                    for (int i = 0; i < dialogue_num; i++)
+                    {
+                        dialogue_textlist.Append(values[i + 2].Replace("|||", "\"").Replace("||", "'").Replace("|", ","));
+                        if (i < dialogue_num - 1)
+                        {
+                            dialogue_textlist.Append("\n");
+                        }
+                    }
 
-            this.units.Add(new StoryUnit(
-                "나",
-                "정말 좋은 날씨네. 계속 방에만 있느라 눈치채지 못했어.",
-                new List<FunctionCall>
-                {
-                    new(new Action(MainCharacter.little_jump))
-                }
-            ));
+                    dialogue_text = dialogue_textlist.ToString();
+                    action_index = 2 + dialogue_num;
+                    action_num = int.Parse(values[action_index]);
+                    List<FunctionCall> functionCalls = new List<FunctionCall>();
 
-            this.units.Add(new StoryUnit(
-                "루나",
-                "아직도 코드가 제대로 작동하지 않는거야?",
-                new List<FunctionCall>
-                {
-                    new(new Action(Luna.dori_dori))
-                }
-            ));
+                    for(int i = 0; i < action_num; i++)
+                    {
+                        string objectName = values[action_index + 1].Split(".")[0];
+                        string methodName = values[action_index + 1].Split(".")[1];
+                        object targetObject = GetObjectByName(objectName);
+                        actionparam_num = int.Parse(values[action_index + 2]);
+                        Type type = targetObject.GetType();
+                        MethodInfo method = type.GetMethod(methodName);
+                        List<float> paramList = new List<float>();
+                        for (int j = 0; j < actionparam_num; j++)
+                        {
+                            paramList.Add(float.Parse(values[action_index + 3 + j]));
+                        }
+                        float[] param = paramList.ToArray();
+                        functionCalls.Add(new FunctionCall(
+                            Delegate.CreateDelegate(typeof(Action<float[]>), targetObject, method),
+                            param
+                        ));
+                        action_index = action_index + actionparam_num + 2;
+                    }
 
-            this.units.Add(new StoryUnit(
-                "나",
-                "coroutine 작동 방식이 너무 어려워서 어떻게 해결해야 할지 모르겠어.",
-                new List<FunctionCall>
-                {
-                    new(new Action(MainCharacter.little_jump))
+                    this.units.Add(new StoryUnit(
+                        name,
+                        dialogue_text,
+                        functionCalls
+                    ));
                 }
-            ));
-
-            this.units.Add(new StoryUnit(
-                "루나",
-                "나랑 같이 잠깐 산책하러 가자. 맑은 공기를 마시면 도움이 될거야!",
-                new List<FunctionCall>
-                {
-                    new(new Action<float>(Luna.fast_jump), 0f),
-                    new(new Action<float>(Luna.fast_jump), 0.5f)
-                }
-            ));
-            
-            this.units.Add(new StoryUnit(
-                " ",
-                " ",
-                new List<FunctionCall>
-                {
-                    new(new Action(MainCharacter.disappear_right_move)),
-                    new(new Action(Luna.disappear_left_move))
-                }
-            ));
+            }
         }
     }
 }

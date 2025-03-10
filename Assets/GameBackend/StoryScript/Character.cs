@@ -95,8 +95,7 @@ namespace GameBackend.StoryScript
             transform.localScale = scale;
             // finalScale = transform.localScale;
         }
-
-        public void appear_right_move()
+        public void appear_right_move(float[] param_list)
         {
             var tmp = transform.position;
             tmp.x = 15;
@@ -106,7 +105,7 @@ namespace GameBackend.StoryScript
             // finalPosition = tmp+new Vector3(-9, 0, 0);
         }
 
-        public void disappear_right_move()
+        public void disappear_right_move(float[] param_list)
         {
             var tmp = transform.position;
             tmp.x = 18;
@@ -114,7 +113,7 @@ namespace GameBackend.StoryScript
             // finalPosition = tmp;
         }
 
-        public void appear_left_move()
+        public void appear_left_move(float[] param_list)
         {
             var tmp = transform.position;
             tmp.x = -15;
@@ -124,7 +123,7 @@ namespace GameBackend.StoryScript
             // finalPosition = tmp+new Vector3(9, 0, 0);
         }
         
-        public void disappear_left_move()
+        public void disappear_left_move(float[] param_list)
         {
             var tmp = transform.position;
             tmp.x = -18;
@@ -132,29 +131,32 @@ namespace GameBackend.StoryScript
             // finalPosition = tmp;
         }
 
-        public void little_jump()
+        public void little_jump(float[] param_list)
         {
             StartAndStoreCoroutine(littleJump());
         }
 
-        public void fast_jump(float delaytime)
+        public void fast_jump(float[] param_list)
         {
-            StartAndStoreCoroutine(fastJump(delaytime));
+            float time = param_list[0];
+            StartAndStoreCoroutine(fastJump(time));
         }
 
-        public void dori_dori()
+        public void dori_dori(float[] param_list)
         {
             StartAndStoreCoroutine(doridori());
         }
 
-        public void fall_down()
+        public void fall_down(float[] param_list)
         {
             StartAndStoreCoroutine(fallDown());
             // finalPosition=transform.position+new Vector3(0, -10f, 0);
         }
 
-        public void move_x(float deltax, float time)
+        public void move_x(float[] param_list)
         {
+            float deltax = param_list[0];
+            float time = param_list[1];
             StartAndStoreCoroutine(movex(deltax, time));
             // finalPosition = transform.position+new Vector3(deltax, 0, 0);
         }
@@ -176,9 +178,9 @@ namespace GameBackend.StoryScript
                 .WaitForCompletion();
         }
 
-        private IEnumerator fastJump(float delaytime)
+        private IEnumerator fastJump(float time)
         {
-            yield return new WaitForSeconds(delaytime);
+            yield return new WaitForSeconds(time);
             yield return transform.DOMoveY(transform.position.y + 1.2f, 0.2f)
                 .SetEase(Ease.OutCubic)
                 .WaitForCompletion();

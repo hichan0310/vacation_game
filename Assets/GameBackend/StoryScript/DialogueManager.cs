@@ -103,7 +103,7 @@ public class DialogueManager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && motionEnd())
         {
-            if (!Dialogue.isTalking && text_index < 10)
+            if (!Dialogue.isTalking && text_index < 9)
             {
                 foreach (var func in functions[text_index])
                 {
