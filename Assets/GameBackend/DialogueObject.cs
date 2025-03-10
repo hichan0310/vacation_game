@@ -7,10 +7,9 @@ namespace GameBackend
     public class DialogueObject:MonoBehaviour
     {
         public EnemyManager enemyManager;
-        private void OnCollisionStay(Collision other)
+        private void OnTriggerEnter(Collider other)
         {
-            Debug.Log(other.gameObject.name);
-            //이거부터 안됨
+            Debug.Log(other.gameObject.name); //fucking not work
             if (enemyManager.enemyWaveFinished)
             {
                 if (other.gameObject.CompareTag("Player"))
