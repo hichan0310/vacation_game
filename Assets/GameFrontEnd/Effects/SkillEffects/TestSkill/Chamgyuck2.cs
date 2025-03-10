@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using GameBackend.Events;
 using UnityEngine;
 
-namespace GameBackend.Objects
+namespace GameBackend.Objects.SkillEffects.TestSkill
 {
-    public class Chamgyuck1 : SkillEffect
+    public class Chamgyuck2 : SkillEffect
     {
         private Entity player;
         private int dmg;
@@ -16,7 +16,7 @@ namespace GameBackend.Objects
         public void Start()
         {
             timeIgnore = true;
-            timer = -0.15f;
+            timer = -0.2f;
             setAlpha(0);
             this.transform.localScale = new Vector3(0, 0, 0);
         }
@@ -28,8 +28,8 @@ namespace GameBackend.Objects
             checkAlpha(0.5f, 0.6f, 1, 0);
             checkScale(0.2f, 0.3f, Vector3.zero, new Vector3(-0.5f * direction, 0.5f, 0.5f));
             checkMove(0.2f, 0.3f,
-                this.playerPosition + new Vector3(0.34f * direction, 0.76f, 0f),
-                this.playerPosition + new Vector3(1.09f * direction, 0.36f, 0));
+                this.playerPosition + new Vector3(0.34f * direction, -0.76f, 0f),
+                this.playerPosition + new Vector3(1.09f * direction, -0.36f, 0));
             checkDestroy(1);
         }
 
@@ -47,9 +47,10 @@ namespace GameBackend.Objects
         {
             this.player = player;
             this.direction = (int)player.transform.localScale.x;
+            if (direction == -1) this.gameObject.transform.rotation = Quaternion.Euler(new Vector3 (0, 0, -35));
             this.playerPosition = player.transform.position;
             this.transform.localScale = new Vector3(-0.5f * direction, 0.5f, 0.5f);
-            this.transform.localPosition = this.playerPosition + new Vector3(1.09f, 0.36f, 0);
+            this.transform.localPosition = this.playerPosition + new Vector3(1.09f, -0.36f, 0f);
             this.dmg = player.status.calculateTrueDamage(atkTags, atkCoef: 100);
         }
     }

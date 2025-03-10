@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GameBackend.Objects
+﻿namespace GameBackend.Objects
 {
     public class NormalSkillEffect:SkillEffect
     {

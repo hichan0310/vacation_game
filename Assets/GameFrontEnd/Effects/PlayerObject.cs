@@ -1,10 +1,7 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Collections.Generic;
 using GameBackend.Events;
-using GameBackend.Skills;
 using GameBackend.Status;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace GameBackend.Objects
@@ -218,7 +215,7 @@ namespace GameBackend.Objects
         void Move(float deltaTime)
         {
             Vector3 moveVelocity = Vector3.zero;
-            if (InputHandler.MoveLeft.Any(key => Input.GetKey(key)))
+            if (InputHandler.MoveLeft.Any(key => Input.GetKey((KeyCode)key)))
             {
                 animator.SetTrigger("walk");
                 if (direction == true)
