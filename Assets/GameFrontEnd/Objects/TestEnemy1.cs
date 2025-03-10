@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using GameBackend;
 using GameBackend.Events;
 using GameBackend.Status;
 using UnityEngine;
 
-namespace GameBackend.Objects
+namespace GameFrontEnd.Effects
 {
     public class TestEnemy1:Enemy
     {

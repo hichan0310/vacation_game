@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using GameBackend;
 using GameBackend.Events;
 using UnityEngine;
 
-namespace GameBackend.Objects.SkillEffects.TestSkill
+namespace GameFrontEnd.Effects.SkillEffects.TestSkill
 {
     public class Chamgyuck1 : SkillEffect
     {

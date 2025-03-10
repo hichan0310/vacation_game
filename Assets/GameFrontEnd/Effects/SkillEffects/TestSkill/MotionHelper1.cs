@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using GameBackend;
+using UnityEngine;
 
-namespace GameBackend.Objects.SkillEffects.TestSkill
+namespace GameFrontEnd.Effects.SkillEffects.TestSkill
 {
     public class MotionHelper1 : SkillEffect
     {

@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
+using GameBackend;
 using GameBackend.Events;
+using GameBackend.Objects;
 using GameBackend.Status;
+using GameFrontEnd.Effects.ArtifactEffect.ElectricStone;
 using UnityEngine;
 
-namespace GameBackend.Objects
+namespace GameFrontEnd.Effects.ArtifactEffect.StoneOfLightning
 {
     public class ElectricSpark:SkillEffect
     {
@@ -20,7 +23,7 @@ namespace GameBackend.Objects
         private Enemy enemys;
         private bool isCrash;
         public float time { get; set; }=0;
-        public ElectricSparkexplosion explosion;
+        public ElectricSparkExplosion explosion;
 
         private GameObject getNearestEnemy(Vector2 position)
         {
@@ -100,8 +103,10 @@ namespace GameBackend.Objects
                     new DmgGiveEvent(dmg, 0f, player, enemys, atkTags);
                 }
                 Destroy(this.gameObject);
-                ElectricSparkexplosion obj = Instantiate(explosion);
-                obj.transform.position = this.transform.position;
+                ElectricSparkExplosion obj1 = Instantiate(explosion);
+                obj1.transform.position = this.transform.position;
+                ElectricSparkExplosion obj2 = Instantiate(explosion);
+                obj2.transform.position = this.transform.position;
             }
         }
     }

@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using GameBackend;
 using GameBackend.Buffs;
 using GameBackend.Events;
 using UnityEngine;
 
-namespace GameBackend.Objects
+namespace GameFrontEnd.Effects.ArtifactEffect.FireStone
 {
     public class Gumgi : SkillEffect
     {
@@ -27,6 +28,7 @@ namespace GameBackend.Objects
 
         protected override void update(float deltaTime)
         {
+            timer += deltaTime;
             transform.position += new Vector3(gumgiSpeed * deltaTime, 0, 0);
             checkDestroy(time);
         }
@@ -39,11 +41,6 @@ namespace GameBackend.Objects
             DefIgnore defIgnore = new DefIgnore(50, 4);
             defIgnore.registrarTarget(enemy);
             atkObjects.Add(enemy);
-        }
-        
-        void destroy()
-        {
-            Destroy(gameObject);
         }
     }
 }

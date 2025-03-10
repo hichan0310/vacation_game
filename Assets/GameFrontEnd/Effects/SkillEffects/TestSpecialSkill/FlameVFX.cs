@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using GameBackend;
+using UnityEngine;
 
-namespace GameBackend.Objects
+namespace GameFrontEnd.Effects.SkillEffects.TestSpecialSkill
 {
     public class FlameVFX:SkillEffect
     {

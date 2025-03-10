@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using GameBackend;
+using UnityEngine;
 
-namespace GameBackend.Objects
+namespace GameFrontEnd.Effects
 {
     public class MuzzleFlashVFX:SkillEffect
     {

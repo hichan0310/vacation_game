@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using GameBackend;
 using GameBackend.Events;
 using GameBackend.Status;
 using UnityEngine;
 
-namespace GameBackend.Objects
+namespace GameFrontEnd.Effects
 {
     public class PlayerObject : Player<TestPlayerInfo1>
     {

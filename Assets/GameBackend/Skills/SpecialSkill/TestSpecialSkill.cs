@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using GameBackend.Buffs;
 using GameBackend.Events;
 using GameBackend.Objects;
 using GameBackend.Status;
+using GameFrontEnd.Effects.SkillEffects.TestSpecialSkill;
 using UnityEngine;
 
-namespace GameBackend.Skills
+namespace GameBackend.Skills.SpecialSkill
 {
-    public class TestSpecialSkill : Skill
+    public class TestSpecialSkill : SpecialSkill
     {
         public override string skillName => "TestSpecialSkill";
         public override string description => "TestSpecialSkillDescription";
@@ -31,6 +31,8 @@ namespace GameBackend.Skills
 
         private void Start()
         {
+            energyProgressBar = Instantiate(energyProgressBar);
+            timeProgressBar = Instantiate(timeProgressBar);
             timeleft = cooltime;
         }
 

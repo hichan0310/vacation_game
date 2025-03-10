@@ -1,13 +1,14 @@
-﻿using UnityEngine;
+﻿using GameBackend;
+using UnityEngine;
 
-namespace GameBackend.Objects
+namespace GameFrontEnd.Effects.ArtifactEffect.ElectricStone
 {
-    public class ElectricSparkexplosion:SkillEffect
+    public class ElectricSparkExplosion:SkillEffect
     {
         private void Start()
         {
             this.timeIgnore = true;
-            this.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            this.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
         }
 
         protected override void update(float deltaTime)

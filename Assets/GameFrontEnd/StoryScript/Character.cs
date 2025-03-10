@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-namespace GameBackend.StoryScript
+namespace GameFrontEnd.StoryScript
 {
     public class Character:MonoBehaviour
     {

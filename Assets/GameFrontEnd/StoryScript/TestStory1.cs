@@ -4,7 +4,7 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 
-namespace GameBackend.StoryScript
+namespace GameFrontEnd.StoryScript
 {
     public class TestStory1:Story
     {

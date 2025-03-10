@@ -1,5 +1,6 @@
 ﻿using GameBackend.Events;
 using GameBackend.Objects;
+using GameFrontEnd.Effects.ArtifactEffect.StoneOfLightning;
 using UnityEngine;
 
 namespace GameBackend.ArtifactPrefabs.Grade2
