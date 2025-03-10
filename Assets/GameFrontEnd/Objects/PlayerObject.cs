@@ -23,7 +23,7 @@ namespace GameFrontEnd.Effects
         private float attackCooldown = 0.25f;
         private string tmp = "";
         private bool direction = true;
-        private float jumpPower = 3.5f;
+        private float jumpPower = 3.6f;
         private bool isJumping = false;
         private bool isJumpatk = false;
         private bool isnormalattack = false;
@@ -35,6 +35,7 @@ namespace GameFrontEnd.Effects
         public List<Artifact> artifects;
 
         public bool controlAble = true;
+        private bool doubleJump=false;
         
         
         private void Awake()
@@ -81,6 +82,7 @@ namespace GameFrontEnd.Effects
                 progressBar.transform.localScale = new Vector3(transform.localScale.x, 1, 1);
             }
             animator.SetBool("jumping", isJumping);
+            
             animator.SetInteger("atknum", atknum);
             if (controlAble)
             {
@@ -154,6 +156,8 @@ namespace GameFrontEnd.Effects
                 if (isJumping) animator.ResetTrigger("atk");
                 isJumping = false;
                 isJumpatk = false;
+                doubleJump = false;
+                animator.SetBool("doubleJump", false);
             }
         }
 
@@ -247,15 +251,30 @@ namespace GameFrontEnd.Effects
 
         void Jump(float deltaTime)
         {
-            if (Input.GetKey(InputHandler.Jump))
+            if (Input.GetKeyDown(InputHandler.Jump))
             {
                 if (!isJumping)
                 {
+                    doubleJump = true;
                     tmp = "";
                     atknum = 0;
                     animator.SetInteger("atknum", atknum);
                     animator.SetTrigger("jump");
+                    
                     isJumping = true;
+                    rigid.velocity = Vector2.zero;
+
+                    Vector2 jumpVelocity = new Vector2(0, jumpPower);
+                    rigid.AddForce(jumpVelocity, ForceMode2D.Impulse);
+                }
+                else if (doubleJump)
+                {
+                    doubleJump = false;
+                    animator.SetBool("doubleJump", false);
+                    tmp = "";
+                    atknum = 0;
+                    animator.SetInteger("atknum", atknum);
+                    animator.SetTrigger("jump");
                     rigid.velocity = Vector2.zero;
 
                     Vector2 jumpVelocity = new Vector2(0, jumpPower);
