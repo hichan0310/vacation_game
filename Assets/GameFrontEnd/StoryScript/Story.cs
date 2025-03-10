@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GameBackend.StoryScript
+namespace GameFrontEnd.StoryScript
 {
     public class StoryUnit
     {

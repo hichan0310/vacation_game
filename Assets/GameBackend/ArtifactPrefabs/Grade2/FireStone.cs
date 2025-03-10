@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using GameBackend.Events;
 using GameBackend.Objects;
+using GameFrontEnd.Effects.ArtifactEffect.FireStone;
 
 namespace GameBackend.ArtifactPrefabs.Grade2
 {
@@ -26,11 +27,18 @@ namespace GameBackend.ArtifactPrefabs.Grade2
                 {
                     cooldown = coolTime;
                     var transform = normalAttackExecuteEvent.attacker.transform;
-                    Gumgi gumg = Instantiate(gumgi, transform);
+                    Gumgi gumg = Instantiate(gumgi);
                     gumg.direction = player.transform.localScale.x > 0;
                     gumg.position = player.transform.position;
                     gumg.time = 0.3f;
                     gumg.gumgiSpeed = 6;
+                    if (!gumg.direction)
+                    {
+                        var scale = gumg.transform.localScale;
+                        scale.x *= -1;
+                        gumg.transform.localScale = scale;
+                    }
+
                     List<AtkTags> tag = new List<AtkTags>
                     {
                         AtkTags.fireAttack,

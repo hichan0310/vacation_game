@@ -1,4 +1,6 @@
 ﻿using GameBackend.Skills;
+using GameBackend.Skills.NormalSkill;
+using GameBackend.Skills.SpecialSkill;
 
 namespace GameBackend.Status
 {

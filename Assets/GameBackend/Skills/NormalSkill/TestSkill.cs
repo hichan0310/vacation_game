@@ -1,11 +1,11 @@
 ﻿using GameBackend.Events;
 using GameBackend.Objects;
-using GameBackend.Objects.SkillEffects.TestSkill;
+using GameFrontEnd.Effects.SkillEffects.TestSkill;
 using UnityEngine;
 
-namespace GameBackend.Skills
+namespace GameBackend.Skills.NormalSkill
 {
-    public class TestSkill : Skill
+    public class TestSkill : NormalSkill
     {
         public override string skillName => "TestSkill";
 
@@ -27,6 +27,7 @@ namespace GameBackend.Skills
 
         private void Start()
         {
+            progressbar=Instantiate(progressbar);
             timeleft = cooltime;
         }
 

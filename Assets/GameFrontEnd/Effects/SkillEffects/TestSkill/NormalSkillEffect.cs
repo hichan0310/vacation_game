@@ -1,4 +1,6 @@
-﻿namespace GameBackend.Objects
+﻿using GameBackend;
+
+namespace GameFrontEnd.Effects.SkillEffects.TestSkill
 {
     public class NormalSkillEffect:SkillEffect
     {

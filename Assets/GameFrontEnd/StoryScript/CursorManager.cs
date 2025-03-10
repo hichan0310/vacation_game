@@ -1,32 +1,35 @@
 using UnityEngine;
 
-public class UICursorChanger : MonoBehaviour
+namespace GameFrontEnd.StoryScript
 {
-    public RectTransform cursorUI; 
-
-    void Awake()
+    public class UICursorChanger : MonoBehaviour
     {
-        cursorUI.gameObject.SetActive(false); 
-        Cursor.visible = true; 
-    }
+        public RectTransform cursorUI; 
 
-    void Update()
-    {
-        cursorUI.position = Input.mousePosition;
-        if (Input.mousePosition.y <= Screen.height / 3)
+        void Awake()
         {
-            if (!cursorUI.gameObject.activeSelf) 
-            {
-                cursorUI.gameObject.SetActive(true);
-                Cursor.visible = false;
-            }
+            cursorUI.gameObject.SetActive(false); 
+            Cursor.visible = true; 
         }
-        else
+
+        void Update()
         {
-            if (cursorUI.gameObject.activeSelf)
+            cursorUI.position = Input.mousePosition;
+            if (Input.mousePosition.y <= Screen.height / 3)
             {
-                cursorUI.gameObject.SetActive(false);
-                Cursor.visible = true;
+                if (!cursorUI.gameObject.activeSelf) 
+                {
+                    cursorUI.gameObject.SetActive(true);
+                    Cursor.visible = false;
+                }
+            }
+            else
+            {
+                if (cursorUI.gameObject.activeSelf)
+                {
+                    cursorUI.gameObject.SetActive(false);
+                    Cursor.visible = true;
+                }
             }
         }
     }
