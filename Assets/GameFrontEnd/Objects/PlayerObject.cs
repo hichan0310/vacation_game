@@ -34,7 +34,11 @@ namespace GameFrontEnd.Effects
         public Skill specialSkill;
         public List<Artifact> artifects;
 
-        public bool controlAble = true;
+        public bool controlable = true;
+        public bool moveable = true;
+        public bool jumpable = true;
+        public bool attackable = true;
+        public bool skillExecutable = true;
         private bool doubleJump=false;
         
         
@@ -84,31 +88,37 @@ namespace GameFrontEnd.Effects
             animator.SetBool("jumping", isJumping);
             
             animator.SetInteger("atknum", atknum);
-            if (controlAble)
+            if (controlable)
             {
-                Move(deltaTime);
-                Jump(deltaTime);
-                NormalSkill(deltaTime);
-                SpecialSkill(deltaTime);
+                if (moveable) Move(deltaTime);
+                if (jumpable) Jump(deltaTime);
+                if (skillExecutable)
+                {
+                    NormalSkill(deltaTime);
+                    SpecialSkill(deltaTime);
+                }
             }
 
-            if (Input.GetMouseButtonDown(0))
+            if (attackable)
             {
-                if (!isJumping && !animator.GetCurrentAnimatorStateInfo(0).IsName("attack_jump"))
+                if (Input.GetMouseButtonDown(0))
                 {
-                    animator.ResetTrigger("walk");
-                    AttemptAttack();
-                }
-                else 
-                {
-                    if (!isJumpatk)
+                    if (!isJumping && !animator.GetCurrentAnimatorStateInfo(0).IsName("attack_jump"))
                     {
-                        animator.SetTrigger("jumpatk");
-                        isJumpatk = true;
+                        animator.ResetTrigger("walk");
+                        AttemptAttack();
+                    }
+                    else
+                    {
+                        if (!isJumpatk)
+                        {
+                            animator.SetTrigger("jumpatk");
+                            isJumpatk = true;
+                        }
                     }
                 }
             }
-            
+
             if (this.dead)
             {
                 Destroy(hpBarObject);

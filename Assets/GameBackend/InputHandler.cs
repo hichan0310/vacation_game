@@ -19,7 +19,7 @@ public class InputHandler : MonoBehaviour
     public static KeyCode Jump { get; private set; } = KeyCode.Space;
     public static KeyCode Skill { get; private set; } = KeyCode.E;
     public static KeyCode Ultimate { get; private set; } = KeyCode.Q;
-
+    public static KeyCode Interaction { get; private set; } = KeyCode.F;
     
     
     
