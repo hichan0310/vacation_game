@@ -13,7 +13,7 @@ namespace GameBackend.Skills
         public override string skillName => "TestSpecialSkill";
         public override string description => "TestSpecialSkillDescription";
         private const float cooltime = 10;
-        private int energy = 0;
+        private float energy = 0;
         private float slowtime = 0;
         private const float slowDuration = 7;
         private int effectCount = 0;
@@ -153,11 +153,11 @@ namespace GameBackend.Skills
             {
                 if (dmgEvent.atkTags.Contains(AtkTags.normalAttack))
                 {
-                    energy += 1;
+                    energy += 1*player.status.energyRecharge/100;
                 }
                 else if (dmgEvent.atkTags.Contains(AtkTags.normalSkill))
                 {
-                    energy += 2;
+                    energy += 2*player.status.energyRecharge/100;
                 }
 
                 if (slowtime > 0)
