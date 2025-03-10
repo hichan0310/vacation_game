@@ -1,13 +1,13 @@
 ﻿using GameBackend.Status;
 
-namespace GameBackend.Artifects
+namespace GameBackend.ArtifactPrefabs.Grade2
 {
-    public class CoreOfSword:Artifect, IBuffStatus
+    public class CoreOfShadow:Artifact, IBuffStatus
     {
         private void Start()
         {
-            this.name = " 검의 핵";
-            this.description = "물리 속성 피해가 30% 증가한다. ";
+            this.name = "암흑의 핵";
+            this.description = "암흑 속성 피해가 30% 증가한다. ";
         }
         
         public override void eventActive<T>(T eventArgs)
@@ -17,7 +17,7 @@ namespace GameBackend.Artifects
 
         public void buffStatus(PlayerStatus status)
         {
-            status.dmgUp[(int)AtkTags.physicalAttack] += 15;
+            status.dmgUp[(int)AtkTags.shadowAttack] += 15;
         }
 
         public override void registrarTarget(Entity target)

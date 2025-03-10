@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
 using GameBackend.Events;
 using GameBackend.Objects;
-using GameBackend.Status;
-using UnityEngine;
 
-namespace GameBackend.Artifects
+namespace GameBackend.ArtifactPrefabs.Grade2
 {
-    public class FireStone:Artifect
+    public class FireStone:Artifact
     {
         public Gumgi gumgi;
         private float cooldown = 0;
@@ -36,7 +34,7 @@ namespace GameBackend.Artifects
                     List<AtkTags> tag = new List<AtkTags>
                     {
                         AtkTags.fireAttack,
-                        AtkTags.artifectDamage
+                        AtkTags.artifactDamage
                     };
                     gumg.dmgInfo = new DmgInfo(player.status.calculateTrueDamage(tag, atkCoef: 30), 0.1f, player, tag);
                     gumg.apply();

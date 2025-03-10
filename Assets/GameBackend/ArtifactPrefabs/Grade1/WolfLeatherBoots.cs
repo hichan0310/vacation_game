@@ -1,13 +1,13 @@
 ﻿using GameBackend.Status;
 
-namespace GameBackend.Artifects
+namespace GameBackend.ArtifactPrefabs.Grade1
 {
-    public class CoreOfWind:Artifect, IBuffStatus
+    public class WolfLeatherBoots:Artifact, IBuffStatus
     {
         private void Start()
         {
-            this.name = "바람의 핵";
-            this.description = "바람 속성 피해가 30% 증가한다. ";
+            this.name = "늑대 가죽 장화";
+            this.description = "이동 속도 +10%, 점프 공격 피해 +10%";
         }
         
         public override void eventActive<T>(T eventArgs)
@@ -17,7 +17,8 @@ namespace GameBackend.Artifects
 
         public void buffStatus(PlayerStatus status)
         {
-            status.dmgUp[(int)AtkTags.windAttack] += 15;
+            status.dmgUp[(int)AtkTags.jumpAttack] += 10;
+            status.movePower *= 1.1f;
         }
 
         public override void registrarTarget(Entity target)

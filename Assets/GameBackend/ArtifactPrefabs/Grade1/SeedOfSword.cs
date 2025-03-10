@@ -1,8 +1,8 @@
 ﻿using GameBackend.Status;
 
-namespace GameBackend.Artifects
+namespace GameBackend.ArtifactPrefabs.Grade1
 {
-    public class SeedOfSword:Artifect, IBuffStatus
+    public class SeedOfSword:Artifact, IBuffStatus
     {
         private void Start()
         {

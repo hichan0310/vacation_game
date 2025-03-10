@@ -1,11 +1,10 @@
-﻿using System;
-using GameBackend.Events;
+﻿using GameBackend.Events;
 using GameBackend.Objects;
 using UnityEngine;
 
-namespace GameBackend.Artifects
+namespace GameBackend.ArtifactPrefabs.Grade2
 {
-    public class ElectricStone:Artifect
+    public class ElectricStone:Artifact
     {
         public ElectricSpark ElectricSpark;
 

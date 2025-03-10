@@ -1,13 +1,13 @@
 ﻿using GameBackend.Status;
 
-namespace GameBackend.Artifects
+namespace GameBackend.ArtifactPrefabs.Grade1
 {
-    public class LivingIcePiece:Artifect, IBuffStatus
+    public class WolfLeatherCoat:Artifact, IBuffStatus
     {
         private void Start()
         {
-            this.name = "살아있는 얼음 결정";
-            this.description = "치명타 확률이 5% 증가한다. ";
+            this.name = "늑대 가죽 코트";
+            this.description = "방어력 10% 상승";
         }
         
         public override void eventActive<T>(T eventArgs)
@@ -17,7 +17,7 @@ namespace GameBackend.Artifects
 
         public void buffStatus(PlayerStatus status)
         {
-            status.crit += 5;
+            status.increaseDef+=10;
         }
 
         public override void registrarTarget(Entity target)

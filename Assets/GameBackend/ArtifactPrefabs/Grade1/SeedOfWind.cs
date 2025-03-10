@@ -1,13 +1,13 @@
 ﻿using GameBackend.Status;
 
-namespace GameBackend.Artifects
+namespace GameBackend.ArtifactPrefabs.Grade1
 {
-    public class TeethOfGoblin:Artifect, IBuffStatus
+    public class SeedOfWind:Artifact, IBuffStatus
     {
         private void Start()
         {
-            this.name = "고블린의 이빨";
-            this.description = "공격력이 10% 증가한다. ";
+            this.name = "바람의 씨앗";
+            this.description = "바람 속성 피해가 15% 증가한다. ";
         }
         
         public override void eventActive<T>(T eventArgs)
@@ -17,7 +17,7 @@ namespace GameBackend.Artifects
 
         public void buffStatus(PlayerStatus status)
         {
-            status.increaseAtk+=10;
+            status.dmgUp[(int)AtkTags.windAttack] += 15;
         }
 
         public override void registrarTarget(Entity target)

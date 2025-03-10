@@ -1,13 +1,13 @@
 ﻿using GameBackend.Status;
 
-namespace GameBackend.Artifects
+namespace GameBackend.ArtifactPrefabs.Grade2
 {
-    public class SeedOfEarth:Artifect, IBuffStatus
+    public class CoreOfLightning:Artifact, IBuffStatus
     {
         private void Start()
         {
-            this.name = "대지의 씨앗";
-            this.description = "땅 속성 피해가 15% 증가한다. ";
+            this.name = "번개의 핵";
+            this.description = "번개 속성 피해가 30% 증가한다. ";
         }
         
         public override void eventActive<T>(T eventArgs)
@@ -17,7 +17,7 @@ namespace GameBackend.Artifects
 
         public void buffStatus(PlayerStatus status)
         {
-            status.dmgUp[(int)AtkTags.earthAttack] += 15;
+            status.dmgUp[(int)AtkTags.lightningAttack] += 15;
         }
 
         public override void registrarTarget(Entity target)

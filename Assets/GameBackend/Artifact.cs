@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace GameBackend
 {
-    public abstract class Artifect : MonoBehaviour, IEntityEventListener
+    public abstract class Artifact : MonoBehaviour, IEntityEventListener
     { 
         public virtual int grade => 1;
         public string name { get; set; }

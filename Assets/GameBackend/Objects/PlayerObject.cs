@@ -34,7 +34,7 @@ namespace GameBackend.Objects
 
         public Skill normalSkill;
         public Skill specialSkill;
-        public List<Artifect> artifects;
+        public List<Artifact> artifects;
 
         public bool controlAble = true;
         

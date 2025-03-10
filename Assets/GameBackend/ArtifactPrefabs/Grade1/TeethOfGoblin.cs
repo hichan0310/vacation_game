@@ -1,13 +1,13 @@
 ﻿using GameBackend.Status;
 
-namespace GameBackend.Artifects
+namespace GameBackend.ArtifactPrefabs.Grade1
 {
-    public class CoreOfLightning:Artifect, IBuffStatus
+    public class TeethOfGoblin:Artifact, IBuffStatus
     {
         private void Start()
         {
-            this.name = "번개의 핵";
-            this.description = "번개 속성 피해가 30% 증가한다. ";
+            this.name = "고블린의 이빨";
+            this.description = "공격력이 10% 증가한다. ";
         }
         
         public override void eventActive<T>(T eventArgs)
@@ -17,7 +17,7 @@ namespace GameBackend.Artifects
 
         public void buffStatus(PlayerStatus status)
         {
-            status.dmgUp[(int)AtkTags.lightningAttack] += 15;
+            status.increaseAtk+=10;
         }
 
         public override void registrarTarget(Entity target)

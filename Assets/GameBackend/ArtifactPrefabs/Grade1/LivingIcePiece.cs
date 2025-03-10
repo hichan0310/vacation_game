@@ -1,13 +1,13 @@
 ﻿using GameBackend.Status;
 
-namespace GameBackend.Artifects
+namespace GameBackend.ArtifactPrefabs.Grade1
 {
-    public class SeedOfWind:Artifect, IBuffStatus
+    public class LivingIcePiece:Artifact, IBuffStatus
     {
         private void Start()
         {
-            this.name = "바람의 씨앗";
-            this.description = "바람 속성 피해가 15% 증가한다. ";
+            this.name = "살아있는 얼음 결정";
+            this.description = "치명타 확률이 5% 증가한다. ";
         }
         
         public override void eventActive<T>(T eventArgs)
@@ -17,7 +17,7 @@ namespace GameBackend.Artifects
 
         public void buffStatus(PlayerStatus status)
         {
-            status.dmgUp[(int)AtkTags.windAttack] += 15;
+            status.crit += 5;
         }
 
         public override void registrarTarget(Entity target)

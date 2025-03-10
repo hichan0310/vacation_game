@@ -1,13 +1,13 @@
 ﻿using GameBackend.Status;
 
-namespace GameBackend.Artifects
+namespace GameBackend.ArtifactPrefabs.Grade2
 {
-    public class WolfLeatherGlove:Artifect, IBuffStatus
+    public class CoreOfWater:Artifact, IBuffStatus
     {
         private void Start()
         {
-            this.name = "늑대 가죽 장갑";
-            this.description = "방어력 5% 상승, 공격력 5% 상승";
+            this.name = "물의 핵";
+            this.description = "물 속성 피해가 30% 증가한다. ";
         }
         
         public override void eventActive<T>(T eventArgs)
@@ -17,8 +17,7 @@ namespace GameBackend.Artifects
 
         public void buffStatus(PlayerStatus status)
         {
-            status.increaseAtk+=5;
-            status.increaseDef+=5;
+            status.dmgUp[(int)AtkTags.waterAttack] += 15;
         }
 
         public override void registrarTarget(Entity target)

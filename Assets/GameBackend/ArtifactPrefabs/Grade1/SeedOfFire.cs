@@ -1,13 +1,13 @@
 ﻿using GameBackend.Status;
 
-namespace GameBackend.Artifects
+namespace GameBackend.ArtifactPrefabs.Grade1
 {
-    public class WolfLeatherCoat:Artifect, IBuffStatus
+    public class SeedOfFire:Artifact, IBuffStatus
     {
         private void Start()
         {
-            this.name = "늑대 가죽 코트";
-            this.description = "방어력 10% 상승";
+            this.name = "불의 씨앗";
+            this.description = "불 속성 피해가 15% 증가한다. ";
         }
         
         public override void eventActive<T>(T eventArgs)
@@ -17,7 +17,7 @@ namespace GameBackend.Artifects
 
         public void buffStatus(PlayerStatus status)
         {
-            status.increaseDef+=10;
+            status.dmgUp[(int)AtkTags.fireAttack] += 15;
         }
 
         public override void registrarTarget(Entity target)

@@ -12,7 +12,7 @@ namespace GameBackend.Objects
         public float sparkSpeed { get; set; } = 5;
         public float angle { get; set; } = 0;
         public float homingAngle { get; set; }= Mathf.PI*1.5f;
-        private List<AtkTags> atkTags = new() { AtkTags.lightningAttack, AtkTags.artifectDamage };
+        private List<AtkTags> atkTags = new() { AtkTags.lightningAttack, AtkTags.artifactDamage };
         private ContactFilter2D filter;
         private int dmg;
         private Entity player;
