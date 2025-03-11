@@ -24,7 +24,7 @@ namespace GameFrontEnd.Effects
         private string tmp = "";
         private bool direction = true;
         private float jumpPower = 3.6f;
-        private bool isJumping = false;
+        public bool isJumping = false;
         private bool isJumpatk = false;
         private bool isnormalattack = false;
         private Rigidbody2D rigid;
@@ -97,23 +97,23 @@ namespace GameFrontEnd.Effects
                     NormalSkill(deltaTime);
                     SpecialSkill(deltaTime);
                 }
-            }
 
-            if (attackable)
-            {
-                if (Input.GetMouseButtonDown(0))
+                if (attackable)
                 {
-                    if (!isJumping && !animator.GetCurrentAnimatorStateInfo(0).IsName("attack_jump"))
+                    if (Input.GetMouseButtonDown(0))
                     {
-                        animator.ResetTrigger("walk");
-                        AttemptAttack();
-                    }
-                    else
-                    {
-                        if (!isJumpatk)
+                        if (!isJumping && !animator.GetCurrentAnimatorStateInfo(0).IsName("attack_jump"))
                         {
-                            animator.SetTrigger("jumpatk");
-                            isJumpatk = true;
+                            animator.ResetTrigger("walk");
+                            AttemptAttack();
+                        }
+                        else
+                        {
+                            if (!isJumpatk)
+                            {
+                                animator.SetTrigger("jumpatk");
+                                isJumpatk = true;
+                            }
                         }
                     }
                 }
@@ -213,7 +213,7 @@ namespace GameFrontEnd.Effects
 
         void NormalSkill(float deltaTime)
         {
-            if (this.normalSkill.active && Input.GetKey(InputHandler.Skill))
+            if (this.normalSkill.active && Input.GetKeyDown(InputHandler.Skill))
             {
                 this.normalSkill.execute();
             }
@@ -221,7 +221,7 @@ namespace GameFrontEnd.Effects
 
         void SpecialSkill(float deltaTime)
         {
-            if (this.specialSkill.active && Input.GetKey(InputHandler.Ultimate))
+            if (this.specialSkill.active && Input.GetKeyDown(InputHandler.Ultimate))
             {
                 this.specialSkill.execute();
             }
