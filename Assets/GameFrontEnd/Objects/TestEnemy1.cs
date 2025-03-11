@@ -4,7 +4,7 @@ using GameBackend.Events;
 using GameBackend.Status;
 using UnityEngine;
 
-namespace GameFrontEnd.Effects
+namespace GameFrontEnd.Objects
 {
     public class TestEnemy1:Enemy
     {

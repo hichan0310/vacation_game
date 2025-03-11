@@ -5,7 +5,7 @@ using GameBackend.Events;
 using GameBackend.Status;
 using UnityEngine;
 
-namespace GameFrontEnd.Effects
+namespace GameFrontEnd.Objects
 {
     public class PlayerObject : Player<TestPlayerInfo1>
     {
