@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GameBackend;
+using GameBackend.Events;
 using UnityEngine;
 
 namespace GameFrontEnd.Effects.SkillEffects.WaterThrust
@@ -33,6 +34,10 @@ namespace GameFrontEnd.Effects.SkillEffects.WaterThrust
             var col = other.gameObject.GetComponent<Enemy>();
             if (hit.Contains(col)) return;
             hit.Add(col);
+            
+            List<AtkTags> atkTags=new List<AtkTags>() { AtkTags.waterAttack, AtkTags.normalSkill };
+            int trueDmg=caster.status.calculateTrueDamage(atkTags, atkCoef:100);
+            new DmgGiveEvent(trueDmg, 0.7f, caster, col, atkTags);
         }
     }
 }

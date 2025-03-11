@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   water: {fileID: 6367226938479478323, guid: 6aa5bd398be29d84f844a14a5d6dd2fc, type: 3}
+  progressbar: {fileID: 5585146357421737802, guid: cf7ae2068f1055e48a8de96431e18260, type: 3}
