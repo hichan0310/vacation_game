@@ -28,7 +28,7 @@ namespace GameFrontEnd.Effects.SkillEffects.WaterThrust
 
         private HashSet<Enemy> hit=new ();
 
-        private void OnTriggerEnter(Collider other)
+        protected override void OnTriggerEnter2D(Collider2D other)
         {
             Debug.Log("dmg");
             var col = other.gameObject.GetComponent<Enemy>();
