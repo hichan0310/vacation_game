@@ -9,6 +9,7 @@ namespace GameBackend.Skills.NormalSkill
     public class WaterThrust : NormalSkill
     {
         float cooldown = 1;
+        float cooltime = 3;
         bool followUp = false;
         float followUpTimer = 0.7f;
         bool followUpEnd = false;
@@ -16,9 +17,16 @@ namespace GameBackend.Skills.NormalSkill
         bool waterSpreaded = false;
 
         public WaterThrustWater water;
+        public ProgressBar progressbar;
 
         public override void eventActive<T>(T eventArgs)
         {
+        }
+
+        private void Start()
+        {
+            progressbar=Instantiate(progressbar);
+            timeleft = cooltime;
         }
 
         bool IsCollidingWithEnemy(Collider2D polygonCollider)
@@ -40,6 +48,7 @@ namespace GameBackend.Skills.NormalSkill
         public override void update(float deltaTime)
         {
             cooldown -= deltaTime;
+            progressbar.ratio = -timeleft / cooltime+1;
             if (followUp)
             {
                 followUpTimer -= deltaTime;
@@ -88,6 +97,7 @@ namespace GameBackend.Skills.NormalSkill
                         wat.velocity = 3*new Vector3(
                             (player.transform.localScale.x > 0 ? 1 : -1) * Mathf.Cos(Mathf.PI * (1f / 18 + (float)i / 36)),
                             Mathf.Sin(Mathf.PI * (1f / 18 + (float)i / 36)), 0);
+                        wat.caster = player;
                     }
                 }
             }
@@ -119,14 +129,18 @@ namespace GameBackend.Skills.NormalSkill
             }
         }
 
-        public override float timeleft { get; set; }
+        public override float timeleft
+        {
+            get => cooldown;
+            set => cooldown = value;
+        }
 
         public override void execute()
         {
             if (!followUp)
             {
                 followUp = true;
-                cooldown = 1;
+                timeleft = cooltime;
                 player.animator.SetTrigger("waterThrust");
                 if (player is PlayerObject playerObject)
                 {

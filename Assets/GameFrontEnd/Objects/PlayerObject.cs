@@ -57,6 +57,9 @@ namespace GameFrontEnd.Objects
                 { "attack_d", 23 },
                 { "attack_jump", 50 }
             };
+            
+            this.normalSkill=Instantiate(this.normalSkill);
+            this.specialSkill=Instantiate(this.specialSkill);
 
             rigid = this.gameObject.GetComponent<Rigidbody2D>();
             hpBarObject=Instantiate(hpBar, transform, true);
