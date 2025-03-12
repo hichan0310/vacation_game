@@ -44,5 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6c821c4f2d942c18a28b38d2bc61098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waterThrustHitbox: {fileID: 5491660963936018, guid: cadc634a57ddd134487e4543fde69a93, type: 3}
   water: {fileID: 6367226938479478323, guid: 6aa5bd398be29d84f844a14a5d6dd2fc, type: 3}
   progressbar: {fileID: 5585146357421737802, guid: cf7ae2068f1055e48a8de96431e18260, type: 3}

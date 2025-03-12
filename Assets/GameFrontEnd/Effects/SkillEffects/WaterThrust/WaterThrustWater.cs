@@ -30,14 +30,14 @@ namespace GameFrontEnd.Effects.SkillEffects.WaterThrust
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.Log("dmg");
             var col = other.gameObject.GetComponent<Enemy>();
+            if (col == null) return;
             if (hit.Contains(col)) return;
             hit.Add(col);
             
             List<AtkTags> atkTags=new List<AtkTags>() { AtkTags.waterAttack, AtkTags.normalSkill };
-            int trueDmg=caster.status.calculateTrueDamage(atkTags, atkCoef:100);
-            new DmgGiveEvent(trueDmg, 0.2f, caster, col, atkTags);
+            int trueDmg=caster.status.calculateTrueDamage(atkTags, atkCoef:30);
+            new DmgGiveEvent(trueDmg, 0.1f, caster, col, atkTags);
         }
     }
 }

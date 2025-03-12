@@ -9,16 +9,19 @@ namespace GameBackend.Skills.NormalSkill
     public class WaterThrust : NormalSkill
     {
         float cooldown = 1;
-        float cooltime = 3;
+        float cooltime = 4;
         bool followUp = false;
         float followUpTimer = 0.7f;
         bool followUpEnd = false;
         float followUpEndTimer = 0.9f;
         bool waterSpreaded = false;
 
+        public WaterThrustHitbox waterThrustHitbox;
         public WaterThrustWater water;
         public ProgressBar progressbar;
 
+        private WaterThrustHitbox tmpObj;
+        
         public override void eventActive<T>(T eventArgs)
         {
         }
@@ -61,6 +64,7 @@ namespace GameBackend.Skills.NormalSkill
 
                 if (followUpTimer <= 0)
                 {
+                    tmpObj.destroyObject();
                     followUp = false;
                     followUpTimer = 0.7f;
                     if (player is PlayerObject playerObject)
@@ -141,6 +145,8 @@ namespace GameBackend.Skills.NormalSkill
                 followUp = true;
                 timeleft = cooltime;
                 player.animator.SetTrigger("waterThrust");
+                tmpObj = Instantiate(this.waterThrustHitbox, player.transform);
+                tmpObj.player = player;
                 if (player is PlayerObject playerObject)
                 {
                     playerObject.attackable = false;
@@ -153,6 +159,7 @@ namespace GameBackend.Skills.NormalSkill
                 followUp = false;
                 followUpTimer = 0.7f;
                 player.animator.SetTrigger("waterThrustFollowUp");
+                tmpObj.destroyObject();
                 if (player is PlayerObject playerObject)
                 {
                     playerObject.attackable = true;
