@@ -7,7 +7,7 @@ namespace GameBackend
     {
         public static DmgEventManager Instance { get; private set; }
 
-        public GameObject dmgDisplay;
+        public DamageDisplay dmgDisplay;
         public void Awake()
         {
             if (Instance == null)
@@ -26,8 +26,7 @@ namespace GameBackend
             //Debug.Log($"Event Triggered: ({dmgEvent.name}, {dmgEvent.realDmg})");
             // 이벤트 처리 로직
             
-            GameObject text = Instantiate(dmgDisplay);
-            text.GetComponent<DamageDisplay>().dmgEvent=dmgEvent;
+            Instantiate(dmgDisplay).dmgEvent=dmgEvent;
         }
     }
 }

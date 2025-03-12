@@ -28,7 +28,7 @@ namespace GameFrontEnd.Effects.SkillEffects.WaterThrust
 
         private HashSet<Enemy> hit=new ();
 
-        protected override void OnTriggerEnter2D(Collider2D other)
+        private void OnTriggerEnter2D(Collider2D other)
         {
             Debug.Log("dmg");
             var col = other.gameObject.GetComponent<Enemy>();
@@ -37,7 +37,7 @@ namespace GameFrontEnd.Effects.SkillEffects.WaterThrust
             
             List<AtkTags> atkTags=new List<AtkTags>() { AtkTags.waterAttack, AtkTags.normalSkill };
             int trueDmg=caster.status.calculateTrueDamage(atkTags, atkCoef:100);
-            new DmgGiveEvent(trueDmg, 0.7f, caster, col, atkTags);
+            new DmgGiveEvent(trueDmg, 0.2f, caster, col, atkTags);
         }
     }
 }

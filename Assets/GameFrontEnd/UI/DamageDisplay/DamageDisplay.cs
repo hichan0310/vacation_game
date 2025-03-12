@@ -25,7 +25,11 @@ namespace GameBackend
                 else text.fontSize = 4;
                 if (value.atkTags.Contains(AtkTags.physicalAttack)) text.color=Color.black;
                 else if (value.atkTags.Contains(AtkTags.fireAttack)) text.color=Color.red;
-                else if (value.atkTags.Contains(AtkTags.statusEffect)) text.color=Color.grey;
+                else if (value.atkTags.Contains(AtkTags.waterAttack)) text.color=Color.blue;
+                else if (value.atkTags.Contains(AtkTags.lightningAttack)) text.color=Color.yellow;
+                else if (value.atkTags.Contains(AtkTags.shadowAttack)) text.color=Color.magenta;
+                else if (value.atkTags.Contains(AtkTags.iceAttack)) text.color=Color.cyan;
+                else if (value.atkTags.Contains(AtkTags.windAttack)) text.color=Color.green;
                 else text.color=Color.white;
             }
         }
