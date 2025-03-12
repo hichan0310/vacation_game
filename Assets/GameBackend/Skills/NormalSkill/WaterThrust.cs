@@ -41,7 +41,6 @@ namespace GameBackend.Skills.NormalSkill
             int hitCount =
                 polygonCollider.OverlapCollider(new ContactFilter2D { layerMask = enemyLayerMask, useLayerMask = true },
                     results);
-
             return hitCount > 0;
         }
 
@@ -52,7 +51,7 @@ namespace GameBackend.Skills.NormalSkill
             if (followUp)
             {
                 followUpTimer -= deltaTime;
-                if (!IsCollidingWithEnemy(player.GetComponent<PolygonCollider2D>()))
+                if (!IsCollidingWithEnemy(player.GetComponent<CapsuleCollider2D>()))
                 {
                     var vector3 = player.transform.position;
                     vector3.x += (followUpTimer + 0.1f) * player.status.movePower * deltaTime *
