@@ -36,7 +36,7 @@ namespace GameFrontEnd.Effects.SkillEffects.WaterThrust
             hit.Add(col);
             
             List<AtkTags> atkTags=new List<AtkTags>() { AtkTags.waterAttack, AtkTags.normalSkill };
-            int trueDmg=caster.status.calculateTrueDamage(atkTags, atkCoef:30);
+            int trueDmg=caster.status.calculateTrueDamage(atkTags, atkCoef:100);
             new DmgGiveEvent(trueDmg, 0.1f, caster, col, atkTags);
         }
     }
