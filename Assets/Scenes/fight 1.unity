@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyManager: {fileID: 1589944215}
-  DialogueManager: {fileID: 0}
+  DialogueManager: {fileID: 8436581566362365652, guid: fb3d80ce67f17614ca60e05afb9018cf, type: 3}
 --- !u!1 &203428160
 GameObject:
   m_ObjectHideFlags: 0
@@ -1333,7 +1333,7 @@ Transform:
   m_GameObject: {fileID: 1729357515}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.0625018, y: 0.49132118, z: -0.029997153}
+  m_LocalPosition: {x: 0, y: 0, z: -0.029997153}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

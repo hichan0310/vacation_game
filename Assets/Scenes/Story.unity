@@ -302,53 +302,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 813654220512409819, guid: fb3d80ce67f17614ca60e05afb9018cf, type: 3}
-      propertyPath: m_UiScaleMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2011332349154939699, guid: fb3d80ce67f17614ca60e05afb9018cf, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2011332349154939699, guid: fb3d80ce67f17614ca60e05afb9018cf, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2053417972965955171, guid: fb3d80ce67f17614ca60e05afb9018cf, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2053417972965955171, guid: fb3d80ce67f17614ca60e05afb9018cf, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2053417972965955171, guid: fb3d80ce67f17614ca60e05afb9018cf, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2053417972965955171, guid: fb3d80ce67f17614ca60e05afb9018cf, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2053417972965955171, guid: fb3d80ce67f17614ca60e05afb9018cf, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 1024
-      objectReference: {fileID: 0}
-    - target: {fileID: 2053417972965955171, guid: fb3d80ce67f17614ca60e05afb9018cf, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 1024
-      objectReference: {fileID: 0}
     - target: {fileID: 5374529188623536277, guid: fb3d80ce67f17614ca60e05afb9018cf, type: 3}
       propertyPath: m_Name
       value: Dialogue
-      objectReference: {fileID: 0}
-    - target: {fileID: 5516634276398383065, guid: fb3d80ce67f17614ca60e05afb9018cf, type: 3}
-      propertyPath: m_VertexColorAlwaysGammaSpace
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5516634276398383065, guid: fb3d80ce67f17614ca60e05afb9018cf, type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

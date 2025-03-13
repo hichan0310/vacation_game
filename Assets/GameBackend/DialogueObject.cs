@@ -9,8 +9,8 @@ namespace GameBackend
     {
         public EnemyManager enemyManager;
         public DialogueManager DialogueManager;
-        
-        
+
+
         private void Start()
         {
             Debug.Log("asdf");
@@ -18,11 +18,13 @@ namespace GameBackend
 
         private void OnTriggerStay2D(Collider2D other)
         {
-            if (enemyManager.enemyWaveFinished)
+            if (Input.GetKeyDown(InputHandler.Interaction))
             {
-                if (Input.GetKey(InputHandler.Interaction))
+                Debug.Log("Interaction");
+
+                if (enemyManager.enemyWaveFinished)
                 {
-                    Debug.Log("Interaction");
+                    Instantiate(DialogueManager);
                 }
             }
         }

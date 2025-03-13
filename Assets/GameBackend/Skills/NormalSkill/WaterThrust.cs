@@ -9,7 +9,7 @@ namespace GameBackend.Skills.NormalSkill
     public class WaterThrust : NormalSkill
     {
         float cooldown = 1;
-        float cooltime = 4;
+        float cooltime = 1;
         bool followUp = false;
         float followUpTimer = 0.7f;
         bool followUpEnd = false;

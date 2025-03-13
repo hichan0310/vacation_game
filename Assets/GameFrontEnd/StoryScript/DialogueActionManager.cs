@@ -24,11 +24,20 @@ namespace GameFrontEnd.StoryScript
     }
     public class DialogueActionManager : MonoBehaviour
     {
-        public static DialogueActionManager Instance { get; private set; }
-    
+        
 
-
-        private Story story;
+        public string storyFilePath
+        {
+            set
+            {
+                foreach (StoryUnit unit in new Story(value, this).units)
+                {
+                    this.name1.Add(unit.name);
+                    this.talk1.Add(unit.dialogue);
+                    this.functions.Add(unit.funcs);
+                }
+            }
+        }
 
 
         private int text_index;
@@ -58,8 +67,12 @@ namespace GameFrontEnd.StoryScript
             return true;
         }
 
+        public Vector2 canvasSize => new(Screen.width, Screen.height);
+
         private void Awake()
         {
+            this.finished = false;
+            
             characters = new List<Character>()
             {
                 MainCharacter,
@@ -69,29 +82,12 @@ namespace GameFrontEnd.StoryScript
                 Helios,
             };
         
-            if (Instance == null)
-            {
-                Instance = this; // Singleton 초기화
-            }
-            else
-            {
-                Destroy(gameObject); // 중복된 매니저 제거
-            }
-
-            this.story = new TestStory1();
-        
             text_index = 0;
             textfield_name = GameObject.Find("CharName").GetComponent<TMP_Text>();
             textfield_text = GameObject.Find("dialogue").GetComponent<TMP_Text>();
-
-
-            foreach (StoryUnit unit in story.units)
-            {
-                this.name1.Add(unit.name);
-                this.talk1.Add(unit.dialogue);
-                this.functions.Add(unit.funcs);
-            }
         }
+        
+        public bool finished { get; set; }
 
         public void Update()
         {
@@ -102,7 +98,12 @@ namespace GameFrontEnd.StoryScript
 
             if (Input.GetMouseButtonDown(0) && motionEnd())
             {
-                if (!Dialogue.isTalking && text_index < 9)
+                if (text_index >= name1.Count)
+                {
+                    this.finished = true;
+                    return;
+                }
+                if (!Dialogue.isTalking)
                 {
                     foreach (var func in functions[text_index])
                     {

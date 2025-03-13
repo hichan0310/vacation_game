@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
@@ -7,7 +8,8 @@ namespace GameFrontEnd.StoryScript
 {
     public class Character:MonoBehaviour
     {
-        private new SpriteRenderer renderer;
+        public Vector2 canvasSize{get;set;} = Vector2.zero;
+        private new CanvasRenderer renderer;
         private float fadeDuration = 1f;
         private float y;
 
@@ -59,22 +61,20 @@ namespace GameFrontEnd.StoryScript
         
         private void Awake()
         {
-            renderer = GetComponent<SpriteRenderer>();
+            renderer = GetComponent<CanvasRenderer>();
             // finalRotation = transform.eulerAngles.z;
             // finalScale = transform.localScale;
             y = transform.position.y;
-            setPosition(new Vector3(0, -2000, 0));
+            setPosition(new Vector3(Screen.width/2, -Screen.height, 0));
             // finalPosition = transform.position;
         }
-        
-        public void SetAlpha(float alpha)
+
+        public void setSize(Vector2 size)
         {
-            alpha = Mathf.Clamp01(alpha);
-            Color c = renderer.color;
-            c.a = alpha;
-            renderer.color = c;
-            // finalAlpha = alpha;
+            this.canvasSize = size;
         }
+
+        
         public void setPosition(Vector3 position)
         {
             transform.position = position;
@@ -95,36 +95,33 @@ namespace GameFrontEnd.StoryScript
         public void appear_right_move(float[] param_list)
         {
             var tmp = transform.position;
-            tmp.x = 15;
+            tmp.x = canvasSize.x*1.3f;
             tmp.y = y;
             transform.position = tmp;
-            StartAndStoreCoroutine(movex(-9, 0.7f));
+            StartAndStoreCoroutine(movex(-canvasSize.x/2, 0.7f));
             // finalPosition = tmp+new Vector3(-9, 0, 0);
         }
 
         public void disappear_right_move(float[] param_list)
         {
-            var tmp = transform.position;
-            tmp.x = 18;
-            StartAndStoreCoroutine(movex(18-transform.position.x, 0.7f));
+            
+            StartAndStoreCoroutine(movex(canvasSize.x*1.5f-transform.position.x, 0.7f));
             // finalPosition = tmp;
         }
 
         public void appear_left_move(float[] param_list)
         {
             var tmp = transform.position;
-            tmp.x = -15;
+            tmp.x = -canvasSize.x*0.3f;
             tmp.y = y;
             transform.position = tmp;
-            StartAndStoreCoroutine(movex(9, 0.7f));
+            StartAndStoreCoroutine(movex(canvasSize.x/2, 0.7f));
             // finalPosition = tmp+new Vector3(9, 0, 0);
         }
         
         public void disappear_left_move(float[] param_list)
         {
-            var tmp = transform.position;
-            tmp.x = -18;
-            StartAndStoreCoroutine(movex(-18-transform.position.x, 0.7f));
+            StartAndStoreCoroutine(movex(-canvasSize.x*0.5f-transform.position.x, 0.7f));
             // finalPosition = tmp;
         }
 
@@ -167,10 +164,10 @@ namespace GameFrontEnd.StoryScript
 
         private IEnumerator littleJump()
         {
-            yield return transform.DOMoveY(transform.position.y + 0.4f, 0.15f)
+            yield return transform.DOMoveY(transform.position.y + canvasSize.y/25, 0.15f)
                 .SetEase(Ease.OutCubic)
                 .WaitForCompletion();
-            yield return transform.DOMoveY(transform.position.y - 0.4f, 0.15f)
+            yield return transform.DOMoveY(transform.position.y - canvasSize.y/25, 0.15f)
                 .SetEase(Ease.InCubic)
                 .WaitForCompletion();
         }
@@ -178,10 +175,10 @@ namespace GameFrontEnd.StoryScript
         private IEnumerator fastJump(float time)
         {
             yield return new WaitForSeconds(time);
-            yield return transform.DOMoveY(transform.position.y + 1.2f, 0.2f)
+            yield return transform.DOMoveY(transform.position.y + canvasSize.y/25*3, 0.2f)
                 .SetEase(Ease.OutCubic)
                 .WaitForCompletion();
-            yield return transform.DOMoveY(transform.position.y - 1.2f, 0.2f)
+            yield return transform.DOMoveY(transform.position.y - canvasSize.y/25*3, 0.2f)
                 .SetEase(Ease.InCubic)
                 .WaitForCompletion();
         }
@@ -196,7 +193,7 @@ namespace GameFrontEnd.StoryScript
                 .SetEase(Ease.Unset) 
                 .WaitForCompletion();
             
-            yield return transform.DOMoveY(transform.position.y - 10, 0.5f)
+            yield return transform.DOMoveY(transform.position.y - canvasSize.y, 0.5f)
                 .SetEase(Ease.Unset)
                 .WaitForCompletion();
             
@@ -231,43 +228,36 @@ namespace GameFrontEnd.StoryScript
 
         private IEnumerator FadeOutRoutine(float time)
         {
-            Color color = renderer.color;
-            float startAlpha = color.a;
+            float startAlpha = renderer.GetAlpha();
             float elapsedTime = 0f;
 
             while (elapsedTime < time)
             {
                 elapsedTime += Time.deltaTime;
-                color.a = Mathf.Lerp(startAlpha, 0f, elapsedTime / time);
-                renderer.color = color;
+                float newAlpha = Mathf.Lerp(startAlpha, 0f, elapsedTime / time);
+                renderer.SetAlpha(newAlpha);
                 yield return null;
             }
 
-            color.a = 0f;
-            renderer.color = color;
+            renderer.SetAlpha(0f);
         }
 
-        
         private IEnumerator FadeInRoutine(float time)
         {
-            Color color = renderer.color;
-            float startAlpha = 0f; // 처음엔 완전히 투명
+            float startAlpha = 0f;
             float elapsedTime = 0f;
 
-            color.a = startAlpha;
-            renderer.color = color;
-            gameObject.SetActive(true); // 먼저 활성화
+            renderer.SetAlpha(startAlpha);
 
             while (elapsedTime < time)
             {
                 elapsedTime += Time.deltaTime;
-                color.a = Mathf.Lerp(startAlpha, 1f, elapsedTime / time);
-                renderer.color = color;
+                float newAlpha = Mathf.Lerp(startAlpha, 1f, elapsedTime / time);
+                renderer.SetAlpha(newAlpha);
                 yield return null;
             }
 
-            color.a = 1f;
-            renderer.color = color;
+            renderer.SetAlpha(1f);
         }
     }
 }
