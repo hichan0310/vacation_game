@@ -18,11 +18,11 @@ namespace GameFrontEnd.StoryScript
     
     public class Story
     {
-        public Character MainCharacter=DialogueManager.Instance.MainCharacter;
-        public Character Luna=DialogueManager.Instance.Luna;
-        public Character Luna_fire=DialogueManager.Instance.Luna_fire;
-        public Character Astra=DialogueManager.Instance.Astra;
-        public Character Helios=DialogueManager.Instance.Helios;
+        public Character MainCharacter=DialogueActionManager.Instance.MainCharacter;
+        public Character Luna=DialogueActionManager.Instance.Luna;
+        public Character Luna_fire=DialogueActionManager.Instance.Luna_fire;
+        public Character Astra=DialogueActionManager.Instance.Astra;
+        public Character Helios=DialogueActionManager.Instance.Helios;
 
         // protected void addUnit(string name, string dialogue, params FunctionCall[] actions)
         // {
