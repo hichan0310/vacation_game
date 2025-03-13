@@ -7,7 +7,7 @@ namespace GameFrontEnd.StoryScript
 {
     public class Character:MonoBehaviour
     {
-        private SpriteRenderer renderer;
+        private new SpriteRenderer renderer;
         private float fadeDuration = 1f;
         private float y;
 
