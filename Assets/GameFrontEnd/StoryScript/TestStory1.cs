@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using UnityEngine;
 
 namespace GameFrontEnd.StoryScript
 {
@@ -36,7 +37,7 @@ namespace GameFrontEnd.StoryScript
                     string line = sr.ReadLine();
                     string[] values = new string[0];
                     values = line.Split(',');
-                    name = values[0];
+                    name = (values[0] == "주인공") ? (PlayerPrefs.HasKey("hero") ? PlayerPrefs.GetString("hero") : "임시") : values[0];
                     dialogue_num = int.Parse(values[1]);
                     dialogue_textlist = new StringBuilder();
                     for (int i = 0; i < dialogue_num; i++)
