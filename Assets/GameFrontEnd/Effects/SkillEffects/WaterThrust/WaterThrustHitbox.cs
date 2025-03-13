@@ -19,7 +19,7 @@ namespace GameFrontEnd.Effects.SkillEffects.WaterThrust
             this.destroy();
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        private new void OnTriggerEnter2D(Collider2D other)
         {
             Entity target = other.gameObject.GetComponent<Entity>();
             if (target is Enemy enemy)

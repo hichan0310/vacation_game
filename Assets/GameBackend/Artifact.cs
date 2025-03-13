@@ -8,7 +8,7 @@ namespace GameBackend
     public abstract class Artifact : MonoBehaviour, IEntityEventListener
     { 
         public virtual int grade => 1;
-        public string name { get; set; }
+        public new string name { get; set; }
         public string description { get; set; }
         public PlayerObject player { get; set; }
 

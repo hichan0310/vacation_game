@@ -26,7 +26,6 @@ namespace GameFrontEnd.Objects
         private float jumpPower = 3.6f;
         public bool isJumping = false;
         private bool isJumpatk = false;
-        private bool isnormalattack = false;
         private Rigidbody2D rigid;
         private Entity player;
 
@@ -157,7 +156,6 @@ namespace GameFrontEnd.Objects
         {
             animator.SetInteger("atknum", atknum);
             animator.SetTrigger("atk");
-            isnormalattack = true;
             NormalAttackExecuteEvent evnt = new NormalAttackExecuteEvent(this, new List<AtkTags>());
             this.eventActive(evnt);
         }
