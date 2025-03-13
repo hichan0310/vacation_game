@@ -23,11 +23,11 @@ namespace GameFrontEnd.StoryScript
     
     public class Story
     {
-        public Character MainCharacter{get;set;}
-        public Character Luna{get;set;}
-        public Character Luna_fire{get;set;}
-        public Character Astra{get;set;}
-        public Character Helios{get;set;}
+        public static Character MainCharacter{get;set;}
+        public static Character Luna{get;set;}
+        public static Character Luna_fire{get;set;}
+        public static Character Astra{get;set;}
+        public static Character Helios{get;set;}
 
         private string name;
         private int dialogue_num;
@@ -36,6 +36,7 @@ namespace GameFrontEnd.StoryScript
         private int action_index;
         private int action_num;
         private int actionparam_num;
+        private string[] values;
         public Story(string filePath, DialogueActionManager manager)
         {
             MainCharacter = manager.MainCharacter;
@@ -50,16 +51,6 @@ namespace GameFrontEnd.StoryScript
             Astra.setSize(manager.canvasSize);
             Helios.setSize(manager.canvasSize);
             
-            
-            // object GetObjectByName(string objectName)
-            // {
-            //     Type dialogueManagerType = typeof(DialogueActionManager);
-            //     object dialogueManagerInstance = dialogueManagerType.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static)?.GetValue(null);
-            //     FieldInfo fieldInfo = dialogueManagerType.GetField(objectName, BindingFlags.Public | BindingFlags.Instance);
-            //     return fieldInfo.GetValue(dialogueManagerInstance);
-            // }
-            // todo : manager 쓴걸로 바꾸기
-
             using (StreamReader sr = new StreamReader(filePath, Encoding.GetEncoding("euc-kr")))
             {
                 string headerLine = sr.ReadLine();
@@ -67,7 +58,6 @@ namespace GameFrontEnd.StoryScript
                 while (!sr.EndOfStream)
                 {
                     string line = sr.ReadLine();
-                    string[] values = new string[0];
                     values = line.Split(',');
                     name = (values[0] == "주인공") ? (PlayerPrefs.HasKey("hero") ? PlayerPrefs.GetString("hero") : "임시") : values[0];
                     dialogue_num = int.Parse(values[1]);
@@ -90,10 +80,10 @@ namespace GameFrontEnd.StoryScript
                     {
                         string objectName = values[action_index + 1].Split(".")[0];
                         string methodName = values[action_index + 1].Split(".")[1];
-                        object targetObject = GetObjectByName(objectName);
+                        object targetObject = GetPropertyValueByName($"{objectName}");
                         actionparam_num = int.Parse(values[action_index + 2]);
-                        Type type = targetObject.GetType();
-                        MethodInfo method = type.GetMethod(methodName);
+                        Type type2 = targetObject.GetType();
+                        MethodInfo method = type2.GetMethod(methodName);
                         List<float> paramList = new List<float>();
                         for (int j = 0; j < actionparam_num; j++)
                         {
@@ -114,6 +104,14 @@ namespace GameFrontEnd.StoryScript
                     ));
                 }
             }
+
+        }
+
+        private object GetPropertyValueByName(string propertyName)
+        {
+            Type storyType = typeof(Story);
+            PropertyInfo propertyInfo = storyType.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Static);
+            return propertyInfo.GetValue(null);  
         }
         
         public List<StoryUnit> units { get; private set; } = new List<StoryUnit>();
