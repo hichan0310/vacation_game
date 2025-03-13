@@ -10,6 +10,7 @@ TagManager:
   - Chamgyuck
   - Plate
   - Skilleffect
+  - Ceil
   layers:
   - Default
   - TransparentFX
