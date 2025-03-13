@@ -162,7 +162,7 @@ namespace GameFrontEnd.Objects
 
         protected override void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.tag == "Plate")
+            if (collision.gameObject.tag == "Plate" && (gameObject.transform.position.y - 0.3f) > collision.contacts[0].point.y )
             { 
                 if (isJumping) animator.ResetTrigger("atk");
                 isJumping = false;
