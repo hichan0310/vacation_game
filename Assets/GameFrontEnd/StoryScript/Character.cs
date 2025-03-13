@@ -63,7 +63,7 @@ namespace GameFrontEnd.StoryScript
             // finalRotation = transform.eulerAngles.z;
             // finalScale = transform.localScale;
             y = transform.position.y;
-            setPosition(new Vector3(0, -20, 0));
+            setPosition(new Vector3(0, -2000, 0));
             // finalPosition = transform.position;
         }
         
