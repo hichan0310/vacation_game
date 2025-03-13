@@ -1,23 +1,28 @@
 ﻿using System;
 using GameFrontEnd.Effects;
+using GameFrontEnd.StoryScript;
 using UnityEngine;
 
 namespace GameBackend
 {
-    public class DialogueObject:MonoBehaviour
+    public class DialogueObject : MonoBehaviour
     {
         public EnemyManager enemyManager;
-        private void OnTriggerEnter(Collider other)
+        public DialogueManager DialogueManager;
+        
+        
+        private void Start()
         {
-            Debug.Log(other.gameObject.name); //fucking not work
+            Debug.Log("asdf");
+        }
+
+        private void OnTriggerStay2D(Collider2D other)
+        {
             if (enemyManager.enemyWaveFinished)
             {
-                if (other.gameObject.CompareTag("Player"))
+                if (Input.GetKey(InputHandler.Interaction))
                 {
-                    if (Input.GetKeyDown(InputHandler.Interaction))
-                    {
-                        Debug.Log("Interaction");
-                    }
+                    Debug.Log("Interaction");
                 }
             }
         }

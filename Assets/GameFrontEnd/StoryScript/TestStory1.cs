@@ -21,7 +21,7 @@ namespace GameFrontEnd.StoryScript
             
             object GetObjectByName(string objectName)
             {
-                Type dialogueManagerType = typeof(DialogueManager);
+                Type dialogueManagerType = typeof(DialogueActionManager);
                 object dialogueManagerInstance = dialogueManagerType.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static)?.GetValue(null);
                 FieldInfo fieldInfo = dialogueManagerType.GetField(objectName, BindingFlags.Public | BindingFlags.Instance);
                 return fieldInfo.GetValue(dialogueManagerInstance);
