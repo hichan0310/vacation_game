@@ -1,5 +1,6 @@
 ﻿using System;
 using GameFrontEnd.Effects;
+using GameFrontEnd.Objects;
 using GameFrontEnd.StoryScript;
 using UnityEngine;
 
@@ -8,23 +9,38 @@ namespace GameBackend
     public class DialogueObject : MonoBehaviour
     {
         public EnemyManager enemyManager;
-        public DialogueManager DialogueManager;
-
+        public DialogueManager dialogueManager;
+        public PlayerObject playerObject;
+        private bool dialogueStart = false; 
 
         private void Start()
         {
-            Debug.Log("asdf");
+        }
+
+        private void Update()
+        {
+            if (dialogueStart && Input.GetKeyDown(InputHandler.Interaction))
+            {
+                if (!this.dialogueManager.next())
+                {
+                    this.playerObject.controlable = true;
+                    Destroy(gameObject);
+                }
+            }
         }
 
         private void OnTriggerStay2D(Collider2D other)
         {
-            if (Input.GetKeyDown(InputHandler.Interaction))
+            if (!dialogueStart)
             {
-                Debug.Log("Interaction");
-
-                if (enemyManager.enemyWaveFinished)
+                if (Input.GetKeyDown(InputHandler.Interaction))
                 {
-                    Instantiate(DialogueManager);
+                    if (enemyManager.enemyWaveFinished)
+                    {
+                        dialogueStart = true;
+                        dialogueManager=Instantiate(dialogueManager);
+                        this.playerObject.controlable = false;
+                    }
                 }
             }
         }

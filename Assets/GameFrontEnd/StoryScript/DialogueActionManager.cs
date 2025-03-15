@@ -89,14 +89,10 @@ namespace GameFrontEnd.StoryScript
         
         public bool finished { get; set; }
 
-        public void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Debug.Log(Luna.coroutines.Count);
-            }
 
-            if (Input.GetMouseButtonDown(0) && motionEnd())
+        public void next()
+        {
+            if (motionEnd())
             {
                 if (text_index >= name1.Count)
                 {
@@ -124,6 +120,17 @@ namespace GameFrontEnd.StoryScript
                     // Luna.setFinal();
                 }
             }
+        }
+        
+
+        public void Update()
+        {
+            // if (Input.GetKeyDown(KeyCode.Space))
+            // {
+            //     Debug.Log(Luna.coroutines.Count);
+            // }
+
+            
         }
     }
 }

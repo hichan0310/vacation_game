@@ -16,6 +16,12 @@ namespace GameFrontEnd.StoryScript
             manager.storyFilePath = "Assets/GameBackend/CSV/dialogue.csv";
         }
 
+        public bool next()
+        {
+            this.manager.next();
+            return !manager.finished;
+        }
+
         private void Update()
         {
             if (manager.finished)

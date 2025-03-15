@@ -19,31 +19,31 @@ namespace GameBackend
         {
             waveDatas.Add(new()
             {
-                // new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
-                // new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
-                // new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
+                new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
+                new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
+                new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
                 new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
             });
             
             waveDatas.Add(new()
             {
-                // new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
-                // new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
-                // new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
-                // new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
-                // new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
+                new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
+                new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
+                new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
+                new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
+                new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
                 new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
             });
             
             waveDatas.Add(new()
             {
-                // new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
-                // new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
-                // new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
-                // new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
-                // new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
-                // new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
-                // new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
+                new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
+                new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
+                new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
+                new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
+                new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
+                new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
+                new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
                 new EnemySpawnInfo(new Vector2(Random.Range(-6f, 6f), 0), 0),
             });
         }
