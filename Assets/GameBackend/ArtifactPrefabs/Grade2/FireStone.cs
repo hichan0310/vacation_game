@@ -9,7 +9,7 @@ namespace GameBackend.ArtifactPrefabs.Grade2
     {
         public Gumgi gumgi;
         private float cooldown = 0;
-        private float coolTime = 6;
+        private readonly float coolTime = 6;
         
         public override int grade => 2;
 

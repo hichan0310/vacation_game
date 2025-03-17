@@ -3,19 +3,26 @@ using GameBackend.Status;
 using GameBackend.Events;
 using UnityEngine;
 using GameBackend.Buffs;
+using UnityEngine.Rendering;
 
 namespace GameBackend.ArtifactPrefabs.Grade_Legend
 {
     public class SolarAndLunaEclipse:Artifact, IBuffStatus
     {
-        public override int grade => 4;
-        private float cooldown = 0;
-        private float coolTime = 10;
-        private float duration = 0;
-        private float duration_max = 10;
+        private float cooldown;
+        private readonly float coolTime = 10;
+        private float duration;
+        private readonly float duration_max = 15;
         private bool isBuff = false;
-        private bool Bufftype = true; // true가 스킬 false가 궁극기
-        
+        private bool Bufftype = true; // true가 스킬 false가 궁극기\
+        private bool isLunaeclipse = false;
+        public override int grade => 4;
+        private void Awake()
+        {
+            cooldown = 10;
+            duration = 0;
+        }
+
         private void Start()
         {
             this.name = "일식, 월식";
@@ -32,6 +39,7 @@ namespace GameBackend.ArtifactPrefabs.Grade_Legend
                     isBuff = true;
                     Bufftype = true;
                     buffStatus(player.status);
+                    player.addBuff(this);
                 }
                 else if (eventArgs is UltimateSkillAttackExecuteEvent)
                 {
@@ -39,15 +47,28 @@ namespace GameBackend.ArtifactPrefabs.Grade_Legend
                     duration = duration_max;
                     isBuff = true;
                     Bufftype = false;
-                    // 모든 스킬 출혈은 어케만들지 고민좀 해봐야겠다
+                    isLunaeclipse = true;
                 }
 
+            }
+            if(isLunaeclipse && eventArgs is DmgGiveEvent dmgGiveEvent && !dmgGiveEvent.atkTags.Contains(AtkTags.statusEffect))
+            {
+                BloodLoss bloodLoss = new BloodLoss(player.status.calculateTrueDamage(new List<AtkTags>
+                {
+                    AtkTags.statusEffect
+                }, atkCoef: 5), 1, player);
+                bloodLoss.registrarTarget(dmgGiveEvent.target);
+                player.addBuff(bloodLoss);
             }
         }
 
         public override void update(float deltaTime)
         {
             duration -= deltaTime;
+            if(duration <= 0)
+            {
+                cooldown += TimeManager.deltaTime - Time.deltaTime;
+            }
             if (cooldown < 0)
             {
                 cooldown = 0;
@@ -59,18 +80,25 @@ namespace GameBackend.ArtifactPrefabs.Grade_Legend
                 {
                     if(Bufftype == true)
                     {
-                        removebuffStatus(player.status);
+                        player.removeBuff(this);
                         isBuff = false;
                     }
                     else
                     {
-
+                        player.removeBuff(this);
+                        isLunaeclipse = false;
                     }
                 }
             } 
-            if(Input.GetKeyDown(KeyCode.L)) // 시간의 변화를 흡수한다는게 뭔지 모르겠어서 일단 임시 테스트용
+            if(Input.GetKeyDown(KeyCode.L)) 
             {
-                cooldown -= 1;
+                Debug.Log($"cooldown : {cooldown}");
+                Debug.Log($"duration : {duration}");
+                Debug.Log($"crit : {player.status.crit}");
+            }   
+            if(Input.GetKeyDown(KeyCode.K)) 
+            {
+                cooldown = 0;
             }            
         }
 
@@ -79,15 +107,9 @@ namespace GameBackend.ArtifactPrefabs.Grade_Legend
             status.crit += 100;
         }
 
-        public void removebuffStatus(PlayerStatus status)
-        {
-            status.crit -= 100;
-        }
-
         public override void registrarTarget(Entity target)
         {
             base.registrarTarget(target);
-            player.addBuff(this);
         }
     }
 }
