@@ -217,6 +217,8 @@ namespace GameFrontEnd.Objects
             if (this.normalSkill.active && Input.GetKeyDown(InputHandler.Skill))
             {
                 this.normalSkill.execute();
+                NormalSkillAttackExecuteEvent evnt = new NormalSkillAttackExecuteEvent();
+                this.eventActive(evnt);
             }
         }
 
@@ -225,6 +227,8 @@ namespace GameFrontEnd.Objects
             if (this.specialSkill.active && Input.GetKeyDown(InputHandler.Ultimate))
             {
                 this.specialSkill.execute();
+                UltimateSkillAttackExecuteEvent evnt = new UltimateSkillAttackExecuteEvent();
+                this.eventActive(evnt);
             }
         }
 
