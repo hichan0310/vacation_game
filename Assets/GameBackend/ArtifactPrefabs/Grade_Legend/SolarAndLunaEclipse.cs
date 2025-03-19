@@ -3,25 +3,19 @@ using GameBackend.Status;
 using GameBackend.Events;
 using UnityEngine;
 using GameBackend.Buffs;
-using UnityEngine.Rendering;
 
 namespace GameBackend.ArtifactPrefabs.Grade_Legend
 {
     public class SolarAndLunaEclipse:Artifact, IBuffStatus
     {
-        private float cooldown;
+        private float cooldown = 10;
         private readonly float coolTime = 10;
-        private float duration;
+        private float duration = 0;
         private readonly float duration_max = 15;
         private bool isBuff = false;
         private bool Bufftype = true; // true가 스킬 false가 궁극기\
         private bool isLunaeclipse = false;
         public override int grade => 4;
-        private void Awake()
-        {
-            cooldown = 10;
-            duration = 0;
-        }
 
         private void Start()
         {

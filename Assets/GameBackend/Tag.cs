@@ -22,6 +22,8 @@ namespace GameBackend
         selfHit = 13,
         bloodLossDamage = 14,
         artifactDamage = 15,
+        projectileDamage = 16,
+        notcriticalHit = 17,
     }
 
     public static class Tag

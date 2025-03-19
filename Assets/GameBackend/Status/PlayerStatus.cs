@@ -41,6 +41,7 @@ namespace GameBackend.Status
         public float[] dmgUp { get; set; }
         public float movePower { get; set; }
         public float energyRecharge { get; set; }
+        public float projdmgDrain { get; set; }
 
         public PlayerStatus(int baseHp, int baseAtk, int baseDef)
         {
@@ -58,9 +59,10 @@ namespace GameBackend.Status
             this.crit = 5;
             this.critDmg = 50;
             this.dmgUp = new float[Tag.atkTagCount];
-            
+
             this.movePower = 1.6f;
             this.energyRecharge = 100f;
+            this.projdmgDrain = 1f;
         }
 
         public PlayerStatus(PlayerStatus copy)
@@ -82,13 +84,14 @@ namespace GameBackend.Status
             
             this.movePower=copy.movePower;
             this.energyRecharge = copy.energyRecharge;
+            this.projdmgDrain = copy.projdmgDrain;
             Array.Copy(copy.dmgUp, this.dmgUp, Tag.atkTagCount);
         }
 
         public int calculateTrueDamage(List<AtkTags> atkTags, float atkCoef=0, float hpCoef=0, float defCoef=0)
         {
             int dmg = (int)((atkCoef * atk + defCoef * def + hpCoef * maxHp)/100);
-            if (Random.value < crit / 100)
+            if (Random.value < crit / 100 && !atkTags.Contains(AtkTags.notcriticalHit))
             {
                 dmg = (int)(dmg * (1 + critDmg / 100));
                 atkTags.Add(AtkTags.criticalHit);
@@ -101,6 +104,10 @@ namespace GameBackend.Status
             foreach (AtkTags atkTag in atkTags)
             {
                 dmg = (int)((dmgUp[(int)atkTag] / 100 + 1) * dmg);
+            }
+            if (atkTags.Contains(AtkTags.projectileDamage))
+            {
+                dmg = (int)(dmg * projdmgDrain);
             }
             return dmg;
         }

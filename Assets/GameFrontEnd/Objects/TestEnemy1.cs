@@ -28,6 +28,10 @@ namespace GameFrontEnd.Objects
             base.update(deltaTime);
             if (this.dead)
             {
+                EnemyDieEvent evnt = new EnemyDieEvent();
+                GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+                foreach(GameObject player in players)
+                player.GetComponent<Player<TestPlayerInfo1>>().eventActive(evnt);
                 Destroy(hpBarObject);
             }
             else
