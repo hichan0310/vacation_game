@@ -904,6 +904,7 @@ MonoBehaviour:
   - {fileID: 3632243553363690961, guid: 21eb42265c68fcd4db7582c31fd61b9e, type: 3}
   - {fileID: 3703947815527082943, guid: 7ce52143d96c48949bec95ffda5798f8, type: 3}
   - {fileID: 7691699020603858834, guid: 58923e3351c0c904db9509d5ec70b00b, type: 3}
+  - {fileID: 5883170419522752958, guid: 11a56db0f34543d42940e75d811b5867, type: 3}
   controlable: 1
   moveable: 1
   jumpable: 1
