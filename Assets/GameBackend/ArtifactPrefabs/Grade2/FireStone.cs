@@ -42,7 +42,8 @@ namespace GameBackend.ArtifactPrefabs.Grade2
                     List<AtkTags> tag = new List<AtkTags>
                     {
                         AtkTags.fireAttack,
-                        AtkTags.artifactDamage
+                        AtkTags.artifactDamage,
+                        AtkTags.projectileDamage
                     };
                     gumg.dmgInfo = new DmgInfo(player.status.calculateTrueDamage(tag, atkCoef: 30), 0.1f, player, tag);
                     gumg.apply();
