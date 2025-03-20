@@ -165,15 +165,18 @@ namespace GameFrontEnd.Objects
             this.eventActive(evnt);
         }
 
-        protected override void OnCollisionEnter2D(Collision2D collision)
+        private void OnCollisionStay2D(Collision2D collision)
         {
-            if (collision.gameObject.tag == "Plate" && (gameObject.transform.position.y - 0.3f) > collision.contacts[0].point.y )
-            { 
-                if (isJumping) animator.ResetTrigger("atk");
-                isJumping = false;
-                isJumpatk = false;
-                doubleJump = false;
-                animator.SetBool("doubleJump", false);
+            foreach (ContactPoint2D contact in collision.contacts)
+            {
+                if (collision.gameObject.tag == "Plate" && contact.normal.y > 0.9f && GetComponent<Rigidbody2D>().velocity.y <= 0) 
+                {
+                    if (isJumping) animator.ResetTrigger("atk");
+                    isJumpatk = false;
+                    doubleJump = false;
+                    animator.SetBool("doubleJump", false);
+                    isJumping = false;
+                }
             }
         }
 
