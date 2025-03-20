@@ -53,7 +53,7 @@ namespace GameBackend.Status
             this.critDmg = 50;
             this.dmgUp = new float[Tag.atkTagCount];
 
-            this.movePower = 1.6f;
+            this.movePower = 2.2f;
             this.energyRecharge = 100f;
             this.dmgDrain = new float[Tag.atkTagCount];
             for (int i = 0; i < Tag.atkTagCount; i++)
