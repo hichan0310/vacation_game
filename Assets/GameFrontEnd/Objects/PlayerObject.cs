@@ -79,6 +79,9 @@ namespace GameFrontEnd.Objects
 
         protected override void update(float deltaTime)
         {
+            var vector2 = this.rigid.velocity;
+            vector2.x = 0;
+            this.rigid.velocity = vector2;
             base.update(deltaTime);
             if (this.dead)
             {
