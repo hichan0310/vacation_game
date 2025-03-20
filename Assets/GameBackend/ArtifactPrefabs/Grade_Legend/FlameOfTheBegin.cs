@@ -12,10 +12,13 @@ namespace GameBackend.ArtifactPrefabs.Grade_Legend
         private List<AtkTags> atkTags = new() { AtkTags.fireAttack, AtkTags.selfHit, AtkTags.notcriticalHit};
         private float cooldown = 0;
         private readonly float coolTime = 0.25f;
+        private bool buffOn = false;
+        
+        
         private void Start()
         {
             this.name = "태초의 불씨";
-            this.description = "자신에게 지속적으로 공격력의 1%에 해당하는 화상 피해를 입힌다. hp가 30% 이상일 때만 hp를 잃고 투사체 데미지가 100% 증가하는 버프를 얻는다.";
+            this.description = "자신에게 4초 간격으로 공격력의 1%에 해당하는 화상 피해를 입힌다. hp가 30% 이상일 때만 hp를 잃고 투사체 데미지가 4초동안 100% 증가하는 버프를 얻는다.";
         }
         public override void eventActive<T>(T eventArgs)
         {
@@ -33,23 +36,24 @@ namespace GameBackend.ArtifactPrefabs.Grade_Legend
                         player.status.calculateTrueDamage(atkTags, atkCoef: 1),
                         0, player, player, atkTags
                     );
+                    buffOn = true;
+                }
+                else
+                {
+                    buffOn = false;
                 }
                 cooldown = 0;
-            }
-            if(Input.GetKeyDown(KeyCode.M))
-            {
-                SetBuff();
             }
         }
 
         public void buffStatus(PlayerStatus status)
         {
-            status.dmgDrain[(int)AtkTags.projectileDamage] *= 2;
+            if(buffOn)status.dmgDrain[(int)AtkTags.projectileDamage] *= 2;
         }
-
-        private void SetBuff()
+        
+        public override void registrarTarget(Entity target)
         {
-            buffStatus(player.status);
+            base.registrarTarget(target);
             player.addBuff(this);
         }
     }

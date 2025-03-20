@@ -30,5 +30,11 @@ namespace GameBackend.ArtifactPrefabs.Grade_Legend
         {
             status.increaseAtk += count;
         }
+        
+        public override void registrarTarget(Entity target)
+        {
+            base.registrarTarget(target);
+            player.addBuff(this);
+        }
     }
 }
