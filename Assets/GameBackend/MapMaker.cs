@@ -19,6 +19,7 @@ namespace GameBackend
             // connection.open() 하고 connection끼리 좌표 겹치게 연결
             // 그 상황에서 value도 최대한 비슷하게 해야 해서 신경쓸게 많음. 
             // 구현은 꽤 빡셀듯
+            // 맵끼리 겹치는 것도 생각해야 하려나?
         }
     }
 }
