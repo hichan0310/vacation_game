@@ -11,7 +11,8 @@ namespace GameBackend.ArtifactPrefabs.Grade_Legend
     {
         private List<AtkTags> atkTags = new() { AtkTags.fireAttack, AtkTags.selfHit, AtkTags.notcriticalHit};
         private float cooldown = 0;
-        private readonly float coolTime = 0.25f;
+        private readonly float coolTime = 4;
+        private float Bufftime = 0;
         private bool buffOn = false;
         
         
@@ -28,6 +29,11 @@ namespace GameBackend.ArtifactPrefabs.Grade_Legend
         public override void update(float deltaTime)
         {
             cooldown += deltaTime;
+            Bufftime += deltaTime;
+            if(Bufftime > 4)
+            {
+                buffOn = false;
+            }
             if(cooldown > coolTime)
             {
                 if(player.status.nowHp >= player.status.maxHp * 0.3f)
@@ -37,6 +43,7 @@ namespace GameBackend.ArtifactPrefabs.Grade_Legend
                         0, player, player, atkTags
                     );
                     buffOn = true;
+                    Bufftime = 0;
                 }
                 else
                 {
