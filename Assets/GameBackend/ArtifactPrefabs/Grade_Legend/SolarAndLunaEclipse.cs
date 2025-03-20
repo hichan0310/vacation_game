@@ -26,7 +26,7 @@ namespace GameBackend.ArtifactPrefabs.Grade_Legend
         {
             if (cooldown == 0)
             {
-                if (eventArgs is NormalSkillAttackExecuteEvent)
+                if (eventArgs is NormalSkillExecuteEvent)
                 {
                     cooldown = coolTime;
                     duration = duration_max;
@@ -35,7 +35,7 @@ namespace GameBackend.ArtifactPrefabs.Grade_Legend
                     buffStatus(player.status);
                     player.addBuff(this);
                 }
-                else if (eventArgs is UltimateSkillAttackExecuteEvent)
+                else if (eventArgs is SpecialSkillExecuteEvent)
                 {
                     cooldown = coolTime;
                     duration = duration_max;

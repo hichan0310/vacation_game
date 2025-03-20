@@ -14,7 +14,7 @@ namespace GameBackend.ArtifactPrefabs.Grade_Legend
         }
         public override void eventActive<T>(T eventArgs)
         {
-            if (eventArgs is EnemyDieEvent && count < 100)
+            if (eventArgs is EntityDieEvent && count < 100)
             {
                 count++;
                 player.removeBuff(this);

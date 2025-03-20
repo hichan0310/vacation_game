@@ -41,7 +41,9 @@ namespace GameBackend.Status
         public float[] dmgUp { get; set; }
         public float movePower { get; set; }
         public float energyRecharge { get; set; }
-        public float projdmgDrain { get; set; }
+        
+        // 사실 배열 많이 쓰면 이거 복사할 때 무리가 갈 가능성도 있긴 해서 피증 하나만 하려고 했는데 2d면 딱히 상관 없으려나?
+        public float[] dmgDrain { get; set; }
 
         public PlayerStatus(int baseHp, int baseAtk, int baseDef)
         {
@@ -62,7 +64,11 @@ namespace GameBackend.Status
 
             this.movePower = 1.6f;
             this.energyRecharge = 100f;
-            this.projdmgDrain = 1f;
+            this.dmgDrain = new float[Tag.atkTagCount];
+            for (int i = 0; i < Tag.atkTagCount; i++)
+            {
+                this.dmgDrain[i] = 1.0f;
+            }
         }
 
         public PlayerStatus(PlayerStatus copy)
@@ -81,11 +87,12 @@ namespace GameBackend.Status
             this.crit = copy.crit;
             this.critDmg = copy.critDmg;
             this.dmgUp = new float[Tag.atkTagCount];
+            this.dmgDrain = new float[Tag.atkTagCount];
             
             this.movePower=copy.movePower;
             this.energyRecharge = copy.energyRecharge;
-            this.projdmgDrain = copy.projdmgDrain;
             Array.Copy(copy.dmgUp, this.dmgUp, Tag.atkTagCount);
+            Array.Copy(copy.dmgDrain, this.dmgDrain, Tag.atkTagCount);
         }
 
         public int calculateTrueDamage(List<AtkTags> atkTags, float atkCoef=0, float hpCoef=0, float defCoef=0)
@@ -104,10 +111,7 @@ namespace GameBackend.Status
             foreach (AtkTags atkTag in atkTags)
             {
                 dmg = (int)((dmgUp[(int)atkTag] / 100 + 1) * dmg);
-            }
-            if (atkTags.Contains(AtkTags.projectileDamage))
-            {
-                dmg = (int)(dmg * projdmgDrain);
+                dmg = (int)(dmgDrain[(int)atkTag]*dmg);
             }
             return dmg;
         }

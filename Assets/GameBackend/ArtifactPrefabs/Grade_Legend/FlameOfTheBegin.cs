@@ -44,7 +44,7 @@ namespace GameBackend.ArtifactPrefabs.Grade_Legend
 
         public void buffStatus(PlayerStatus status)
         {
-            status.projdmgDrain += 1;
+            status.dmgDrain[(int)AtkTags.projectileDamage] *= 2;
         }
 
         private void SetBuff()

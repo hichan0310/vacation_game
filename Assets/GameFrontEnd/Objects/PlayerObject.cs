@@ -2,6 +2,8 @@
 using System.Linq;
 using GameBackend;
 using GameBackend.Events;
+using GameBackend.Skills.NormalSkill;
+using GameBackend.Skills.SpecialSkill;
 using GameBackend.Status;
 using UnityEngine;
 
@@ -29,16 +31,16 @@ namespace GameFrontEnd.Objects
         private Rigidbody2D rigid;
         private Entity player;
 
-        public Skill normalSkill;
-        public Skill specialSkill;
+        public NormalSkill normalSkill;
+        public SpecialSkill specialSkill;
         public List<Artifact> artifects;
 
-        public bool controlable = true;
-        public bool moveable = true;
-        public bool jumpable = true;
-        public bool attackable = true;
-        public bool skillExecutable = true;
-        private bool doubleJump=false;
+        public bool controlable { get; set; } = true;
+        public bool moveable { get; set; } = true;
+        public bool jumpable { get; set; } = true;
+        public bool attackable { get; set; } = true;
+        public bool skillExecutable { get; set; } = true;
+        private bool doubleJump { get; set; } = false;
         
         
         private void Awake()
@@ -217,7 +219,7 @@ namespace GameFrontEnd.Objects
             if (this.normalSkill.active && Input.GetKeyDown(InputHandler.Skill))
             {
                 this.normalSkill.execute();
-                NormalSkillAttackExecuteEvent evnt = new NormalSkillAttackExecuteEvent();
+                NormalSkillExecuteEvent evnt = new NormalSkillExecuteEvent(this, this.normalSkill);
                 this.eventActive(evnt);
             }
         }
@@ -227,7 +229,7 @@ namespace GameFrontEnd.Objects
             if (this.specialSkill.active && Input.GetKeyDown(InputHandler.Ultimate))
             {
                 this.specialSkill.execute();
-                UltimateSkillAttackExecuteEvent evnt = new UltimateSkillAttackExecuteEvent();
+                SpecialSkillExecuteEvent evnt = new SpecialSkillExecuteEvent(this, this.specialSkill);
                 this.eventActive(evnt);
             }
         }
