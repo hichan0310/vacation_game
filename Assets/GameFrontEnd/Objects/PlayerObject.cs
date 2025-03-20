@@ -25,7 +25,7 @@ namespace GameFrontEnd.Objects
         private float attackCooldown = 0.25f;
         private string tmp = "";
         private bool direction = true;
-        private float jumpPower = 5f;
+        private float jumpPower = 4.6f;
         public bool isJumping = false;
         private bool isJumpatk = false;
         private Rigidbody2D rigid;
