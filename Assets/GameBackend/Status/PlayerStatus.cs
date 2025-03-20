@@ -10,10 +10,7 @@ namespace GameBackend.Status
         public int addHp { get; set; }
         public float increaseHp { get; set; }
 
-        public int maxHp
-        {
-            get { return (int)(baseHp * (increaseHp / 100 + 1) + addHp); }
-        }
+        public int maxHp => (int)(baseHp * (increaseHp / 100 + 1) + addHp);
 
         public int nowHp { get; set; }
         public int shieldHp { get; set; }
@@ -22,19 +19,13 @@ namespace GameBackend.Status
         public int addAtk { get; set; }
         public float increaseAtk { get; set; }
 
-        public int atk
-        {
-            get { return (int)(baseAtk * (increaseAtk / 100 + 1) + addAtk); }
-        }
+        public int atk => (int)(baseAtk * (increaseAtk / 100 + 1) + addAtk);
 
         private int baseDef { get; }
         public int addDef { get; set; }
         public float increaseDef { get; set; }
 
-        public int def
-        {
-            get { return (int)(baseDef * (increaseDef / 100 + 1) + addDef); }
-        }
+        public int def => (int)(baseDef * (increaseDef / 100 + 1) + addDef);
 
         public float crit { get; set; }
         public float critDmg { get; set; }
@@ -107,12 +98,14 @@ namespace GameBackend.Status
             {
                 atkTags.Remove(AtkTags.criticalHit);
             }
-            
+
+            float dmgUpSum = 0;
             foreach (AtkTags atkTag in atkTags)
             {
-                dmg = (int)((dmgUp[(int)atkTag] / 100 + 1) * dmg);
+                dmgUpSum += dmgUp[(int)atkTag];
                 dmg = (int)(dmgDrain[(int)atkTag]*dmg);
             }
+            dmg = (int)((dmgUpSum / 100 + 1) * dmg);
             return dmg;
         }
     }
