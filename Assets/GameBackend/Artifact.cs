@@ -1,4 +1,5 @@
-﻿using GameBackend.Objects;
+﻿using System;
+using GameBackend.Objects;
 using GameFrontEnd.Effects;
 using GameFrontEnd.Objects;
 using UnityEngine;
@@ -28,7 +29,10 @@ namespace GameBackend
             player.removeListener(this);
         }
 
-        public virtual void update(float deltaTime){}
+        public virtual void update(float deltaTime)
+        {
+            
+        }
 
         public void OnTriggerStay2D(Collider2D other)
         {
