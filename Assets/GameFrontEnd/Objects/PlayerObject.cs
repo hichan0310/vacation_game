@@ -77,8 +77,16 @@ namespace GameFrontEnd.Objects
             }
         }
 
+        public void addArtifact(Artifact artifact)
+        {
+            this.artifects.Add(artifact);
+            artifact.registrarTarget(this);
+            Debug.Log(artifact.name);
+        }
+
         protected override void update(float deltaTime)
         {
+            
             var vector2 = this.rigid.velocity;
             vector2.x = 0;
             this.rigid.velocity = vector2;

@@ -1,18 +1,19 @@
 ﻿using GameBackend.Status;
+using GameFrontEnd.Objects;
+using UnityEngine;
 
 namespace GameBackend.ArtifactPrefabs.Grade1
 {
-    public class LivingIcePiece:Artifact, IBuffStatus
+    public class LivingIcePiece : Artifact, IBuffStatus
     {
         private void Start()
         {
             this.name = "살아있는 얼음 결정";
             this.description = "치명타 확률이 5% 증가한다. ";
         }
-        
+
         public override void eventActive<T>(T eventArgs)
         {
-            
         }
 
         public void buffStatus(PlayerStatus status)
