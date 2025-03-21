@@ -44,10 +44,13 @@ namespace GameBackend
         }
 
         private PlayerObject stayingPlayer;
-        
+
         private void OnTriggerStay2D(Collider2D other)
         {
-            stayingPlayer = other.GetComponent<PlayerObject>();
+            if(other is PolygonCollider2D)
+            {
+                stayingPlayer = other.GetComponent<PlayerObject>();
+            }
         }
     }
 }

@@ -32,7 +32,6 @@ namespace GameBackend.ArtifactPrefabs.Grade_Legend
                     duration = duration_max;
                     isBuff = true;
                     Bufftype = true;
-                    buffStatus(player.status);
                     player.addBuff(this);
                 }
                 else if (eventArgs is SpecialSkillExecuteEvent)
