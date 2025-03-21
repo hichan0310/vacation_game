@@ -1,4 +1,5 @@
-﻿using GameBackend.Objects;
+﻿using System;
+using GameBackend.Objects;
 using GameFrontEnd.Effects;
 using GameFrontEnd.Objects;
 using UnityEngine;
@@ -28,22 +29,25 @@ namespace GameBackend
             player.removeListener(this);
         }
 
-        public virtual void update(float deltaTime){}
+        public virtual void update(float deltaTime)
+        {
+            
+        }
 
-        private bool test = true;
+        private void Update()
+        {
+            if (stayingPlayer && Input.GetKeyDown(InputHandler.Interaction))
+            {
+                stayingPlayer.addArtifact(this);
+                Destroy(gameObject);
+            }
+        }
+
+        private PlayerObject stayingPlayer;
+        
         private void OnTriggerStay2D(Collider2D other)
         {
-            var p = other.GetComponent<PlayerObject>();
-            if (p && test)
-            {
-                if (Input.GetKeyDown(InputHandler.Interaction))
-                {
-                    p.addArtifact(this);
-                    Destroy(gameObject);
-                    Debug.Log(test);
-                    test = false;
-                }
-            }
+            stayingPlayer = other.GetComponent<PlayerObject>();
         }
     }
 }

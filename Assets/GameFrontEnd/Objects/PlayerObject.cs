@@ -81,7 +81,6 @@ namespace GameFrontEnd.Objects
         {
             this.artifects.Add(artifact);
             artifact.registrarTarget(this);
-            Debug.Log(artifact.name);
         }
 
         protected override void update(float deltaTime)
