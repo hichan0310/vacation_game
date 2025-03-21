@@ -18,6 +18,7 @@ namespace GameBackend.ArtifactPrefabs.Grade_Legend
             {
                 count++;
                 player.removeBuff(this);
+                buffStatus(player.status);
                 player.addBuff(this);
                 Debug.Log($"죽인 적 수 : {count}");
                 Debug.Log($"플레이어 공격력 : {player.status.atk}");

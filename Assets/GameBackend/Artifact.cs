@@ -34,14 +34,20 @@ namespace GameBackend
             
         }
 
-        public void OnTriggerStay2D(Collider2D other)
+        private void Update()
         {
-            PlayerObject playerObject = other.GetComponent<PlayerObject>();
-            if (playerObject && Input.GetKey(InputHandler.Interaction) && other is PolygonCollider2D)
+            if (stayingPlayer && Input.GetKeyDown(InputHandler.Interaction))
             {
-                playerObject.addArtifact(this);
-                gameObject.SetActive(false);                
+                stayingPlayer.addArtifact(this);
+                Destroy(gameObject);
             }
+        }
+
+        private PlayerObject stayingPlayer;
+
+        private void OnTriggerStay2D(Collider2D other)
+        {
+            stayingPlayer = other.GetComponent<PlayerObject>();
         }
     }
 }
