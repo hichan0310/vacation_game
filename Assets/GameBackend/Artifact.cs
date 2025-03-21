@@ -30,19 +30,13 @@ namespace GameBackend
 
         public virtual void update(float deltaTime){}
 
-        private bool test = true;
-        private void OnTriggerStay2D(Collider2D other)
+        public void OnTriggerStay2D(Collider2D other)
         {
-            var p = other.GetComponent<PlayerObject>();
-            if (p && test)
+            PlayerObject playerObject = other.GetComponent<PlayerObject>();
+            if (playerObject && Input.GetKey(InputHandler.Interaction) && other is PolygonCollider2D)
             {
-                if (Input.GetKeyDown(InputHandler.Interaction))
-                {
-                    p.addArtifact(this);
-                    Destroy(gameObject);
-                    Debug.Log(test);
-                    test = false;
-                }
+                playerObject.addArtifact(this);
+                gameObject.SetActive(false);                
             }
         }
     }
