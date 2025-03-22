@@ -40,6 +40,7 @@ namespace GameBackend
             {
                 stayingPlayer.addArtifact(this);
                 Destroy(gameObject);
+                Debug.Log(this.name);
             }
         }
 
