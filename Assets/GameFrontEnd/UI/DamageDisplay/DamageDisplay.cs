@@ -9,7 +9,7 @@ namespace GameBackend
     {
         private float moveSpeed=1; // 텍스트 이동속도
         private float alphaSpeed=2; // 투명도 변환속도
-        private float destroyTime=2;
+        private float destroyTime=1.4f;
         private TextMeshPro text;
 
         public DmgTakeEvent dmgEvent

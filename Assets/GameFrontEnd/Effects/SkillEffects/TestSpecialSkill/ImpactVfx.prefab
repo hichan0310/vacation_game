@@ -4899,7 +4899,7 @@ GameObject:
   - component: {fileID: 5521277632010768499}
   - component: {fileID: 6280281539998945384}
   - component: {fileID: 8763340833693183750}
-  - component: {fileID: 7639276305331893442}
+  - component: {fileID: 2190746982069479173}
   m_Layer: 0
   m_Name: ImpactVfx
   m_TagString: Untagged
@@ -9780,7 +9780,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &7639276305331893442
+--- !u!114 &2190746982069479173
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -17,8 +17,6 @@ namespace GameBackend.ArtifactPrefabs.Grade_Legend
             if (eventArgs is EntityDieEvent && count < 100)
             {
                 count++;
-                player.removeBuff(this);
-                player.addBuff(this);
                 Debug.Log($"죽인 적 수 : {count}");
                 Debug.Log($"플레이어 공격력 : {player.status.atk}");
 

@@ -20,7 +20,7 @@ namespace GameFrontEnd.Objects
             hpBarObject=Instantiate(hpBar, transform, true);
             hpBarObject.transform.localPosition = new Vector3(0, 0.5f, 0.1f);
             progressBar = hpBarObject.GetComponent<ProgressBar>();
-            this.status = new PlayerStatus(10000, 100, 100);
+            this.status = new PlayerStatus(100000, 100, 100);
         }
 
         protected override void update(float deltaTime)

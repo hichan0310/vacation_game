@@ -46,5 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   energyProgressBar: {fileID: 7368180959476364924, guid: d6c85895fdd631e4f97db9b22a35f858, type: 3}
   timeProgressBar: {fileID: 3839262447278643640, guid: f9ecaa472b5c5b94da31062c71ebe553, type: 3}
-  impact: {fileID: 7639276305331893442, guid: fdd0ce7a0fc67f74b8d75c537c2de3cc, type: 3}
+  impact: {fileID: 2190746982069479173, guid: fdd0ce7a0fc67f74b8d75c537c2de3cc, type: 3}
   flame: {fileID: 1122221591950016613, guid: 4e2b1e2ca3499654e9c67e723ecc7bba, type: 3}

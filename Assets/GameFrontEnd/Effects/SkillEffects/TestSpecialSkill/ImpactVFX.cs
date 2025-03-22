@@ -1,4 +1,6 @@
-﻿namespace GameBackend.Objects
+﻿using GameBackend;
+
+namespace GameFrontEnd.Effects.SkillEffects.TestSpecialSkill
 {
     public class ImpactVFX:SkillEffect
     {
