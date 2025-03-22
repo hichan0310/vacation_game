@@ -25,13 +25,13 @@ namespace GameBackend.ArtifactPrefabs.Grade_Legend
             {
                 if (eventArgs is NormalSkillExecuteEvent)
                 {
-                    buffType = true;
+                    buffType = false;
                     this.timeStack = 0;
                     duration = 10;
                 }
                 else if (eventArgs is SpecialSkillExecuteEvent)
                 {
-                    buffType = false;
+                    buffType = true;
                     this.timeStack = 0;
                     duration = 10;
                 }
@@ -61,17 +61,6 @@ namespace GameBackend.ArtifactPrefabs.Grade_Legend
                 buffType = null;
                 duration = 0;
             }
-            
-            if(Input.GetKeyDown(KeyCode.K)) 
-            {
-                timeStack = 10;
-            }
-            
-            
-            if(Input.GetKeyDown(KeyCode.L)) 
-            {
-                Debug.Log($"crit : {player.status.crit}, time : {timeStack}, buff : {buffType}");
-            }   
         }
 
         public void buffStatus(PlayerStatus status)
