@@ -1186,7 +1186,7 @@ MonoBehaviour:
   normalSkill: {fileID: 1737031201991181424, guid: f556a14ecfdba294b9045c9d94d3256b, type: 3}
   specialSkill: {fileID: 2584874280621943015, guid: bab61afbd76dae442bd8b6f838837b30, type: 3}
   artifects:
-  - {fileID: 7691699020603858834, guid: 58923e3351c0c904db9509d5ec70b00b, type: 3}
+  - {fileID: 7715283785666254821, guid: 5c36b6e782a47c642907572491b87670, type: 3}
 --- !u!60 &1061263773
 PolygonCollider2D:
   m_ObjectHideFlags: 0
