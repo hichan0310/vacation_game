@@ -6,7 +6,7 @@ namespace GameBackend.ArtifactPrefabs.Grade_Legend
 {
     public class CloneOfTheWarriorSword : Artifact, IBuffStatus
     {
-        public static int count = 0;
+        private int count = 0;
         private void Start()
         {
             this.name = "복제된 용사의 검";
@@ -17,9 +17,6 @@ namespace GameBackend.ArtifactPrefabs.Grade_Legend
             if (eventArgs is EntityDieEvent && count < 100)
             {
                 count++;
-                Debug.Log($"죽인 적 수 : {count}");
-                Debug.Log($"플레이어 공격력 : {player.status.atk}");
-
             }
         }
 
