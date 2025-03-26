@@ -6,6 +6,7 @@ using GameBackend.Skills.NormalSkill;
 using GameBackend.Skills.SpecialSkill;
 using GameBackend.Status;
 using UnityEngine;
+using GameBackend.Buffs;
 
 namespace GameFrontEnd.Objects
 {

@@ -1,8 +1,5 @@
-using System.Collections.Generic;
 using GameBackend.Status;
 using GameBackend.Events;
-using UnityEngine;
-using GameBackend.Buffs;
 
 namespace GameBackend.ArtifactPrefabs.Grade3
 {
