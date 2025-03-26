@@ -1,6 +1,5 @@
 using GameBackend.Status;
 using GameBackend.Events;
-using UnityEngine;
 
 namespace GameBackend.ArtifactPrefabs.Grade_Legend
 {
