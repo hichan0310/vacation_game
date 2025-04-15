@@ -23,8 +23,10 @@ namespace GameBackend.Events
 
         public override void trigger()
         {
-            attacker.eventActive(this);
-            target.dmgtake(this);
+            if (attacker)
+                attacker.eventActive(this);
+            if (target)
+                target.dmgtake(this);
         }
     }
 }

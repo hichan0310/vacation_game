@@ -28,7 +28,7 @@ namespace GameBackend.ArtifactPrefabs.Grade3
                     if(i is BloodLoss && eve.target.status.nowHp < eve.target.status.maxHp * 0.1f && !eve.target.dead)
                     {
                         var enemy = eve.target;
-                        new DmgGiveEvent(enemy.status.maxHp, 0, EmptyEntity.Instance, enemy, new List<AtkTags>()
+                        new DmgGiveEvent(enemy.status.maxHp, 0, null, enemy, new List<AtkTags>()
                             {
                                 AtkTags.bloodLossDamage
                             }).trigger();
