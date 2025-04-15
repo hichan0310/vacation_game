@@ -4,9 +4,10 @@ using UnityEngine;
 namespace GameBackend
 {
     [System.Serializable]
-    public class EventArgs
+    public abstract class EventArgs
     {
         public string name { get; protected set; }
+        public abstract void trigger();
     }
     
     public interface IEntityEventListener

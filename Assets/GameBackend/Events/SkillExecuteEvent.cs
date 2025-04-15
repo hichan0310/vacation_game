@@ -11,5 +11,10 @@
             this.caster = caster;
             this.skill = skill;
         }
+
+        public override void trigger()
+        {
+            caster.eventActive(this);
+        }
     }
 }

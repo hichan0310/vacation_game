@@ -12,5 +12,10 @@ namespace GameBackend.Events
             name="EntityDieEvent";
             this.entity = entity;
         }
+
+        public override void trigger()
+        {
+            entity.eventActive(this);
+        }
     }
 }

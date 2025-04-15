@@ -37,7 +37,7 @@ namespace GameFrontEnd.Effects.ArtifactEffect.FireStone
         {
             Enemy enemy = other.gameObject.GetComponentInParent<Enemy>();
             if (atkObjects.Contains(enemy) || !enemy) return;
-            new DmgGiveEvent(dmgInfo.trueDmg, dmgInfo.force, dmgInfo.attacker, enemy, dmgInfo.atkTags);
+            new DmgGiveEvent(dmgInfo.trueDmg, dmgInfo.force, dmgInfo.attacker, enemy, dmgInfo.atkTags).trigger();
             DefIgnore defIgnore = new DefIgnore(50, 4);
             defIgnore.registrarTarget(enemy);
             atkObjects.Add(enemy);

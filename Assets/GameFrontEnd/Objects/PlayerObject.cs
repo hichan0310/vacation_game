@@ -170,7 +170,7 @@ namespace GameFrontEnd.Objects
             animator.SetInteger("atknum", atknum);
             animator.SetTrigger("atk");
             NormalAttackExecuteEvent evnt = new NormalAttackExecuteEvent(this, new List<AtkTags>());
-            this.eventActive(evnt);
+            evnt.trigger();
         }
 
         private void OnCollisionStay2D(Collision2D collision)
@@ -214,7 +214,7 @@ namespace GameFrontEnd.Objects
                     {
                         if (enemycollider is PolygonCollider2D && !enemycollider.gameObject.GetComponent<Enemy>().dead)
                             new DmgGiveEvent(dmg, (tmp == "attack_jump") ? 0.5f : 0f, player,
-                                enemycollider.gameObject.GetComponent<Enemy>(), atkTags);
+                                enemycollider.gameObject.GetComponent<Enemy>(), atkTags).trigger();
                     }
                 }
             }
@@ -234,7 +234,7 @@ namespace GameFrontEnd.Objects
             {
                 this.normalSkill.execute();
                 NormalSkillExecuteEvent evnt = new NormalSkillExecuteEvent(this, this.normalSkill);
-                this.eventActive(evnt);
+                evnt.trigger();
             }
         }
 
@@ -244,7 +244,7 @@ namespace GameFrontEnd.Objects
             {
                 this.specialSkill.execute();
                 SpecialSkillExecuteEvent evnt = new SpecialSkillExecuteEvent(this, this.specialSkill);
-                this.eventActive(evnt);
+                evnt.trigger();
             }
         }
 

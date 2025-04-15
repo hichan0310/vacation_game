@@ -37,7 +37,7 @@ namespace GameBackend.ArtifactPrefabs.Grade3
                     if (collider is not PolygonCollider2D || collider == null || collider.gameObject.GetComponent<Enemy>().dead) continue;
                     enemys = collider.gameObject.GetComponent<Enemy>();
                     dmg = (int)(enemys.status.maxHp * 0.2f);
-                    new DmgGiveEvent(dmg, 0.5f, player, enemys, atkTags);
+                    new DmgGiveEvent(dmg, 0.5f, player, enemys, atkTags).trigger();
                 }
                 count = 0;
             }

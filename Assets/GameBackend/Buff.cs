@@ -17,6 +17,7 @@ namespace GameBackend
         {
             this.targets.Add(target);
             target.addListener(this);
+            target.addBuff(this);
         }
 
         public virtual void removeSelf()
@@ -24,6 +25,7 @@ namespace GameBackend
             foreach (var target in targets)
             {
                 target.removeListener(this);
+                target.removeBuff(this);
             }
         }
 

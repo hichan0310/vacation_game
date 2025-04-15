@@ -20,7 +20,7 @@ public class testentity1 : Entity
             t = 1;
             var tags = new List<AtkTags>();
             tags.Add(AtkTags.normalAttack);
-            new DmgGiveEvent(100, 0, this, target, tags);
+            new DmgGiveEvent(100, 0, this, target, tags).trigger();
         }
     }
 }

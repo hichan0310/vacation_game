@@ -91,7 +91,7 @@ namespace GameFrontEnd.Effects.ArtifactEffect.StoneOfLightning
             {
                 enemy = other.gameObject.GetComponent<Enemy>();
                 dmg = player.status.calculateTrueDamage(atkTags, atkCoef: 50);
-                new DmgGiveEvent(dmg, 0f, player, enemy, atkTags);
+                new DmgGiveEvent(dmg, 0f, player, enemy, atkTags).trigger();
                 isCrash = false;
                 PolygonCollider2D[] colliders = new PolygonCollider2D[30];
                 GetComponent<CircleCollider2D>().OverlapCollider(filter, colliders);
@@ -100,7 +100,7 @@ namespace GameFrontEnd.Effects.ArtifactEffect.StoneOfLightning
                     if (collider == null || collider == other || collider.gameObject.GetComponent<Enemy>().dead) continue;
                     enemys = collider.gameObject.GetComponent<Enemy>();
                     dmg = player.status.calculateTrueDamage(atkTags, atkCoef: 100);
-                    new DmgGiveEvent(dmg, 0f, player, enemys, atkTags);
+                    new DmgGiveEvent(dmg, 0f, player, enemys, atkTags).trigger();
                 }
                 Destroy(this.gameObject);
                 ElectricSparkExplosion obj1 = Instantiate(explosion);

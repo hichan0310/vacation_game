@@ -20,7 +20,7 @@ namespace GameFrontEnd.Objects
             hpBarObject=Instantiate(hpBar, transform, true);
             hpBarObject.transform.localPosition = new Vector3(0, 0.5f, 0.1f);
             progressBar = hpBarObject.GetComponent<ProgressBar>();
-            this.status = new PlayerStatus(100000, 100, 100);
+            this.status = new PlayerStatus(10000, 100, 100);
         }
 
         protected override void update(float deltaTime)
@@ -29,9 +29,10 @@ namespace GameFrontEnd.Objects
             if (this.dead)
             {
                 EntityDieEvent evnt = new EntityDieEvent(this);
-                GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-                foreach(GameObject player in players)
-                player.GetComponent<Player<TestPlayerInfo1>>().eventActive(evnt);
+                evnt.trigger();
+                // GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+                // foreach(GameObject player in players)
+                // player.GetComponent<Player<TestPlayerInfo1>>().eventActive(evnt);
                 Destroy(hpBarObject);
             }
             else
@@ -58,7 +59,7 @@ namespace GameFrontEnd.Objects
                 new DmgGiveEvent(
                     this.status.calculateTrueDamage(atkTags, atkCoef: 100),
                     0, this, player, atkTags
-                );
+                ).trigger();
             }
         }
     }

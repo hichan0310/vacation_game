@@ -38,7 +38,7 @@ namespace GameBackend.ArtifactPrefabs.Grade_Legend
                     new DmgGiveEvent(
                         player.status.calculateTrueDamage(atkTags, atkCoef: 1),
                         0, player, player, atkTags
-                    );
+                    ).trigger();
                     buffOn = true;
                     Bufftime = 0;
                 }

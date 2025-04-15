@@ -130,7 +130,7 @@ namespace GameBackend.Skills.SpecialSkill
                 atkTags.Add(AtkTags.specialSkill);
                 new DmgGiveEvent(
                     status.calculateTrueDamage(atkTags, atkCoef: 40 * target.Value), 
-                    1, player, target.Key, atkTags);
+                    1, player, target.Key, atkTags).trigger();
 
                 BloodLoss bloodLoss = new BloodLoss(status.calculateTrueDamage(new List<AtkTags>
                 {

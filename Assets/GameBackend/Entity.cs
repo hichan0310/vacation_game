@@ -129,9 +129,7 @@ namespace GameBackend
 
         public virtual void dmgtake(DmgGiveEvent dmg)
         {
-            int def = status.def;
-            int C = 200;
-            int realDmg = (int)(dmg.trueDmg * ((float)(C) / (def + C)));
+            int realDmg = this.status.calculateTakeDamage(dmg.trueDmg, dmg.atkTags);
 
             if (status.shieldHp >= realDmg)
             {
@@ -140,7 +138,7 @@ namespace GameBackend
             else
             {
                 this.statusData.shieldHp = 0;
-                eventActive(new DmgTakeEvent(realDmg-status.shieldHp, dmg.attacker, dmg.target, dmg.atkTags));
+                new DmgTakeEvent(realDmg-status.shieldHp, dmg.attacker, dmg.target, dmg.atkTags).trigger();
                 statusData.nowHp -= realDmg;
                 if (statusData.nowHp <= 0) die();
             }

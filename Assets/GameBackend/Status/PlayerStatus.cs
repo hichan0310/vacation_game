@@ -35,6 +35,8 @@ namespace GameBackend.Status
         
         // 사실 배열 많이 쓰면 이거 복사할 때 무리가 갈 가능성도 있긴 해서 피증 하나만 하려고 했는데 2d면 딱히 상관 없으려나?
         public float[] dmgDrain { get; set; }
+        
+        public float[] dmgTakeUp { get; set; }
 
         public PlayerStatus(int baseHp, int baseAtk, int baseDef)
         {
@@ -52,6 +54,7 @@ namespace GameBackend.Status
             this.crit = 5;
             this.critDmg = 50;
             this.dmgUp = new float[Tag.atkTagCount];
+            this.dmgTakeUp = new float[Tag.atkTagCount];
 
             this.movePower = 2.2f;
             this.energyRecharge = 100f;
@@ -78,11 +81,13 @@ namespace GameBackend.Status
             this.crit = copy.crit;
             this.critDmg = copy.critDmg;
             this.dmgUp = new float[Tag.atkTagCount];
+            this.dmgTakeUp = new float[Tag.atkTagCount];
             this.dmgDrain = new float[Tag.atkTagCount];
             
             this.movePower=copy.movePower;
             this.energyRecharge = copy.energyRecharge;
             Array.Copy(copy.dmgUp, this.dmgUp, Tag.atkTagCount);
+            Array.Copy(copy.dmgTakeUp, this.dmgTakeUp, Tag.atkTagCount);
             Array.Copy(copy.dmgDrain, this.dmgDrain, Tag.atkTagCount);
         }
 
@@ -107,6 +112,17 @@ namespace GameBackend.Status
             }
             dmg = (int)((dmgUpSum / 100 + 1) * dmg);
             return dmg;
+        }
+
+        public int calculateTakeDamage(int trueDamage, List<AtkTags> atkTags)
+        {
+            int C = 200;
+            float dmgUpSum = 0;
+            foreach (AtkTags atkTag in atkTags)
+            {
+                dmgUpSum += dmgTakeUp[(int)atkTag];
+            }
+            return (int)(trueDamage * ((float)(C) / (def + C)) * (dmgUpSum / 100 + 1));
         }
     }
 

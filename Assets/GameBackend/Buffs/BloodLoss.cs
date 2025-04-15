@@ -28,7 +28,7 @@ namespace GameBackend.Buffs
                 {
                     List<AtkTags> atkTags = new List<AtkTags>();
                     atkTags.Add(AtkTags.bloodLossDamage);
-                    new DmgGiveEvent(damage, 0, caster, target, atkTags);
+                    new DmgGiveEvent(damage, 0, caster, target, atkTags).trigger();
                 }
 
                 if (times <= 0)

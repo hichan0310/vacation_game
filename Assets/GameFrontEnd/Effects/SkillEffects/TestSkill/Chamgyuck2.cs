@@ -41,7 +41,7 @@ namespace GameFrontEnd.Effects.SkillEffects.TestSkill
             this.atkObjects.Add(other.gameObject);
             Enemy enemy = other.GetComponent<Enemy>();
             if (enemy is null) return;
-            new DmgGiveEvent(this.dmg, 0.3f, player, enemy, atkTags);
+            new DmgGiveEvent(this.dmg, 0.3f, player, enemy, atkTags).trigger();
         }
 
         public void setInfo(Entity player)

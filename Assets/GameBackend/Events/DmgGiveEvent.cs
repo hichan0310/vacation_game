@@ -19,7 +19,10 @@ namespace GameBackend.Events
             this.attacker = attacker;
             this.target = target;
             this.atkTags = atkTags;
-            
+        }
+
+        public override void trigger()
+        {
             attacker.eventActive(this);
             target.dmgtake(this);
         }
