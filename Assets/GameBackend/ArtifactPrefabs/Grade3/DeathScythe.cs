@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Linq;
 using GameBackend.Status;
 using GameBackend.Events;
@@ -20,7 +21,9 @@ namespace GameBackend.ArtifactPrefabs.Grade3
         {
             if(eventArgs is DmgGiveEvent eve)
             {
-                foreach(IBuffStatus i in eve.target.buffStatus)
+                if(eve.atkTags.Contains(AtkTags.bloodLossDamage)) return;
+                
+                foreach(IEntityEventListener i in eve.target.eventListener)
                 {
                     if(i is BloodLoss && eve.target.status.nowHp < eve.target.status.maxHp * 0.1f && !eve.target.dead)
                     {
