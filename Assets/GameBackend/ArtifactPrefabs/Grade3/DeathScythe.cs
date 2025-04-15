@@ -11,7 +11,7 @@ namespace GameBackend.ArtifactPrefabs.Grade3
     public class DeathScythe:Artifact
     {
         private List<AtkTags> atkTags = new() { AtkTags.physicalAttack, AtkTags.artifactDamage, AtkTags.notcriticalHit};
-        private Entity enemy;
+        
         private void Start()
         {
             this.name = "사신의 낫";
@@ -27,18 +27,11 @@ namespace GameBackend.ArtifactPrefabs.Grade3
                 {
                     if(i is BloodLoss && eve.target.status.nowHp < eve.target.status.maxHp * 0.1f && !eve.target.dead)
                     {
-                        enemy = eve.target;
+                        var enemy = eve.target;
+                        new DmgTakeEvent(enemy.status.maxHp, EmptyEntity.Instance, enemy, eve.atkTags).trigger();
                         break;
                     }
                 }
-            }
-        }
-        public override void update(float deltaTime)
-        {
-            if(enemy != null)
-            {
-                new DmgGiveEvent(enemy.status.maxHp, 0f, player, enemy, atkTags).trigger();
-                enemy = null;
             }
         }
     }
