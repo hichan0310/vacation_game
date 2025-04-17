@@ -8,7 +8,7 @@ namespace GameFrontEnd.Effects
     {
         public virtual bool enemyWaveFinished => false;
 
-        protected List<Enemy> spawnedEnemies { get; } = new();
+        public List<Enemy> spawnedEnemies { get; } = new();
 
         protected virtual void update(float deltaTime){}
 
