@@ -9,7 +9,6 @@ namespace GameFrontEnd.Effects
         public EnemyManager manager;
         public PlayerObject player;
         private float assistAngleRange = 20f; // ±도
-        private float assistRange = 5f;
         public LayerMask wallMask;
 
         private LineRenderer lr;
@@ -40,8 +39,6 @@ namespace GameFrontEnd.Effects
             {
                 Vector3 toEnemy = (enemy.transform.position - start);
                 float dist = toEnemy.magnitude;
-
-                if (dist > assistRange) continue;
 
                 float angle = Vector3.Angle(aimDir, toEnemy.normalized);
                 if (angle > assistAngleRange) continue;
